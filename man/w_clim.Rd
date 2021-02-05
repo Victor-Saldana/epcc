@@ -79,7 +79,13 @@ Three populations and/or scenarios can be simulated simultaneously. The temperat
 #from Rezende and Bozinovic (2019).
 
 
-M_pygmaeus <- read_excel("M_pygmaeus.xlsx", sheet = 1)
+github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/M_pygmaeus.xlsx"
+library(httr)
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link,
+          authenticate(Sys.getenv("GITHUB_PAT"), ""),
+          write_disk(path = temp_file))
+M_pygmaeus <- readxl::read_excel(temp_file)
 
 TPC <- rate_adjustment(data = M_pygmaeus)
 
@@ -118,7 +124,13 @@ w_clim(y_ini = c(N = 100, N = 100, N = 100),
 #from Rezende and Bozinovic (2019).
 
 
-M_pygmaeus <- read_excel("M_pygmaeus.xlsx", sheet = 1)
+github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/M_pygmaeus.xlsx"
+library(httr)
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link,
+          authenticate(Sys.getenv("GITHUB_PAT"), ""),
+          write_disk(path = temp_file))
+M_pygmaeus <- readxl::read_excel(temp_file)
 
 TPC <- rate_adjustment(data = M_pygmaeus)
 
@@ -157,7 +169,13 @@ w_clim(y_ini = c(N = 100, N = 100, N = 100),
 #from Rezende and Bozinovic (2019).
 
 
-M_pygmaeus <- read_excel("M_pygmaeus.xlsx", sheet = 1)
+github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/M_pygmaeus.xlsx"
+library(httr)
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link,
+          authenticate(Sys.getenv("GITHUB_PAT"), ""),
+          write_disk(path = temp_file))
+M_pygmaeus <- readxl::read_excel(temp_file)
 
 TPC <- rate_adjustment(data = M_pygmaeus)
 

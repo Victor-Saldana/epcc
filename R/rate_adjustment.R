@@ -25,7 +25,13 @@
 #'   #and Bozinovic (2019).
 #'#######################################################################
 #'
-#'M_pygmaeus <- read_excel("M_pygmaeus.xlsx", sheet = 1)
+#'github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/M_pygmaeus.xlsx"
+#'library(httr)
+#'temp_file <- tempfile(fileext = ".xlsx")
+#'req <- GET(github_link,
+#'           authenticate(Sys.getenv("GITHUB_PAT"), ""),
+#'           write_disk(path = temp_file))
+#'M_pygmaeus <- readxl::read_excel(temp_file)
 #'TPC <- rate_adjustment(data = M_pygmaeus)
 #'
 #'######################################################################
@@ -34,7 +40,13 @@
 #'   #and Bozinovic (2019).
 #'#######################################################################
 #'
-#'E_furuhashii  <- read_excel("E_furuhashii.xlsx", sheet = 1)
+#'github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/E_furuhashii.xlsx"
+#'library(httr)
+#'temp_file <- tempfile(fileext = ".xlsx")
+#'req <- GET(github_link,
+#'           authenticate(Sys.getenv("GITHUB_PAT"), ""),
+#'           write_disk(path = temp_file))
+#'E_furuhashii <- readxl::read_excel(temp_file)
 #'TPC <- rate_adjustment(data = E_furuhashii)
 #'
 #'######################################################################
@@ -43,7 +55,13 @@
 #'   #and Bozinovic (2019).
 #'#######################################################################
 #'
-#'T_pretoisum <- read_excel("T_pretoisum.xlsx", sheet = 1)
+#'github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/T_pretoisum.xlsx"
+#'library(httr)
+#'temp_file <- tempfile(fileext = ".xlsx")
+#'req <- GET(github_link,
+#'           authenticate(Sys.getenv("GITHUB_PAT"), ""),
+#'           write_disk(path = temp_file))
+#'T_pretoisum <- readxl::read_excel(temp_file)
 #'TPC <- rate_adjustment(data = T_pretoisum)
 #'
 #'
@@ -58,10 +76,10 @@
 
 
 
-#options(warn = - 1)
+
 rate_adjustment<-function(data = M_pygmaeus){
 
-
+  options(warn = - 1)
   rate <- function(T,temp_cmin,temp_cmax,ro){ro*T*(T-temp_cmin)*(temp_cmax-T)/(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)*(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)-temp_cmin)*(temp_cmax-((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)))}
 
   m <- nls2(data$R~rate(data$TA,temp_cmin,temp_cmax,ro),data=data,start=list(temp_cmin=10,temp_cmax=30,ro=0.2))

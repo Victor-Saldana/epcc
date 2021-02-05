@@ -32,7 +32,13 @@ This function allows you to adjust the intrinsic growth rate of an ectotherm
   #and Bozinovic (2019).
 #######################################################################
 
-M_pygmaeus <- read_excel("M_pygmaeus.xlsx", sheet = 1)
+github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/M_pygmaeus.xlsx"
+library(httr)
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link,
+          authenticate(Sys.getenv("GITHUB_PAT"), ""),
+          write_disk(path = temp_file))
+M_pygmaeus <- readxl::read_excel(temp_file)
 TPC <- rate_adjustment(data = M_pygmaeus)
 
 ######################################################################
@@ -41,7 +47,13 @@ TPC <- rate_adjustment(data = M_pygmaeus)
   #and Bozinovic (2019).
 #######################################################################
 
-E_furuhashii  <- read_excel("E_furuhashii.xlsx", sheet = 1)
+github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/E_furuhashii.xlsx"
+library(httr)
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link,
+          authenticate(Sys.getenv("GITHUB_PAT"), ""),
+          write_disk(path = temp_file))
+E_furuhashii <- readxl::read_excel(temp_file)
 TPC <- rate_adjustment(data = E_furuhashii)
 
 ######################################################################
@@ -50,7 +62,13 @@ TPC <- rate_adjustment(data = E_furuhashii)
   #and Bozinovic (2019).
 #######################################################################
 
-T_pretoisum <- read_excel("T_pretoisum.xlsx", sheet = 1)
+github_link <- "https://github.com/Victor-Saldana/epcc/raw/main/T_pretoisum.xlsx"
+library(httr)
+temp_file <- tempfile(fileext = ".xlsx")
+req <- GET(github_link,
+          authenticate(Sys.getenv("GITHUB_PAT"), ""),
+          write_disk(path = temp_file))
+T_pretoisum <- readxl::read_excel(temp_file)
 TPC <- rate_adjustment(data = T_pretoisum)
 
 
