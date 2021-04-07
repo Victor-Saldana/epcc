@@ -132,7 +132,6 @@
 #'#######################################################################
 #'   #Example 5: Different marginal losses by a non-thermodependent
 #'   #           component of intraspecific competition.
-
 #'#######################################################################
 #'
 #'lambda3 <- 0.01

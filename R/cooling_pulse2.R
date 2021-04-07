@@ -86,7 +86,7 @@
 #'
 #'#######################################################################
 #'   #Example 3: Different relationships between initial environmental
-#'               temperature and optimum temperature
+#'   #           temperature and optimum temperature
 #'#######################################################################
 #'
 #'temp_cmin <- 18
@@ -137,7 +137,7 @@
 #'
 #'#######################################################################
 #'   #Example 5: Different marginal losses by a non-thermodependent
-#'               component of intraspecific competition.
+#'   #          component of intraspecific competition.
 #'#######################################################################
 #'
 #'lambda3 <- 0.01

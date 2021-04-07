@@ -25,7 +25,7 @@
 #'temp
 #'
 #'########################################################################
-#'#Example 2: Projection of the temperature increase for a vector of years.
+#'  #Example 2: Projection of the temperature increase for a vector of years.
 #'########################################################################
 #'
 #'date <- seq(2005,2100,1/12)

@@ -119,7 +119,7 @@
 #'#######################################################################
 #'   #Example 3: Different marginal losses by a non-thermodependent
 #'   #           component of intraspecific competition for species-1
-#'               (scenario RCP2.6).
+#'   #           (scenario RCP2.6).
 #'#######################################################################
 #'
 #' lambda3 <- 0.002
@@ -145,7 +145,7 @@
 #'#'#######################################################################
 #'   #Example 4: Different marginal losses by a non-thermodependent
 #'   #           component of intraspecific competition for species-1
-#'               (scenario RCP8.5).
+#'   #           (scenario RCP8.5).
 #'#######################################################################
 #'
 #' lambda3 <- 0.002
