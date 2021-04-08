@@ -129,7 +129,7 @@
 IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
                        temp_ini = rep(20,3),
                        temp_cmin = rep(18,3),
-                       temp_cmax = c(c1,c2,c3),
+                       temp_cmax = c(20,25,36),
                        ro = rep(0.7,3),
                        lambda = rep(0.00005,3),
                        time_start = 2005,
@@ -292,9 +292,9 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
       da2<-data.frame('x'=times,'y'=out2[,3] )
       da3<-data.frame('x'=times,'y'=out3[,3] )
 
-      da1$group<-"Pop1"
-      da2$group<-"Pop2"
-      da3$group<-"Pop3"
+      # da1$group<-"Pop1"
+      # da2$group<-"Pop2"
+      # da3$group<-"Pop3"
 
       ###############################################################
       # Abundance
@@ -304,9 +304,9 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
       data2<-data.frame('x'=times,'y'=out2[,2] )
       data3<-data.frame('x'=times,'y'=out3[,2] )
 
-      data1$group<-"Pop1"
-      data2$group<-"Pop2"
-      data3$group<-"Pop3"
+      # data1$group<-"Pop1"
+      # data2$group<-"Pop2"
+      # data3$group<-"Pop3"
 
       ###############################################################
       # Carrying capacity
@@ -320,9 +320,9 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
       dat2<-data.frame('x'=times,'y'=K2 )
       dat3<-data.frame('x'=times,'y'=K3 )
 
-      dat1$group<-"Pop1"
-      dat2$group<-"Pop2"
-      dat3$group<-"Pop3"
+      # dat1$group<-"Pop1"
+      # dat2$group<-"Pop2"
+      # dat3$group<-"Pop3"
 
 
       ###############################################################
@@ -340,7 +340,7 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
 
       data<-rbind(data1, data2, data3)
 
-      p1 <- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+      p1 <- ggplot(data, aes(x=x, y=y)) +
               theme_bw()+
               theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
               geom_ribbon(data=subset(dat1,x>times[1] & x<times_sup1),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
@@ -361,7 +361,7 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
               labs(tag = "(a)")
 
 
-      p2 <- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+      p2 <- ggplot(data, aes(x=x, y=y)) +
               theme_bw()+
               theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
               scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+

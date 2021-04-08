@@ -4,7 +4,7 @@
 \alias{rate_adjustment}
 \title{Intrinsic growth rate adjustment}
 \usage{
-rate_adjustment(data = M_pygmaeus)
+rate_adjustment(data = data)
 }
 \arguments{
 \item{data}{database where the first column shows the ambient

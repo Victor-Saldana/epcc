@@ -9,7 +9,7 @@ age_structure(
     400, N3 = 400),
   temp_ini = rep(25, 3),
   temp_cmin = rep(18, 3),
-  temp_cmax = c(c1, c2, c3),
+  temp_cmax = c(25, 28, 35),
   ro = rep(0.7, 3),
   lambda1 = rep(4e-04, 3),
   lambda2 = rep(4e-04, 3),

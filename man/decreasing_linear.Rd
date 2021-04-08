@@ -7,7 +7,7 @@
 decreasing_linear(
   y_ini = c(N = 400, N = 400, N = 400),
   temp_ini = rep(35, 3),
-  temp_cmin = c(c1, c2, c3),
+  temp_cmin = c(18, 19, 20),
   temp_cmax = rep(40, 3),
   ro = rep(0.7, 3),
   m = rep(1/5, 3),

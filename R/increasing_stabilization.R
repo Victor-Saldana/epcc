@@ -156,7 +156,7 @@
 increasing_stabilization<- function(y_ini = c(N = 400, N = 400, N = 400),
                                     temp_ini = rep(20,3),
                                     temp_cmin = rep(18,3),
-                                    temp_cmax = c(c1,c2,c3),
+                                    temp_cmax = c(25,28,32),
                                     ro = rep(0.7,3),
                                     lambda = rep(0.00005,3),
                                     temp_stabilization = rep(25,3),

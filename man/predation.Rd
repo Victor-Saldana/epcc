@@ -8,7 +8,7 @@ predation(
   y_ini = c(V = 400, V = 400, V = 400, P = 200, P = 200, P = 200),
   temp_ini = rep(25, 3),
   temp_cmin = rep(18, 3),
-  temp_cmax = c(c1, c2, c3),
+  temp_cmax = c(25, 28, 32),
   ro = rep(0.7, 3),
   lambda = rep(5e-05, 3),
   e = rep(0.3, 3),

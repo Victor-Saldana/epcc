@@ -77,7 +77,7 @@
 
 
 
-rate_adjustment<-function(data = M_pygmaeus){
+rate_adjustment<-function(data = data){
 
   options(warn = - 1)
   rate <- function(T,temp_cmin,temp_cmax,ro){ro*T*(T-temp_cmin)*(temp_cmax-T)/(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)*(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)-temp_cmin)*(temp_cmax-((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)))}

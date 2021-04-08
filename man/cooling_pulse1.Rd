@@ -8,7 +8,7 @@ cooling_pulse1(
   y_ini = c(N = 400, N = 400, N = 400),
   temp_ini = rep(35, 3),
   temp_cmin = rep(18, 3),
-  temp_cmax = c(c1, c2, c3),
+  temp_cmax = c(25, 28, 35),
   ro = rep(0.7, 3),
   lambda = rep(5e-05, 3),
   temp_peak = rep(25, 3),

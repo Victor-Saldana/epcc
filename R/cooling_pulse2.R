@@ -162,7 +162,7 @@
 
 cooling_pulse2<- function(y_ini = c(N = 400, N = 400, N = 400),
                           temp_ini = rep(35,3),
-                          temp_cmin = c(c1,c2,c3),
+                          temp_cmin = c(15,18,20),
                           temp_cmax = rep(40,3),
                           ro = rep(0.7,3),
                           lambda = rep(0.00005,3),

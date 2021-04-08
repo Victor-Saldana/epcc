@@ -9,7 +9,7 @@ competition(
   y_ini = c(N1 = 400, N1 = 400, N1 = 400, N2 = 200, N2 = 200, N2 = 200),
   temp_ini = rep(25, 3),
   temp_cmin = rep(18, 3),
-  temp_cmax = c(c1, c2, c3),
+  temp_cmax = c(25, 28, 35),
   ro = rep(0.7, 3),
   r2 = rep(0.7, 3),
   lambda1 = rep(5e-05, 3),
