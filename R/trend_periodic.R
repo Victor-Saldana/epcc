@@ -304,9 +304,9 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    da1$group<-"Pop1"
-    da2$group<-"Pop2"
-    da3$group<-"Pop3"
+    # da1$group<-"Pop1"
+    # da2$group<-"Pop2"
+    # da3$group<-"Pop3"
 
     ###############################################################
     # Abundance
@@ -316,9 +316,9 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
 
-    data1$group<-"Pop1"
-    data2$group<-"Pop2"
-    data3$group<-"Pop3"
+    # data1$group<-"Pop1"
+    # data2$group<-"Pop2"
+    # data3$group<-"Pop3"
 
 
     ###############################################################
@@ -333,9 +333,9 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    dat1$group<-"Pop1"
-    dat2$group<-"Pop2"
-    dat3$group<-"Pop3"
+    # dat1$group<-"Pop1"
+    # dat2$group<-"Pop2"
+    # dat3$group<-"Pop3"
 
 
     ###############################################################
@@ -352,7 +352,7 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
     ##############################################################
 
     data<-rbind(data1, data2, data3)
-    q1 <- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+    q1 <- ggplot(data, aes(x=x, y=y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
@@ -371,7 +371,7 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
 
 
 
-    q2 <- ggplot(data, aes(x=x, y=y, group=group)) +
+    q2 <- ggplot(data, aes(x=x, y=y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+

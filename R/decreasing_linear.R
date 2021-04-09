@@ -245,9 +245,9 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    da1$group<-"Pop1"
-    da2$group<-"Pop2"
-    da3$group<-"Pop3"
+    # da1$group<-"Pop1"
+    # da2$group<-"Pop2"
+    # da3$group<-"Pop3"
 ###############################################################
 
 ###############################################################
@@ -258,9 +258,9 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
 
-    data1$group<-"Pop1"
-    data2$group<-"Pop2"
-    data3$group<-"Pop3"
+    # data1$group<-"Pop1"
+    # data2$group<-"Pop2"
+    # data3$group<-"Pop3"
 
 ###############################################################
 # Carrying capacity
@@ -274,9 +274,9 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    dat1$group<-"Pop1"
-    dat2$group<-"Pop2"
-    dat3$group<-"Pop3"
+    # dat1$group<-"Pop1"
+    # dat2$group<-"Pop2"
+    # dat3$group<-"Pop3"
 
 ###############################################################
 # Data
@@ -294,7 +294,7 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
 
     data<-rbind(data1, data2, data3)
 
-    p1 <- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+    p1 <- ggplot(data, aes(x=x, y=y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
@@ -315,7 +315,7 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
             labs(tag = "(a)")
 
 
-    p2 <- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+    p2 <- ggplot(data, aes(x=x, y=y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+

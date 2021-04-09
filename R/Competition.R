@@ -340,8 +340,8 @@ temp_max<- get_RCP2.6(time_end)
   data2<-data.frame('x'=times,'y'=out1[,3] )
 
 
-  data1$group<-"Pop1"
-  data2$group<-"Pop2"
+  # data1$group<-"Pop1"
+  # data2$group<-"Pop2"
 
 
 
@@ -349,16 +349,16 @@ temp_max<- get_RCP2.6(time_end)
   dat2<-data.frame('x'=times,'y'=out2[,3] )
 
 
-  dat1$group<-"Pop1"
-  dat2$group<-"Pop2"
+  # dat1$group<-"Pop1"
+  # dat2$group<-"Pop2"
 
 
   da1<-data.frame('x'=times,'y'=out3[,2] )
   da2<-data.frame('x'=times,'y'=out3[,3] )
 
 
-  da1$group<-"Pop1"
-  da2$group<-"Pop2"
+  # da1$group<-"Pop1"
+  # da2$group<-"Pop2"
 
   T1 <- get_RCP2.6(times)+temp_ini[1]
   T2 <- get_RCP2.6(times)+temp_ini[2]
@@ -368,9 +368,9 @@ temp_max<- get_RCP2.6(time_end)
   d2<-data.frame('x'=times,'y'=T2)
   d3<-data.frame('x'=times,'y'=T3)
 
-  d1$group<-"Pop1"
-  d2$group<-"Pop2"
-  d3$group<-"Pop3"
+  # d1$group<-"Pop1"
+  # d2$group<-"Pop2"
+  # d3$group<-"Pop3"
 
 
   r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
@@ -387,9 +387,9 @@ temp_max<- get_RCP2.6(time_end)
   cap2<-data.frame('x'=times,'y'=K2 )
   cap3<-data.frame('x'=times,'y'=K3 )
 
-  cap1$group<-"Pop1"
-  cap2$group<-"Pop2"
-  cap3$group<-"Pop3"
+  # cap1$group<-"Pop1"
+  # cap2$group<-"Pop2"
+  # cap3$group<-"Pop3"
 
 
 
@@ -616,7 +616,7 @@ temp_max<- get_RCP2.6(time_end)
 
   data<-rbind(data1, data2)
 
-  p1<- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+  p1<- ggplot(data, aes(x=x, y=y)) +
            theme_bw()+
            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
            geom_ribbon(data=subset(cap1,x>times[1] & x<times_sup4),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
@@ -635,13 +635,13 @@ temp_max<- get_RCP2.6(time_end)
 
   dat<-rbind(dat1, dat2)
 
-  p2<- ggplot(dat, aes(x=x, y=y, group=group, fill=group)) +
+  p2<- ggplot(dat, aes(x=x, y=y)) +
            theme_bw()+
            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
            geom_ribbon(data=subset(cap2,x>times[1] & x<times_sup5),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
            geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
-           geom_line(dat =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
-           geom_line(dat =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
+           geom_line(data =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
+           geom_line(data =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
            labs(x = "Time",y="Abundance")+
            theme(plot.title = element_text(size=40))+
            theme(plot.title = element_text(hjust = 0.5))+
@@ -652,13 +652,13 @@ temp_max<- get_RCP2.6(time_end)
 
   da<-rbind(da1, da2)
 
-  p3<- ggplot(da, aes(x=x, y=y, group=group, fill=group)) +
+  p3<- ggplot(da, aes(x=x, y=y)) +
            theme_bw()+
            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
            geom_ribbon(data=subset(cap3,x>times[1] & x<times_sup6),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
            geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
-           geom_line(da =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
-           geom_line(da =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
+           geom_line(data =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
+           geom_line(data =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
            labs(x = "Time",y="Abundance")+
            theme(plot.title = element_text(size=40))+
            theme(plot.title = element_text(hjust = 0.5))+
@@ -668,15 +668,15 @@ temp_max<- get_RCP2.6(time_end)
 
   d<-rbind(d1, d2, d3)
 
-  p4<- ggplot(d, aes(x=x, y=y, group=group, fill=group)) +
+  p4<- ggplot(d, aes(x=x, y=y)) +
     theme_bw()+
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
     geom_vline(xintercept = times_sup1, size=.5, color="green",linetype="dashed")+
     geom_vline(xintercept = times_sup2, size=.5, color="blue",linetype="dashed")+
     geom_vline(xintercept = times_sup3, size=.5, color="black",linetype="dashed")+
-    geom_line(d =subset(d1,x>times[1] & x<times_sup1), color = "green")+
-    geom_line(d =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
-    geom_line(d =subset(d3,x>times[1] & x<times_sup3), color = "black")+
+    geom_line(data =subset(d1,x>times[1] & x<times_sup1), color = "green")+
+    geom_line(data =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
+    geom_line(data =subset(d3,x>times[1] & x<times_sup3), color = "black")+
     labs(x = "Time",y="Temperature")+
     theme(plot.title = element_text(size=40))+
     theme(plot.title = element_text(hjust = 0.5))+
@@ -749,8 +749,8 @@ temp_max<- get_RCP2.6(time_end)
   data2<-data.frame('x'=times,'y'=out1[,3] )
 
 
-  data1$group<-"Pop1"
-  data2$group<-"Pop2"
+  # data1$group<-"Pop1"
+  # data2$group<-"Pop2"
 
 
 
@@ -758,16 +758,16 @@ temp_max<- get_RCP2.6(time_end)
   dat2<-data.frame('x'=times,'y'=out2[,3] )
 
 
-  dat1$group<-"Pop1"
-  dat2$group<-"Pop2"
+  # dat1$group<-"Pop1"
+  # dat2$group<-"Pop2"
 
 
   da1<-data.frame('x'=times,'y'=out3[,2] )
   da2<-data.frame('x'=times,'y'=out3[,3] )
 
 
-  da1$group<-"Pop1"
-  da2$group<-"Pop2"
+  # da1$group<-"Pop1"
+  # da2$group<-"Pop2"
 
   T1<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[1]
   T2<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[2]
@@ -777,9 +777,9 @@ temp_max<- get_RCP2.6(time_end)
   d2<-data.frame('x'=times,'y'=T2)
   d3<-data.frame('x'=times,'y'=T3)
 
-  d1$group<-"Pop1"
-  d2$group<-"Pop2"
-  d3$group<-"Pop3"
+  # d1$group<-"Pop1"
+  # d2$group<-"Pop2"
+  # d3$group<-"Pop3"
 
 
   r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
@@ -795,9 +795,9 @@ temp_max<- get_RCP2.6(time_end)
   cap2<-data.frame('x'=times,'y'=K2 )
   cap3<-data.frame('x'=times,'y'=K3 )
 
-  cap1$group<-"Pop1"
-  cap2$group<-"Pop2"
-  cap3$group<-"Pop3"
+  # cap1$group<-"Pop1"
+  # cap2$group<-"Pop2"
+  # cap3$group<-"Pop3"
 
 
   ###############################################################
@@ -1026,7 +1026,7 @@ temp_max<- get_RCP2.6(time_end)
 
   data<-rbind(data1, data2)
 
-  p1<- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+  p1<- ggplot(data, aes(x=x, y=y)) +
            theme_bw()+
            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
            geom_ribbon(data=subset(cap1,x>times[1] & x<times_sup4),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
@@ -1044,13 +1044,13 @@ temp_max<- get_RCP2.6(time_end)
 
   dat<-rbind(dat1, dat2)
 
-  p2<-  ggplot(dat, aes(x=x, y=y, group=group, fill=group)) +
+  p2<-  ggplot(dat, aes(x=x, y=y)) +
            theme_bw()+
            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
            geom_ribbon(data=subset(cap2,x>times[1] & x<times_sup5),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
            geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
-           geom_line(dat =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
-           geom_line(dat =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
+           geom_line(data =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
+           geom_line(data =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
            labs(x = "Time",y="Abundance")+
            theme(plot.title = element_text(size=40))+
            theme(plot.title = element_text(hjust = 0.5))+
@@ -1061,13 +1061,13 @@ temp_max<- get_RCP2.6(time_end)
 
   da<-rbind(da1, da2)
 
-  p3<- ggplot(da, aes(x=x, y=y, group=group, fill=group)) +
+  p3<- ggplot(da, aes(x=x, y=y)) +
            theme_bw()+
            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
            geom_ribbon(data=subset(cap3,x>times[1] & x<times_sup6),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
            geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
-           geom_line(da =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
-           geom_line(da =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
+           geom_line(data =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
+           geom_line(data =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
            labs(x = "Time",y="Abundance")+
            theme(plot.title = element_text(size=40))+
            theme(plot.title = element_text(hjust = 0.5))+
@@ -1078,15 +1078,15 @@ temp_max<- get_RCP2.6(time_end)
 
   d<-rbind(d1, d2, d3)
 
-  p4<- ggplot(d, aes(x=x, y=y, group=group, fill=group)) +
+  p4<- ggplot(d, aes(x=x, y=y)) +
     theme_bw()+
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
     geom_vline(xintercept = times_sup1, size=.5, color="green",linetype="dashed")+
     geom_vline(xintercept = times_sup2, size=.5, color="blue",linetype="dashed")+
     geom_vline(xintercept = times_sup3, size=.5, color="black",linetype="dashed")+
-    geom_line(d =subset(d1,x>times[1] & x<times_sup1), color = "green")+
-    geom_line(d =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
-    geom_line(d =subset(d3,x>times[1] & x<times_sup3), color = "black")+
+    geom_line(data =subset(d1,x>times[1] & x<times_sup1), color = "green")+
+    geom_line(data =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
+    geom_line(data =subset(d3,x>times[1] & x<times_sup3), color = "black")+
     labs(x = "Time",y="Temperature")+
     theme(plot.title = element_text(size=40))+
     theme(plot.title = element_text(hjust = 0.5))+

@@ -409,7 +409,7 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
 
     data<-rbind(data1, data2, data3)
 
-    p1 <- ggplot(data, aes(x=x, y=y, group=group, fill=group )) +
+    p1 <- ggplot(data, aes(x=x, y=y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             geom_ribbon(data=subset(dat1,x>times[1] & x<tm_new1),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
@@ -431,7 +431,7 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
 
 
 
-    p2 <- ggplot(data, aes(x=x, y=y, group=group, fill=group)) +
+    p2 <- ggplot(data, aes(x=x, y=y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
