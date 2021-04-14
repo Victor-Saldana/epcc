@@ -40,6 +40,7 @@
 #'
 #'@import deSolve
 #'@import ggplot2
+#'@import httr
 #'@import cowplot
 #'@import raster
 #'@import sp

@@ -3,6 +3,7 @@
 import(cowplot)
 import(deSolve)
 import(ggplot2)
+import(httr)
 import(nls2)
 import(proto)
 import(raster)

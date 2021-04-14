@@ -15,7 +15,8 @@ Description: This package provides several functions
 License: GPL-3 + file LICENSE
 Imports: 
     deSolve (>= 1.28), 
-    ggplot2 (>= 3.3.3), 
+    ggplot2 (>= 3.3.3),
+    httr (>= 1.4.2),
     cowplot (>= 1.1.1),
     sp (>= 1.4-5),
     raster (>= 3.1-5),
