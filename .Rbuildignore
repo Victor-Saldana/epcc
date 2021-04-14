@@ -1,4 +1,3 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^xlsx$
 ^_pkgdown\.yml$
