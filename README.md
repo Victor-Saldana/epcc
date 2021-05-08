@@ -1,5 +1,5 @@
 
-# $e_{\tiny PCC}$
+# \mathbf{e}_{PCC}
 
 <!-- badges: start -->
 <!-- badges: end -->
