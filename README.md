@@ -44,12 +44,12 @@ Assessment Report of the Intergovernmental Panel on Climate Change [Core Writing
 Meyer (eds.)]. IPCC, Geneva, Switzerland, 151 pp.
 ```
 ``` r
-Rich,, H. B., Quinn, T. P., Scheuerell, M. D., \& Schindler, D. E. (2009). Climate and intraspecific 
+Rich,, H. B., Quinn, T. P., Scheuerell, M. D., & Schindler, D. E. (2009). Climate and intraspecific 
 competition control the growth and life history of juvenile sockeye salmon (Oncorhynchus nerka) in Iliamna 
 Lake, Alaska. Canadian Journal of Fisheries and Aquatic Sciences, 66(2), 238-246.doi:10.1139/f08-210
 ```
 ``` r
-Soetaert, K., Petzoldt, T., \& Setzer, R. (2010). Solving Differential Equations in R: Package deSolve. 
+Soetaert, K., Petzoldt, T., & Setzer, R. (2010). Solving Differential Equations in R: Package deSolve. 
 Journal of Statistical Software, 33(9), 1 - 25. doi:http://dx.doi.org/10.18637/jss.v033.i09
 ```
 
