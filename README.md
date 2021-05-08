@@ -25,7 +25,8 @@ install\_github(''Victor-Saldana/epcc'')
 
 ## Contact us 
 ``` r
-Please, if you have any questions or problems with the implementation of the package,  send an email to saldananunezvictor@gmail.com.
+Please, if you have any questions or problems with the implementation of the package,  send an 
+email to saldananunezvictor@gmail.com.
 ```
 
 ## Authors
