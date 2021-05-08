@@ -1,8 +1,3 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
 
 # $e_{\tiny PCC}$
 
