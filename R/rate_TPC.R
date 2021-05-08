@@ -50,7 +50,7 @@
 #'# Temperature that occurs in the minimum time ofthe simulation.
 #'temp_i <- 20
 #'
-#'temp <- get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_i
+#'temp <- get_RCP8.5(times)+temp_i
 #'
 #'rate <- rate_TPC(temp,ro,temp_cmin,temp_cmax,temp_op)
 #'

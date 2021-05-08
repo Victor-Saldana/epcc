@@ -38,14 +38,14 @@
 
 get_RCP8.5 <- function(date) {
   values <- c(0.61, 2, 3.7)
-  x<- c(2005,2065,2100)
-  y<- values
-  df <- data.frame(x, y)
+  q<- c(2005,2065,2100)
+  p<- values
+  df <- data.frame(q, p)
 
-  m<- nls(y ~ exp(loga + b * x), df, start = list( loga = log(2), b = 0.005),control = list (maxiter = 500))
-  y_est<-predict(m,df$x)
+  m<- nls(p ~ exp(loga + b * q), df, start = list( loga = log(2), b = 0.005),control = list (maxiter = 500))
+  y_est<-predict(m,df$q)
 
-  k<- exp(coef(m)[1]) * exp(exp(coef(m)[2]) * date)
+  k<- exp(coef(m)[1]) * exp(coef(m)[2] * date)
   return(k)
   }
 
