@@ -63,6 +63,7 @@ Three populations and/or scenarios can be simulated simultaneously. A logistic
         function uses the ODE solver implemented in the package deSolve (Soetaert et al., 2010).
 }
 \examples{
+
 #######################################################################
   #Example 1: Different initial population abundances.
 #######################################################################

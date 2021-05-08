@@ -41,6 +41,7 @@
 #'            Differential Equations in R: Package deSolve. Journal of Statistical
 #'            Software, 33(9), 1 - 25. doi:http://dx.doi.org/10.18637/jss.v033.i09
 #'
+#'@export
 #'@examples
 #'
 #'#######################################################################
@@ -400,7 +401,7 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
 
     Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
     names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    View(Data)
+   # View(Data)
 
 
     ###############################################################
@@ -408,47 +409,47 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
     ##############################################################
 
     data<-rbind(data1, data2, data3)
-
-    p1 <- ggplot(data, aes(x=x, y=y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            geom_ribbon(data=subset(dat1,x>times[1] & x<tm_new1),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-            geom_ribbon(data=subset(dat2,x>times[1] & x<tm_new2),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="green4") +
-            geom_ribbon(data=subset(dat3,x>times[1] & x<tm_new3),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="blue") +
-            scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
-            geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
-            geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+
-            geom_line(data =subset(data1,x>times[1] & x<tm_new1), color = "brown")+
-            geom_line(data =subset(data2,x>times[1] & x<tm_new2), color = "green4")+
-            geom_line(data =subset(data3,x>times[1] & x<tm_new3), color = "blue")+
-            labs(x = "Time",y="Abundance")+
-            theme(plot.title = element_text(size=40))+
-            theme(plot.title = element_text(hjust = 0.5))+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(a)")
-
-
-
-    p2 <- ggplot(data, aes(x=x, y=y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
-            geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
-            geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+
-            geom_line(data =subset(da1,x>times[1] & x<tm_new1), color = "brown")+
-            geom_line(data =subset(da2,x>times[1] & x<tm_new2), color = "green4")+
-            geom_line(data =subset(da3,x>times[1] & x<tm_new3), color = "blue")+
-            labs(x = "Time",y="Temperature")+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(b)")
-
-
-
-    plot_grid(p1, p2)
+#
+#     p1 <- ggplot(data, aes(x=x, y=y)) +
+#             theme_bw()+
+#             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+#             geom_ribbon(data=subset(dat1,x>times[1] & x<tm_new1),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+#             geom_ribbon(data=subset(dat2,x>times[1] & x<tm_new2),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="green4") +
+#             geom_ribbon(data=subset(dat3,x>times[1] & x<tm_new3),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="blue") +
+#             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
+#             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
+#             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
+#             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+
+#             geom_line(data =subset(data1,x>times[1] & x<tm_new1), color = "brown")+
+#             geom_line(data =subset(data2,x>times[1] & x<tm_new2), color = "green4")+
+#             geom_line(data =subset(data3,x>times[1] & x<tm_new3), color = "blue")+
+#             labs(x = "Time",y="Abundance")+
+#             theme(plot.title = element_text(size=40))+
+#             theme(plot.title = element_text(hjust = 0.5))+
+#             theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+#             theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+#             labs(tag = "(a)")
+#
+#
+#
+#     p2 <- ggplot(data, aes(x=x, y=y)) +
+#             theme_bw()+
+#             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+#             scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
+#             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
+#             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
+#             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+
+#             geom_line(data =subset(da1,x>times[1] & x<tm_new1), color = "brown")+
+#             geom_line(data =subset(da2,x>times[1] & x<tm_new2), color = "green4")+
+#             geom_line(data =subset(da3,x>times[1] & x<tm_new3), color = "blue")+
+#             labs(x = "Time",y="Temperature")+
+#             theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+#             theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+#             labs(tag = "(b)")
+#
+#
+#
+#     plot_grid(p1, p2)
 
   }else{
     stop("It is recommended that the time in which the peak temperature is reached is within the time sequence")

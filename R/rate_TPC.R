@@ -34,7 +34,7 @@
 #'            climate change: Analysis of a cubic thermal performance curve in ectotherms. J. Phys.: Conf.
 #'            Ser. 1329 012007.   doi:10.1088/1742-6596/1329/1/012007
 #'
-#'
+#'@export
 #'@examples
 #'
 #'times<- seq(2005, 2100, 1/12)
@@ -55,6 +55,7 @@
 #'rate <- rate_TPC(temp,ro,temp_cmin,temp_cmax,temp_op)
 #'
 #'plot(times,rate, type="l")
+#'
 
 
 rate_TPC<- function (T,ro,temp_cmin,temp_cmax,temp_op) {

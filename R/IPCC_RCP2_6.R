@@ -39,7 +39,7 @@
 #'@references Soetaert, K., Petzoldt, T., & Setzer, R. (2010). Solving Differential Equations in R: Package
 #'            deSolve. Journal of Statistical Software, 33(9), 1 - 25.
 #'            doi:http://dx.doi.org/10.18637/jss.v033.i09
-#'
+#'@export
 #'@examples
 #'
 #'#######################################################################
@@ -126,7 +126,7 @@
 ###################################################
 
 
-IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
+IPCC_RCP2_6 <- function(y_ini = c(N = 400, N = 400, N = 400),
                        temp_ini = rep(20,3),
                        temp_cmin = rep(18,3),
                        temp_cmax = c(20,25,36),
@@ -149,7 +149,7 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
 
 
 
-              options(warn = - 1)
+             # options(warn = - 1)
   ##########################################################
   # Optimum growing temperature
   ##########################################################
@@ -304,9 +304,9 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
       data2<-data.frame('x'=times,'y'=out2[,2] )
       data3<-data.frame('x'=times,'y'=out3[,2] )
 
-      # data1$group<-"Pop1"
-      # data2$group<-"Pop2"
-      # data3$group<-"Pop3"
+       data1$group<-"Pop1"
+       data2$group<-"Pop2"
+       data3$group<-"Pop3"
 
       ###############################################################
       # Carrying capacity
@@ -320,9 +320,9 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
       dat2<-data.frame('x'=times,'y'=K2 )
       dat3<-data.frame('x'=times,'y'=K3 )
 
-      # dat1$group<-"Pop1"
-      # dat2$group<-"Pop2"
-      # dat3$group<-"Pop3"
+      dat1$group<-"Pop1"
+      dat2$group<-"Pop2"
+      dat3$group<-"Pop3"
 
 
       ###############################################################
@@ -331,50 +331,52 @@ IPCC_RCP2_6<- function(y_ini = c(N = 400, N = 400, N = 400),
 
       Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
       names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-      View(Data)
+      #View(Data)
 
 
       ###############################################################
       # Plots
       ##############################################################
-
+       #globalVariables(c("x.data1", "y.data1"))
+      # utils::globalVariables(c("x", "y"))
       data<-rbind(data1, data2, data3)
+      datas<-rbind(da1,da2,da3)
 
-      p1 <- ggplot(data, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              geom_ribbon(data=subset(dat1,x>times[1] & x<times_sup1),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_ribbon(data=subset(dat2,x>times[1] & x<times_sup2),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="green4") +
-              geom_ribbon(data=subset(dat3,x>times[1] & x<times_sup3),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="blue") +
-              geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
-              geom_vline(xintercept = times_sup2, size=.5, color="green4",linetype="dashed")+
-              geom_vline(xintercept = times_sup3, size=.5, color="blue",linetype="dashed")+
-              scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-              geom_line(data =subset(data1,x>times[1] & x<times_sup1), color = "brown")+
-              geom_line(data =subset(data2,x>times[1] & x<times_sup2), color = "green4")+
-              geom_line(data =subset(data3,x>times[1] & x<times_sup3), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(a)")
+      p1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
+       theme_bw()+
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+        geom_ribbon(data=subset(dat1,.data$x>times[1] & .data$x<times_sup1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
+        geom_ribbon(data=subset(dat2,.data$x>times[1] & .data$x<times_sup2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
+        geom_ribbon(data=subset(dat3,.data$x>times[1] & .data$x<times_sup3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
+        geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
+        geom_vline(xintercept = times_sup2, size=.5, color="green4",linetype="dashed")+
+        geom_vline(xintercept = times_sup3, size=.5, color="blue",linetype="dashed")+
+        # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
+        geom_line(data =subset(data1,.data$x>times[1] & .data$x<times_sup1),aes( y=.data$y), color = "brown")+
+        geom_line(data =subset(data2,.data$x>times[1] & .data$x<times_sup2),aes(y=.data$y), color = "green4")+
+        geom_line(data =subset(data3,.data$x>times[1] & .data$x<times_sup3),aes( y=.data$y), color = "blue")+
+        labs(x = "Time",y="Abundance")+
+       theme(plot.title = element_text(size=40))+
+       theme(plot.title = element_text(hjust = 0.5))+
+        theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+        theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+        labs(tag = "(a)")
 
 
-      p2 <- ggplot(data, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-              geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
-              geom_vline(xintercept = times_sup2, size=.5, color="green4",linetype="dashed")+
-              geom_vline(xintercept = times_sup3, size=.5, color="blue",linetype="dashed")+
-              geom_line(data =subset(da1,x>times[1] & x<times_sup1), color = "brown")+
-              geom_line(data =subset(da2,x>times[1] & x<times_sup2), color = "green4")+
-              geom_line(data =subset(da3,x>times[1] & x<times_sup3), color = "blue")+
-              labs(x = "Time",y="Temperature")+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(b)")
+      p2 <-ggplot(datas, aes(x=.data$x, y=.data$y)) +
+        theme_bw()+
+        theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+        # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
+        geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
+        geom_vline(xintercept = times_sup2, size=.5, color="green4",linetype="dashed")+
+        geom_vline(xintercept = times_sup3, size=.5, color="blue",linetype="dashed")+
+        geom_line(data =subset(da1,.data$x>times[1] & .data$x<times_sup1), aes( y=.data$y),color = "brown")+
+        geom_line(data =subset(da2,.data$x>times[1] & .data$x<times_sup2),aes( y=.data$y), color = "green4")+
+        geom_line(data =subset(da3,.data$x>times[1] & .data$x<times_sup3),aes( y=.data$y), color = "blue")+
+        labs(x = "Time",y="Temperature")+
+        theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+        theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+        labs(tag = "(b)")
 
       plot_grid(p1, p2)
 

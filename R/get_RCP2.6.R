@@ -14,6 +14,7 @@
 #'            Cambio Climático [Equipo principal de redacción, R.K. Pachauri y L.A. Meyer (eds.)]. IPCC, Ginebra,
 #'            Suiza, 157 págs.
 #'
+#'@export
 #'@examples
 #'
 #'########################################################################

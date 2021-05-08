@@ -4,12 +4,10 @@
 \alias{get_RCP8.5}
 \title{Projected values under IPCC RCP8.5 scenario}
 \usage{
-get_RCP8.5(date, a, b)
+get_RCP8.5(date)
 }
 \arguments{
 \item{date}{A specific year or a vector of years.}
-
-\item{a, b}{Parameters obtained from the adjustment of the temperature trend.}
 }
 \description{
 This function allows obtaining the projected increment in environmental
@@ -27,7 +25,7 @@ The temperature increment projection of the change in global mean surface
 ########################################################################
 
 date <- 2050
-temp <- get_RCP8.5(date,a=exp(coef(m)[1]), b=coef(m)[2])
+temp <- get_RCP8.5(date)
 temp
 
 ########################################################################
@@ -35,7 +33,7 @@ temp
 ########################################################################
 
 date <- seq(2005,2100,1/12)
-temp <- get_RCP8.5(date,a=exp(coef(m)[1]), b=coef(m)[2])
+temp <- get_RCP8.5(date)
 plot(date,temp,type="l")
 
 }

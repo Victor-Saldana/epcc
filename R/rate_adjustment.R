@@ -15,9 +15,8 @@
 #'         temp_cmax, temp_cmax and ro, which are necessary to adjust the curve through a cubic polynomial
 #'         which fulfills the essential conditions of a TPC.
 #'
-#'
+#'@export
 #'@examples
-#'
 #'
 #'######################################################################
 #'   #Example 1: We consider a population of Macrolophus pygmaeus whose
@@ -72,6 +71,7 @@
 #'@references Saldaña-Núñez, V.N., Córdova-Lepe, F.D. & Moreno-Gómez, F.N. (2019). Population dynamics in the face of
 #'            climate change: Analysis of a cubic thermal performance curve in ectotherms. J. Phys.: Conf.
 #'            Ser. 1329 012007.   doi:10.1088/1742-6596/1329/1/012007
+#'
 
 
 

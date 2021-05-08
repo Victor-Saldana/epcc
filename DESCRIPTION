@@ -1,6 +1,6 @@
 Package: epcc
 Type: Package
-Title:epcc: an R package to assess and simulate the vulnerability of ectothermic populations when facing global warming
+Title: epcc: an R package to assess and simulate the vulnerability of ectothermic populations when facing global warming
 Version: 1.4.3
 Author: Víctor Saldaña-Núñez, Fernando Córdova-Lepe, Felipe N. Moreno-Gómez.
 Maintainer: Víctor Saldaña Núñez <saldananunezvictor@gmail.com>
@@ -14,15 +14,16 @@ Description: This package provides several functions
              for understanding the extinction risk of populations.
 License: GPL-3 + file LICENSE
 Imports: 
-    deSolve (>= 1.28), 
+    deSolve (>= 1.28),
     ggplot2 (>= 3.3.3),
     httr (>= 1.4.2),
     cowplot (>= 1.1.1),
     sp (>= 1.4-5),
-    raster (>= 3.1-5),
     nls2 (>= 0.2),
     readxl (>= 1.3.1),
-    proto (>= 1.0.0)
+    raster (>= 3.1-5),
+    proto (>= 1.0.0),
+    rlang
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

@@ -37,7 +37,7 @@
 #'            I, II y III al Quinto Informe de Evaluación del Grupo Intergubernamental de Expertos sobre el
 #'            Cambio Climático [Equipo principal de redacción, R.K. Pachauri y L.A. Meyer (eds.)]. IPCC, Ginebra,
 #'            Suiza, 157 págs.
-#'
+#'@export
 #'@examples
 #'
 #'#######################################################################
@@ -93,7 +93,7 @@
 #'time_end <- 2100
 #'
 #'# Temperature that occurs in the maximum time ofthe simulation.
-#'temp_max <- get_RCP8.5(time_end,a=exp(coef(m)[1]), b=coef(m)[2])+temp_i
+#'temp_max <- get_RCP8.5(time_end)+temp_i
 #'
 #'# Simulation thermal range.
 #'RS <- temp_max-temp_cmin
@@ -354,7 +354,7 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 
             Data<- data.frame(times,out1[,2],out1[,3], out1[,4],out2[,2],out2[,3],out2[,4],out3[,2],out3[,3],out3[,4])
             names(Data)<- c("Time","Abundance species-1","Abundance species-2","Abundance species-3","Abundance species-1","Abundance species-2","Abundance species-3","Abundance species-1","Abundance species-2","Abundance species-3")
-            View(Data)
+            #View(Data)
 
 
             times_new1<-vector(mode = "numeric", length = 0)
@@ -572,78 +572,78 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 
             data<-rbind(data1, data2, data3)
 
-            p1<- ggplot(data, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # geom_ribbon(data=subset(cap1,x>times[1] & x<times_sup4),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
-              geom_line(data =subset(data1,x>times[1] & x<times_sup1), color = "brown")+
-              geom_line(data =subset(data2,x>times[1] & x<times_sup1), color = "green4")+
-              geom_line(data =subset(data3,x>times[1] & x<times_sup1), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(a)")
-
-
-
-            dat<-rbind(dat1, dat2, dat3)
-
-            p2<- ggplot(dat, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # geom_ribbon(data=subset(cap2,x>times[1] & x<times_sup5),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
-              geom_line(data =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
-              geom_line(data =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
-              geom_line(data =subset(dat3,x>times[1] & x<times_sup2), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(b)")
-
-
-            da<-rbind(da1, da2, da3)
-
-            p3<- ggplot(da, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # geom_ribbon(data=subset(cap3,x>times[1] & x<times_sup6),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
-              geom_line(data =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
-              geom_line(data =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
-              geom_line(data =subset(da3,x>times[1] & x<times_sup3), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(c)")
-
-
-            d<-rbind(d1, d2, d3)
-
-            p4<- ggplot(d, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              geom_vline(xintercept = times_sup1, size=.5, color="green",linetype="dashed")+
-              geom_vline(xintercept = times_sup2, size=.5, color="blue",linetype="dashed")+
-              geom_vline(xintercept = times_sup3, size=.5, color="black",linetype="dashed")+
-              geom_line(data =subset(d1,x>times[1] & x<times_sup1), color = "green")+
-              geom_line(data =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
-              geom_line(data =subset(d3,x>times[1] & x<times_sup3), color = "black")+
-              labs(x = "Time",y="Temperature")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(d)")
-
-            plot_grid(p1, p2,p3,p4)
+            # p1<- ggplot(data, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   # geom_ribbon(data=subset(cap1,x>times[1] & x<times_sup4),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+            #   geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
+            #   geom_line(data =subset(data1,x>times[1] & x<times_sup1), color = "brown")+
+            #   geom_line(data =subset(data2,x>times[1] & x<times_sup1), color = "green4")+
+            #   geom_line(data =subset(data3,x>times[1] & x<times_sup1), color = "blue")+
+            #   labs(x = "Time",y="Abundance")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(a)")
+            #
+            #
+            #
+            # dat<-rbind(dat1, dat2, dat3)
+            #
+            # p2<- ggplot(dat, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   # geom_ribbon(data=subset(cap2,x>times[1] & x<times_sup5),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+            #   geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
+            #   geom_line(data =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
+            #   geom_line(data =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
+            #   geom_line(data =subset(dat3,x>times[1] & x<times_sup2), color = "blue")+
+            #   labs(x = "Time",y="Abundance")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(b)")
+            #
+            #
+            # da<-rbind(da1, da2, da3)
+            #
+            # p3<- ggplot(da, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   # geom_ribbon(data=subset(cap3,x>times[1] & x<times_sup6),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+            #   geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
+            #   geom_line(data =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
+            #   geom_line(data =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
+            #   geom_line(data =subset(da3,x>times[1] & x<times_sup3), color = "blue")+
+            #   labs(x = "Time",y="Abundance")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(c)")
+            #
+            #
+            # d<-rbind(d1, d2, d3)
+            #
+            # p4<- ggplot(d, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   geom_vline(xintercept = times_sup1, size=.5, color="green",linetype="dashed")+
+            #   geom_vline(xintercept = times_sup2, size=.5, color="blue",linetype="dashed")+
+            #   geom_vline(xintercept = times_sup3, size=.5, color="black",linetype="dashed")+
+            #   geom_line(data =subset(d1,x>times[1] & x<times_sup1), color = "green")+
+            #   geom_line(data =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
+            #   geom_line(data =subset(d3,x>times[1] & x<times_sup3), color = "black")+
+            #   labs(x = "Time",y="Temperature")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(d)")
+            #
+            # plot_grid(p1, p2,p3,p4)
 
           } else if(RCP==8.5) {
 
@@ -652,7 +652,7 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
             ##########################################################
             model1 <- function (times, y,parms1) {
               with(as.list(c(y)), {
-                T1<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[1]    #IPCC2
+                T1<-  get_RCP8.5(times)+temp_ini[1]    #IPCC2
                 r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
                 dN1 <-  r1*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
                 dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
@@ -665,7 +665,7 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 
             model2 <- function (times, y,parms2) {
               with(as.list(c(y)), {
-                T2<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[2]    #IPCC2
+                T2<-  get_RCP8.5(times)+temp_ini[2]    #IPCC2
                 r2<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
                 dN1 <-  r2*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
                 dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
@@ -678,7 +678,7 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 
             model3 <- function (times, y,parms3) {
               with(as.list(c(y)), {
-                T3<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[3]    #IPCC2
+                T3<-  get_RCP8.5(times)+temp_ini[3]    #IPCC2
                 r3<- rate_TPC(T3,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
                 dN1 <-  r3*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
                 dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
@@ -732,9 +732,9 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
             # da2$group<-"Pop2"
             # da3$group<-"Pop3"
 
-            T1<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[1]
-            T2<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[2]
-            T3<-  get_RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[3]
+            T1<-  get_RCP8.5(times)+temp_ini[1]
+            T2<-  get_RCP8.5(times)+temp_ini[2]
+            T3<-  get_RCP8.5(times)+temp_ini[3]
 
             d1<-data.frame('x'=times,'y'=T1)
             d2<-data.frame('x'=times,'y'=T2)
@@ -767,7 +767,7 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 
             Data<- data.frame(times,out1[,2],out1[,3],out1[,4],out2[,2],out2[,3],out2[,4],out3[,2],out3[,3],out3[,4])
             names(Data)<- c("Time","Abundance species-1","Abundance species-2","Abundance species-3","Abundance species-1","Abundance species-2","Abundance species-3","Abundance species-1","Abundance species-2","Abundance species-3")
-            View(Data)
+            #View(Data)
 
             times_new1<-vector(mode = "numeric", length = 0)
             times_new2<-vector(mode = "numeric", length = 0)
@@ -987,78 +987,78 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 
             data<-rbind(data1, data2, data3)
 
-            p1<- ggplot(data, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # geom_ribbon(data=subset(cap1,x>times[1] & x<times_sup4),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
-              geom_line(data =subset(data1,x>times[1] & x<times_sup1), color = "brown")+
-              geom_line(data =subset(data2,x>times[1] & x<times_sup1), color = "green4")+
-              geom_line(data =subset(data3,x>times[1] & x<times_sup1), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(a)")
-
-
-
-            dat<-rbind(dat1, dat2, dat3)
-
-            p2<- ggplot(dat, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # geom_ribbon(data=subset(cap2,x>times[1] & x<times_sup5),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
-              geom_line(data =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
-              geom_line(data =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
-              geom_line(data =subset(dat3,x>times[1] & x<times_sup2), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(b)")
-
-
-            da<-rbind(da1, da2, da3)
-
-            p3<- ggplot(da, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # geom_ribbon(data=subset(cap3,x>times[1] & x<times_sup6),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-              geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
-              geom_line(data =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
-              geom_line(data =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
-              geom_line(data =subset(da3,x>times[1] & x<times_sup3), color = "blue")+
-              labs(x = "Time",y="Abundance")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(c)")
-
-
-            d<-rbind(d1, d2, d3)
-
-            p4<- ggplot(d, aes(x=x, y=y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              geom_vline(xintercept = times_sup1, size=.5, color="green",linetype="dashed")+
-              geom_vline(xintercept = times_sup2, size=.5, color="blue",linetype="dashed")+
-              geom_vline(xintercept = times_sup3, size=.5, color="black",linetype="dashed")+
-              geom_line(data =subset(d1,x>times[1] & x<times_sup1), color = "green")+
-              geom_line(data =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
-              geom_line(data =subset(d3,x>times[1] & x<times_sup3), color = "black")+
-              labs(x = "Time",y="Temperature")+
-              theme(plot.title = element_text(size=40))+
-              theme(plot.title = element_text(hjust = 0.5))+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(d)")
-
-            plot_grid(p1, p2,p3,p4)
+            # p1<- ggplot(data, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   # geom_ribbon(data=subset(cap1,x>times[1] & x<times_sup4),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+            #   geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
+            #   geom_line(data =subset(data1,x>times[1] & x<times_sup1), color = "brown")+
+            #   geom_line(data =subset(data2,x>times[1] & x<times_sup1), color = "green4")+
+            #   geom_line(data =subset(data3,x>times[1] & x<times_sup1), color = "blue")+
+            #   labs(x = "Time",y="Abundance")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(a)")
+            #
+            #
+            #
+            # dat<-rbind(dat1, dat2, dat3)
+            #
+            # p2<- ggplot(dat, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   # geom_ribbon(data=subset(cap2,x>times[1] & x<times_sup5),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+            #   geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
+            #   geom_line(data =subset(dat1,x>times[1] & x<times_sup2), color = "brown")+
+            #   geom_line(data =subset(dat2,x>times[1] & x<times_sup2), color = "green4")+
+            #   geom_line(data =subset(dat3,x>times[1] & x<times_sup2), color = "blue")+
+            #   labs(x = "Time",y="Abundance")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(b)")
+            #
+            #
+            # da<-rbind(da1, da2, da3)
+            #
+            # p3<- ggplot(da, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   # geom_ribbon(data=subset(cap3,x>times[1] & x<times_sup6),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+            #   geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
+            #   geom_line(data =subset(da1,x>times[1] & x<times_sup3), color = "brown")+
+            #   geom_line(data =subset(da2,x>times[1] & x<times_sup3), color = "green4")+
+            #   geom_line(data =subset(da3,x>times[1] & x<times_sup3), color = "blue")+
+            #   labs(x = "Time",y="Abundance")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(c)")
+            #
+            #
+            # d<-rbind(d1, d2, d3)
+            #
+            # p4<- ggplot(d, aes(x=x, y=y)) +
+            #   theme_bw()+
+            #   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+            #   geom_vline(xintercept = times_sup1, size=.5, color="green",linetype="dashed")+
+            #   geom_vline(xintercept = times_sup2, size=.5, color="blue",linetype="dashed")+
+            #   geom_vline(xintercept = times_sup3, size=.5, color="black",linetype="dashed")+
+            #   geom_line(data =subset(d1,x>times[1] & x<times_sup1), color = "green")+
+            #   geom_line(data =subset(d2,x>times[1] & x<times_sup2), color = "blue")+
+            #   geom_line(data =subset(d3,x>times[1] & x<times_sup3), color = "black")+
+            #   labs(x = "Time",y="Temperature")+
+            #   theme(plot.title = element_text(size=40))+
+            #   theme(plot.title = element_text(hjust = 0.5))+
+            #   theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+            #   theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+            #   labs(tag = "(d)")
+            #
+            # plot_grid(p1, p2,p3,p4)
 
           } else {
 

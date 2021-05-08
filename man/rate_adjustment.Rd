@@ -25,7 +25,6 @@ This function allows you to adjust the intrinsic growth rate of an ectotherm
 }
 \examples{
 
-
 ######################################################################
   #Example 1: We consider a population of Macrolophus pygmaeus whose
   #intrinsic growth rate is adjusted to the data obtained from Rezende

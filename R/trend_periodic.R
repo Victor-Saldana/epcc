@@ -38,7 +38,7 @@
 #'@references Soetaert, K., Petzoldt, T., & Setzer, R. (2010). Solving Differential Equations in R:
 #'            Package deSolve. Journal of Statistical Software, 33(9), 1 - 25.
 #'            doi:http://dx.doi.org/10.18637/jss.v033.i09
-#'
+#'@export
 #'@examples
 #'
 #'#######################################################################
@@ -344,7 +344,7 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
 
     Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
     names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    View(Data)
+    #View(Data)
 
 
     ###############################################################
@@ -352,39 +352,39 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
     ##############################################################
 
     data<-rbind(data1, data2, data3)
-    q1 <- ggplot(data, aes(x=x, y=y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_ribbon(data=subset(dat1,x>times[1] & x<times[length(times)]),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
-            geom_ribbon(data=subset(dat2,x>times[1] & x<times[length(times)]),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="green4") +
-            geom_ribbon(data=subset(dat3,x>times[1] & x<times[length(times)]),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="blue") +
-            geom_line(data =subset(data1,x>times[1] & x<times[length(times)]), color = "brown")+
-            geom_line(data =subset(data2,x>times[1] & x<times[length(times)]), color = "green4")+
-            geom_line(data =subset(data3,x>times[1] & x<times[length(times)]), color = "blue")+
-            labs(x = "Time",y="Abundance")+
-            theme(plot.title = element_text(size=40))+
-            theme(plot.title = element_text(hjust = 0.5))+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(a)")
-
-
-
-    q2 <- ggplot(data, aes(x=x, y=y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_line(data =subset(da1,x>times[1] & x<times[length(times)]), color = "brown")+
-            geom_line(data =subset(da2,x>times[1] & x<times[length(times)]), color = "green4")+
-            geom_line(data =subset(da3,x>times[1] & x<times[length(times)]), color = "blue")+
-            labs(x = "Time",y="Temperature")+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(b)")
-
-
-          plot_grid(q1, q2)
+    # q1 <- ggplot(data, aes(x=x, y=y)) +
+    #         theme_bw()+
+    #         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+    #         scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
+    #         geom_ribbon(data=subset(dat1,x>times[1] & x<times[length(times)]),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="brown") +
+    #         geom_ribbon(data=subset(dat2,x>times[1] & x<times[length(times)]),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="green4") +
+    #         geom_ribbon(data=subset(dat3,x>times[1] & x<times[length(times)]),aes(x=x,ymax=y),ymin=0,alpha=0.3, fill="blue") +
+    #         geom_line(data =subset(data1,x>times[1] & x<times[length(times)]), color = "brown")+
+    #         geom_line(data =subset(data2,x>times[1] & x<times[length(times)]), color = "green4")+
+    #         geom_line(data =subset(data3,x>times[1] & x<times[length(times)]), color = "blue")+
+    #         labs(x = "Time",y="Abundance")+
+    #         theme(plot.title = element_text(size=40))+
+    #         theme(plot.title = element_text(hjust = 0.5))+
+    #         theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+    #         theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+    #         labs(tag = "(a)")
+    #
+    #
+    #
+    # q2 <- ggplot(data, aes(x=x, y=y)) +
+    #         theme_bw()+
+    #         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+    #         scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
+    #         geom_line(data =subset(da1,x>times[1] & x<times[length(times)]), color = "brown")+
+    #         geom_line(data =subset(da2,x>times[1] & x<times[length(times)]), color = "green4")+
+    #         geom_line(data =subset(da3,x>times[1] & x<times[length(times)]), color = "blue")+
+    #         labs(x = "Time",y="Temperature")+
+    #         theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+    #         theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+    #         labs(tag = "(b)")
+    #
+    #
+    #       plot_grid(q1, q2)
 
 
   }else{

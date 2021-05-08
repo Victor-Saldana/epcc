@@ -119,7 +119,7 @@ temp_i <- 22
 time_end <- 2100
 
 # Temperature that occurs in the maximum time ofthe simulation.
-temp_max <- get_RCP8.5(time_end,a=exp(coef(m)[1]), b=coef(m)[2])+temp_i
+temp_max <- get_RCP8.5(time_end)+temp_i
 
 # Simulation thermal range.
 RS <- temp_max-temp_cmin
