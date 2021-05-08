@@ -1,5 +1,5 @@
 
-# \mathbf{e}_{PCC}
+# epcc
 
 <!-- badges: start -->
 <!-- badges: end -->
