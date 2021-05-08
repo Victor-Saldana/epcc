@@ -34,14 +34,6 @@ email to saldananunezvictor@gmail.com.
 Víctor Saldaña-Núñez, Fernando Córdova-Lepe, Felipe N. Moreno-Gómez.
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(epcc)
-## basic example code
-```
 ## References
 ``` r
 IPCC, 2014: Climate Change 2014: Synthesis Report. Contribution of Working Groups I, II and III to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, Geneva, Switzerland, 151 pp.
