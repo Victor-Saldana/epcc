@@ -39,21 +39,22 @@ library(epcc)
 ```
 ## References
 ``` r
-IPCC, 2014: Climate Change 2014: Synthesis Report. Contribution of Working Groups I, II and III to the Fifth Assessment 
-Report of the Intergovernmental Panel on Climate Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, 
-Geneva, Switzerland, 151 pp.
+IPCC, 2014: Climate Change 2014: Synthesis Report. Contribution of Working Groups I, II and III to the Fifth 
+Assessment Report of the Intergovernmental Panel on Climate Change [Core Writing Team, R.K. Pachauri and L.A. 
+Meyer (eds.)]. IPCC, Geneva, Switzerland, 151 pp.
 ```
 ``` r
-Rich,, H. B., Quinn, T. P., Scheuerell, M. D., \& Schindler, D. E. (2009). Climate and intraspecific competition control 
-the growth and life history of juvenile sockeye salmon (Oncorhynchus nerka) in Iliamna Lake, Alaska. Canadian Journal of 
-Fisheries and Aquatic Sciences, 66(2), 238-246.doi:10.1139/f08-210
+Rich,, H. B., Quinn, T. P., Scheuerell, M. D., \& Schindler, D. E. (2009). Climate and intraspecific 
+competition control the growth and life history of juvenile sockeye salmon (Oncorhynchus nerka) in Iliamna 
+Lake, Alaska. Canadian Journal of Fisheries and Aquatic Sciences, 66(2), 238-246.doi:10.1139/f08-210
 ```
 ``` r
-Soetaert, K., Petzoldt, T., \& Setzer, R. (2010). Solving Differential Equations in R: Package deSolve. Journal of 
-Statistical Software, 33(9), 1 - 25. doi:http://dx.doi.org/10.18637/jss.v033.i09
+Soetaert, K., Petzoldt, T., \& Setzer, R. (2010). Solving Differential Equations in R: Package deSolve. 
+Journal of Statistical Software, 33(9), 1 - 25. doi:http://dx.doi.org/10.18637/jss.v033.i09
 ```
 
 ``` r
-Svanback, R., \& Bolnick, D. I. (2007). Intraspecific competition drives increased resource use diversity within a natural 
-population. Proceedings of the Royal Society B: Biological Sciences, 274(1611), 839-844. doi:10.1098/rspb.2006.0198 
+Svanback, R., \& Bolnick, D. I. (2007). Intraspecific competition drives increased resource use diversity within 
+a natural population. Proceedings of the Royal Society B: Biological Sciences, 274(1611), 839-844. 
+doi:10.1098/rspb.2006.0198 
 ```
