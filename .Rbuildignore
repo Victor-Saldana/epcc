@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
+^E_furuhashii.xlsx$
+^M_pygmaeus.xlsx$
+^T_pretoisum.xlsx$
