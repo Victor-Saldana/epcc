@@ -54,7 +54,7 @@ Journal of Statistical Software, 33(9), 1 - 25. doi:http://dx.doi.org/10.18637/j
 ```
 
 ``` r
-Svanback, R., \& Bolnick, D. I. (2007). Intraspecific competition drives increased resource use diversity within 
+Svanback, R., & Bolnick, D. I. (2007). Intraspecific competition drives increased resource use diversity within 
 a natural population. Proceedings of the Royal Society B: Biological Sciences, 274(1611), 839-844. 
 doi:10.1098/rspb.2006.0198 
 ```
