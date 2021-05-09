@@ -146,7 +146,7 @@ IPCC_RCP8_5<- function(y_ini = c(N = 400, N = 400, N = 400),
 
     if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
-      options(warn = - 1)
+      # options(warn = - 1)
 
       values <- c(0.61, 2, 3.7)
       q<- c(2005,2065,2100)
@@ -155,6 +155,7 @@ IPCC_RCP8_5<- function(y_ini = c(N = 400, N = 400, N = 400),
 
       m<- nls(r ~ exp(loga + b * q), df, start = list( loga = log(2), b = 0.005),control = list (maxiter = 500))
       y_est<-predict(m,df$q)
+
 
   ##########################################################
   # Optimum growing temperature
@@ -171,19 +172,19 @@ IPCC_RCP8_5<- function(y_ini = c(N = 400, N = 400, N = 400),
   # Time
   ##########################################################
 
-    time_op1=   1/coef(m)[2]*log((temp_op1-temp_ini[1])/exp(coef(m)[1]))
+    # time_op1=   1/coef(m)[2]*log((temp_op1-temp_ini[1])/exp(coef(m)[1]))
   # time_cmin1= 1/coef(m)[2]*log((temp_cmin[1]-temp_ini[1])/exp(coef(m)[1]))
     time_cmax1= 1/coef(m)[2]*log((temp_cmax[1]-temp_ini[1])/exp(coef(m)[1]))
 
  #########################################################
 
-    time_op2= 1/coef(m)[2]*log((temp_op2-temp_ini[2])/exp(coef(m)[1]))
+    # time_op2= 1/coef(m)[2]*log((temp_op2-temp_ini[2])/exp(coef(m)[1]))
   # time_cmin2= 1/coef(m)[2]*log((temp_cmin[2]-temp_ini[2])/exp(coef(m)[1]))
     time_cmax2= 1/coef(m)[2]*log((temp_cmax[2]-temp_ini[2])/exp(coef(m)[1]))
 
  ##########################################################
 
-    time_op3=   1/coef(m)[2]*log((temp_op3-temp_ini[3])/exp(coef(m)[1]))
+    # time_op3=   1/coef(m)[2]*log((temp_op3-temp_ini[3])/exp(coef(m)[1]))
   # time_cmin3= 1/coef(m)[2]*log((temp_cmin[3]-temp_ini[3])/exp(coef(m)[1]))
     time_cmax3= 1/coef(m)[2]*log((temp_cmax[3]-temp_ini[3])/exp(coef(m)[1]))
 
@@ -320,7 +321,8 @@ IPCC_RCP8_5<- function(y_ini = c(N = 400, N = 400, N = 400),
       # Plots
       ##############################################################
 
-      data<-rbind(data1, data2, data3, dat1, dat2, dat3)
+      data<-rbind(data1, data2, data3)
+      dat<-rbind(dat1,dat2,dat3)
       da<-rbind(da1, da2, da3)
 
       p1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +

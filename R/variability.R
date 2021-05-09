@@ -494,7 +494,9 @@ variability<- function(y_ini = c(N =400, N = 400, N = 400),
     # Plots
     ##############################################################
 
-  data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
+  data<-rbind(data1,data2,data3)
+  dat<-rbind(dat1,dat2,dat3)
+  da<-rbind(da1,da2,da3)
 
     p1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
@@ -518,7 +520,7 @@ variability<- function(y_ini = c(N =400, N = 400, N = 400),
 
 
 
-    p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
+    p2 <- ggplot(da, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
             # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
