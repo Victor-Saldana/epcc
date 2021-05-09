@@ -1,7 +1,7 @@
 Package: epcc
 Type: Package
 Title: epcc: an R package to assess and simulate the vulnerability of ectothermic populations when facing global warming
-Version: 1.4.3
+Version: 1.4.4
 Author: Víctor Saldaña-Núñez, Fernando Córdova-Lepe, Felipe N. Moreno-Gómez.
 Maintainer: Víctor Saldaña Núñez <saldananunezvictor@gmail.com>
 Description: This package provides several functions 

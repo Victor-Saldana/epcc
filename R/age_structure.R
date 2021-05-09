@@ -7,17 +7,15 @@
 #'
 #'
 #'@param y_ini Initial population values (must be written with its name: N).
-#'@param temp_ini Initial temperature.
-#'@param temp_cmin Minimum critical temperature (prey).
-#'@param temp_cmax Maximum critical temperature (prey).
-#'@param ro Population growth rate at optimum temperature (prey).
-#'@param lambda1 Marginal loss by non-thermodependent intraspecific competition (age1).
-#'@param lambda2 Marginal loss by non-thermodependent intraspecific competition (age2).
-#'@param lambda3 Marginal loss by non-thermodependent intraspecific competition (age3).
-#'@param alpha1 Stage 1 to 2 transition coefficient.
-#'@param alpha2 Stage 2 to 3 transition coefficient.
-#'@param d2 Mortality rate (age2).
-#'@param d3 Mortality rate (age3).
+#'@param temp_ini Initial temperature (K).
+#'@param temp_cmin Minimum critical temperature (K).
+#'@param temp_cmax Maximum critical temperature (K).
+#'@param ro Population growth rate at optimum temperature.
+#'@param lambda1,lambda2,lambda3 Marginal loss by non-thermodependent intraspecific competition.
+#'@param alpha1,alpha2 Stage 1 to 2 and 2 to 3 transition coefficient respectively.
+#'@param d2,d3 Mortality rate at a reference temperature.
+#'@param Ad2,Ad3 Arrhenius constant which quantifies the temperature sensitivity of mortality.
+#'@param Tr2,Tr3 Reference temperature (K).
 #'@param RCP Representative concentration trajectories (RCP2.6 and RCP8.5 scenarios).
 #'@param time_start Start of time sequence.
 #'@param time_end End of time sequence.
@@ -44,10 +42,10 @@
 #'   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #'#######################################################################
 #'
-#'temp_cmin <- 18
+#'temp_cmin <- 291
 #'
 #'# Temperature that occurs before the minimum simulation time.
-#'temp_i <- 22
+#'temp_i <- 295
 #'
 #'time_end <- 2100
 #'
@@ -69,13 +67,17 @@
 #'              temp_cmin = rep(temp_cmin,3),
 #'              temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
 #'              ro = rep(0.7,3),
-#'              lambda1 = rep(0.0004,3),
-#'              lambda2 = rep(0.0006,3),
-#'              lambda3 = rep(0.0005,3),
-#'              alpha1 = 0.3,
-#'              alpha2 = 0.4,
-#'              d2 = 0.2,
-#'              d3 = 0.3,
+#'              lambda1 = rep(0.00004,3),
+#'              lambda2 = rep(0.00006,3),
+#'              lambda3 = rep(0.00005,3),
+#'              alpha1 = rep(0.3,3),
+#'              alpha2 = rep(0.4,3),
+#'              d2 = rep(0.005,3),
+#'              d3 = rep(0.5,3),
+#'              Ad2 = rep(0.5,3),
+#'              Ad3 = rep(0.75,3),
+#'              Tr2 = rep(298,3),
+#'              Tr3 = rep(298,3),
 #'              RCP = 2.6,
 #'              time_start = 2005,
 #'              time_end = time_end,
@@ -85,10 +87,10 @@
 #'   #Example 2: Different thermal tolerance ranges (scenario RCP8.5).
 #'#######################################################################
 #'
-#'temp_cmin <- 18
+#'temp_cmin <- 291
 #'
 #'# Temperature that occurs before the minimum simulation time.
-#'temp_i <- 22
+#'temp_i <- 295
 #'
 #'time_end <- 2100
 #'
@@ -110,13 +112,17 @@
 #'              temp_cmin = rep(temp_cmin,3),
 #'              temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
 #'              ro = rep(0.7,3),
-#'              lambda1 = rep(0.0004,3),
-#'              lambda2 = rep(0.0006,3),
-#'              lambda3 = rep(0.0005,3),
-#'              alpha1 = 0.3,
-#'              alpha2 = 0.4,
-#'              d2 = 0.3,
-#'              d3 = 0.4,
+#'              lambda1 = rep(0.00004,3),
+#'              lambda2 = rep(0.00006,3),
+#'              lambda3 = rep(0.00005,3),
+#'              alpha1 = rep(0.3,3),
+#'              alpha2 = rep(0.4,3),
+#'              d2 = rep(0.005,3),
+#'              d3 = rep(0.5,3),
+#'              Ad2 = rep(0.5,3),
+#'              Ad3 = rep(0.75,3),
+#'              Tr2 = rep(298,3),
+#'              Tr3 = rep(298,3),
 #'              RCP = 8.5,
 #'              time_start = 2005,
 #'              time_end = time_end,
@@ -133,17 +139,21 @@
 #'age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 #'                        N2 = 600, N2 = 600, N2 = 600,
 #'                        N3 = 400, N3 = 400, N3 = 400),
-#'              temp_ini = rep(22,3),
-#'              temp_cmin = rep(20,3),
-#'              temp_cmax = rep(35,3),
+#'              temp_ini = rep(295,3),
+#'              temp_cmin = rep(293,3),
+#'              temp_cmax = rep(308,3),
 #'              ro = rep(0.9,3),
-#'              lambda1 = rep(0.0004,3),
-#'              lambda2 = rep(0.0006,3),
-#'              lambda3 = rep(0.0005,3),
-#'              alpha1 = 0.3,
-#'              alpha2 = 0.4,
-#'              d2 = 0.3,
-#'              d3 = 0.4,
+#'              lambda1 = rep(0.00004,3),
+#'              lambda2 = rep(0.00006,3),
+#'              lambda3 = rep(0.00005,3),
+#'              alpha1 = rep(0.3,3),
+#'              alpha2 = rep(0.4,3),
+#'              d2 = rep(0.005,3),
+#'              d3 = rep(0.5,3),
+#'              Ad2 = rep(0.5,3),
+#'              Ad3 = rep(0.75,3),
+#'              Tr2 = rep(298,3),
+#'              Tr3 = rep(298,3),
 #'              RCP = 2.6,
 #'              time_start = 2005,
 #'              time_end = 2100,
@@ -160,17 +170,21 @@
 #'age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
 #'                        N2 = 600, N2 = 600, N2 = 600,
 #'                        N3 = 400, N3 = 400, N3 = 400),
-#'              temp_ini = rep(22,3),
-#'              temp_cmin = rep(20,3),
-#'              temp_cmax = rep(35,3),
+#'              temp_ini = rep(295,3),
+#'              temp_cmin = rep(293,3),
+#'              temp_cmax = rep(308,3),
 #'              ro = rep(0.9,3),
-#'              lambda1 = rep(0.0004,3),
-#'              lambda2 = rep(0.0006,3),
-#'              lambda3 = rep(0.0005,3),
-#'              alpha1 = 0.3,
-#'              alpha2 = 0.4,
-#'              d2 = 0.3,
-#'              d3 = 0.4,
+#'              lambda1 = rep(0.00004,3),
+#'              lambda2 = rep(0.00006,3),
+#'              lambda3 = rep(0.00005,3),
+#'              alpha1 = rep(0.3,3),
+#'              alpha2 = rep(0.4,3),
+#'              d2 = rep(0.005,3),
+#'              d3 = rep(0.5,3),
+#'              Ad2 = rep(0.5,3),
+#'              Ad3 = rep(0.75,3),
+#'              Tr2 = rep(298,3),
+#'              Tr3 = rep(298,3),
 #'              RCP = 8.5,
 #'              time_start = 2005,
 #'              time_end = 2100,
@@ -181,17 +195,21 @@
 age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
                         N2 = 600, N2 = 600, N2 = 600,
                         N3 = 400, N3 = 400, N3 = 400),
-              temp_ini = rep(25,3),
-              temp_cmin = rep(18,3),
-              temp_cmax = c(25,28,35),
+              temp_ini = rep(25+273.15,3),
+              temp_cmin = rep(18+273.15,3),
+              temp_cmax = c(25+273.15,28+273.15,35+273.15),
               ro = rep(0.7,3),
               lambda1 = rep(0.0004,3),
               lambda2 = rep(0.0004,3),
               lambda3 = rep(0.0004,3),
-              alpha1 = 0.1,
-              alpha2 = 0.7,
-              d2 = 0.4,
-              d3 = 0.4,
+              alpha1 = rep(0.1,3),
+              alpha2 = rep(0.7,3),
+              d2 = rep(0.005,3),
+              d3 = rep(0.5,3),
+              Ad2 = rep(0.5,3),
+              Ad3 = rep(0.75,3),
+              Tr2 = rep(298,3),
+              Tr3 = rep(298,3),
               RCP = 2.6,
               time_start = 2005,
               time_end = 2100,
@@ -223,9 +241,9 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
           # Parameters
           ##########################################################
 
-          parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1,ro[1], lambda1[1],lambda1[2],lambda1[3],lambda2[1],lambda2[2],lambda2[3],lambda3[1],lambda3[2],lambda3[3],alpha1,alpha2,d2,d3)
-          parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2,ro[2], lambda1[1],lambda1[2],lambda1[3],lambda2[1],lambda2[2],lambda2[3],lambda3[1],lambda3[2],lambda3[3],alpha1,alpha2,d2,d3)
-          parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda1[1],lambda1[2],lambda1[3],lambda2[1],lambda2[2],lambda2[3],lambda3[1],lambda3[2],lambda3[3],alpha1,alpha2,d2,d3)
+          parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1,ro[1], lambda1[1],lambda1[2],lambda1[3],lambda2[1],lambda2[2],lambda2[3],lambda3[1],lambda3[2],lambda3[3],alpha1[1],alpha2[1],d2[1],d3[1])
+          parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2,ro[2], lambda1[1],lambda1[2],lambda1[3],lambda2[1],lambda2[2],lambda2[3],lambda3[1],lambda3[2],lambda3[3],alpha1[2],alpha2[2],d2[2],d3[2])
+          parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda1[1],lambda1[2],lambda1[3],lambda2[1],lambda2[2],lambda2[3],lambda3[1],lambda3[2],lambda3[3],alpha1[3],alpha2[3],d2[3],d3[3])
 
           ##############################################
 
@@ -237,11 +255,13 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
             ##########################################################
             model1 <- function (times, y,parms1) {
               with(as.list(c(y)), {
-                T1 <- get_RCP2.6(times)+temp_ini[1]  # IPCC1
-                r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
-                dN1 <-  r1*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
-                dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
-                dN3 <-  alpha2*N2-d3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
+                  T1<- get_RCP2.6(times)+temp_ini[1]  # IPCC1
+                  r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
+                  D2<- d2[1]*exp(Ad2[1]*(1/Tr2[1]-1/T1))
+                  D3<- d3[1]*exp(Ad3[1]*(1/Tr3[1]-1/T1))
+                dN1 <-  r1*N3-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1[1]*N1
+                dN2 <-  alpha1[1]*N1-D2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2[1]*N2
+                dN3 <-  alpha2[1]*N2-D3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
 
                 return(list(c(dN1,dN2,dN3)))
               })
@@ -252,9 +272,11 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
               with(as.list(c(y)), {
                 T2 <- get_RCP2.6(times)+temp_ini[2]  # IPCC1
                 r2<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
-                dN1 <-  r2*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
-                dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
-                dN3 <-  alpha2*N2-d3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
+                D2<- d2[2]*exp(Ad2[2]*(1/Tr2[2]-1/T2))
+                D3<- d3[2]*exp(Ad3[2]*(1/Tr3[2]-1/T2))
+                dN1 <-  r2*N3-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1[2]*N1
+                dN2 <-  alpha1[2]*N1-D2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2[2]*N2
+                dN3 <-  alpha2[2]*N2-D3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
 
                 return(list(c(dN1,dN2,dN3)))
               })
@@ -265,9 +287,11 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
               with(as.list(c(y)), {
                 T3 <- get_RCP2.6(times)+temp_ini[3]  # IPCC1
                 r3<- rate_TPC(T3,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
-                dN1 <-  r3*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
-                dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
-                dN3 <-  alpha2*N2-d3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
+                D2<- d2[3]*exp(Ad2[3]*(1/Tr2[3]-1/T3))
+                D3<- d3[3]*exp(Ad3[3]*(1/Tr3[3]-1/T3))
+                dN1 <-  r3*N3-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1[3]*N1
+                dN2 <-  alpha1[3]*N1-D2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2[3]*N2
+                dN3 <-  alpha2[3]*N2-D3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
 
                 return(list(c(dN1,dN2,dN3)))
               })
@@ -654,9 +678,11 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
               with(as.list(c(y)), {
                 T1<-  get_RCP8.5(times)+temp_ini[1]    #IPCC2
                 r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
-                dN1 <-  r1*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
-                dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
-                dN3 <-  alpha2*N2-d3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
+                D2<- d2[1]*exp(Ad2[1]*(1/Tr2[1]-1/T1))
+                D3<- d3[1]*exp(Ad3[1]*(1/Tr3[1]-1/T1))
+                dN1 <-  r1*N3-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1[2]*N1
+                dN2 <-  alpha1[1]*N1-D2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2[2]*N2
+                dN3 <-  alpha2[2]*N2-D3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
 
                 return(list(c(dN1,dN2,dN3)))
               })
@@ -667,9 +693,11 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
               with(as.list(c(y)), {
                 T2<-  get_RCP8.5(times)+temp_ini[2]    #IPCC2
                 r2<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
-                dN1 <-  r2*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
-                dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
-                dN3 <-  alpha2*N2-d3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
+                D2<- d2[2]*exp(Ad2[2]*(1/Tr2[2]-1/T2))
+                D3<- d3[2]*exp(Ad3[2]*(1/Tr3[2]-1/T2))
+                dN1 <-  r2*N3-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1[3]*N1
+                dN2 <-  alpha1[2]*N1-D2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2[2]*N2
+                dN3 <-  alpha2*N2-D3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
 
                 return(list(c(dN1,dN2,dN3)))
               })
@@ -680,9 +708,11 @@ age_structure<- function(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
               with(as.list(c(y)), {
                 T3<-  get_RCP8.5(times)+temp_ini[3]    #IPCC2
                 r3<- rate_TPC(T3,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
-                dN1 <-  r3*N1-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
-                dN2 <-  alpha1*N1-d2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
-                dN3 <-  alpha2*N2-d3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
+                D2<- d2[3]*exp(Ad2[1]*(1/Tr2[1]-1/T1))
+                D3<- d3[1]*exp(Ad3[1]*(1/Tr3[1]-1/T1))
+                dN1 <-  r3*N3-lambda1[1]*N1*N1-lambda1[2]*N1*N2-lambda1[3]*N1*N3-alpha1*N1
+                dN2 <-  alpha1*N1-D2*N2-lambda2[1]*N2*N1-lambda2[2]*N2*N2-lambda2[3]*N2*N3-alpha2*N2
+                dN3 <-  alpha2*N2-D3*N3-lambda3[1]*N3*N1-lambda3[2]*N3*N2-lambda3[3]*N3*N3
 
                 return(list(c(dN1,dN2,dN3)))
               })

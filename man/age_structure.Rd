@@ -7,17 +7,21 @@
 age_structure(
   y_ini = c(N1 = 800, N1 = 800, N1 = 800, N2 = 600, N2 = 600, N2 = 600, N3 = 400, N3 =
     400, N3 = 400),
-  temp_ini = rep(25, 3),
-  temp_cmin = rep(18, 3),
-  temp_cmax = c(25, 28, 35),
+  temp_ini = rep(25 + 273.15, 3),
+  temp_cmin = rep(18 + 273.15, 3),
+  temp_cmax = c(25 + 273.15, 28 + 273.15, 35 + 273.15),
   ro = rep(0.7, 3),
   lambda1 = rep(4e-04, 3),
   lambda2 = rep(4e-04, 3),
   lambda3 = rep(4e-04, 3),
-  alpha1 = 0.1,
-  alpha2 = 0.7,
-  d2 = 0.4,
-  d3 = 0.4,
+  alpha1 = rep(0.1, 3),
+  alpha2 = rep(0.7, 3),
+  d2 = rep(0.005, 3),
+  d3 = rep(0.5, 3),
+  Ad2 = rep(0.5, 3),
+  Ad3 = rep(0.75, 3),
+  Tr2 = rep(298, 3),
+  Tr3 = rep(298, 3),
   RCP = 2.6,
   time_start = 2005,
   time_end = 2100,
@@ -27,27 +31,23 @@ age_structure(
 \arguments{
 \item{y_ini}{Initial population values (must be written with its name: N).}
 
-\item{temp_ini}{Initial temperature.}
+\item{temp_ini}{Initial temperature (K).}
 
-\item{temp_cmin}{Minimum critical temperature (prey).}
+\item{temp_cmin}{Minimum critical temperature (K).}
 
-\item{temp_cmax}{Maximum critical temperature (prey).}
+\item{temp_cmax}{Maximum critical temperature (K).}
 
-\item{ro}{Population growth rate at optimum temperature (prey).}
+\item{ro}{Population growth rate at optimum temperature.}
 
-\item{lambda1}{Marginal loss by non-thermodependent intraspecific competition (age1).}
+\item{lambda1, lambda2, lambda3}{Marginal loss by non-thermodependent intraspecific competition.}
 
-\item{lambda2}{Marginal loss by non-thermodependent intraspecific competition (age2).}
+\item{alpha1, alpha2}{Stage 1 to 2 and 2 to 3 transition coefficient respectively.}
 
-\item{lambda3}{Marginal loss by non-thermodependent intraspecific competition (age3).}
+\item{d2, d3}{Mortality rate at a reference temperature.}
 
-\item{alpha1}{Stage 1 to 2 transition coefficient.}
+\item{Ad2, Ad3}{Arrhenius constant which quantifies the temperature sensitivity of mortality.}
 
-\item{alpha2}{Stage 2 to 3 transition coefficient.}
-
-\item{d2}{Mortality rate (age2).}
-
-\item{d3}{Mortality rate (age3).}
+\item{Tr2, Tr3}{Reference temperature (K).}
 
 \item{RCP}{Representative concentration trajectories (RCP2.6 and RCP8.5 scenarios).}
 
@@ -80,10 +80,10 @@ Three scenarios can be evaluated for a predation interaction where the prey is a
   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #######################################################################
 
-temp_cmin <- 18
+temp_cmin <- 291
 
 # Temperature that occurs before the minimum simulation time.
-temp_i <- 22
+temp_i <- 295
 
 time_end <- 2100
 
@@ -105,13 +105,17 @@ age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
              temp_cmin = rep(temp_cmin,3),
              temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
              ro = rep(0.7,3),
-             lambda1 = rep(0.0004,3),
-             lambda2 = rep(0.0006,3),
-             lambda3 = rep(0.0005,3),
-             alpha1 = 0.3,
-             alpha2 = 0.4,
-             d2 = 0.2,
-             d3 = 0.3,
+             lambda1 = rep(0.00004,3),
+             lambda2 = rep(0.00006,3),
+             lambda3 = rep(0.00005,3),
+             alpha1 = rep(0.3,3),
+             alpha2 = rep(0.4,3),
+             d2 = rep(0.005,3),
+             d3 = rep(0.5,3),
+             Ad2 = rep(0.5,3),
+             Ad3 = rep(0.75,3),
+             Tr2 = rep(298,3),
+             Tr3 = rep(298,3),
              RCP = 2.6,
              time_start = 2005,
              time_end = time_end,
@@ -121,10 +125,10 @@ age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
   #Example 2: Different thermal tolerance ranges (scenario RCP8.5).
 #######################################################################
 
-temp_cmin <- 18
+temp_cmin <- 291
 
 # Temperature that occurs before the minimum simulation time.
-temp_i <- 22
+temp_i <- 295
 
 time_end <- 2100
 
@@ -146,13 +150,17 @@ age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
              temp_cmin = rep(temp_cmin,3),
              temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
              ro = rep(0.7,3),
-             lambda1 = rep(0.0004,3),
-             lambda2 = rep(0.0006,3),
-             lambda3 = rep(0.0005,3),
-             alpha1 = 0.3,
-             alpha2 = 0.4,
-             d2 = 0.3,
-             d3 = 0.4,
+             lambda1 = rep(0.00004,3),
+             lambda2 = rep(0.00006,3),
+             lambda3 = rep(0.00005,3),
+             alpha1 = rep(0.3,3),
+             alpha2 = rep(0.4,3),
+             d2 = rep(0.005,3),
+             d3 = rep(0.5,3),
+             Ad2 = rep(0.5,3),
+             Ad3 = rep(0.75,3),
+             Tr2 = rep(298,3),
+             Tr3 = rep(298,3),
              RCP = 8.5,
              time_start = 2005,
              time_end = time_end,
@@ -169,17 +177,21 @@ e3 <- 2*e2
 age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
                        N2 = 600, N2 = 600, N2 = 600,
                        N3 = 400, N3 = 400, N3 = 400),
-             temp_ini = rep(22,3),
-             temp_cmin = rep(20,3),
-             temp_cmax = rep(35,3),
+             temp_ini = rep(295,3),
+             temp_cmin = rep(293,3),
+             temp_cmax = rep(308,3),
              ro = rep(0.9,3),
-             lambda1 = rep(0.0004,3),
-             lambda2 = rep(0.0006,3),
-             lambda3 = rep(0.0005,3),
-             alpha1 = 0.3,
-             alpha2 = 0.4,
-             d2 = 0.3,
-             d3 = 0.4,
+             lambda1 = rep(0.00004,3),
+             lambda2 = rep(0.00006,3),
+             lambda3 = rep(0.00005,3),
+             alpha1 = rep(0.3,3),
+             alpha2 = rep(0.4,3),
+             d2 = rep(0.005,3),
+             d3 = rep(0.5,3),
+             Ad2 = rep(0.5,3),
+             Ad3 = rep(0.75,3),
+             Tr2 = rep(298,3),
+             Tr3 = rep(298,3),
              RCP = 2.6,
              time_start = 2005,
              time_end = 2100,
@@ -196,17 +208,21 @@ e3 <- 2*e2
 age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
                        N2 = 600, N2 = 600, N2 = 600,
                        N3 = 400, N3 = 400, N3 = 400),
-             temp_ini = rep(22,3),
-             temp_cmin = rep(20,3),
-             temp_cmax = rep(35,3),
+             temp_ini = rep(295,3),
+             temp_cmin = rep(293,3),
+             temp_cmax = rep(308,3),
              ro = rep(0.9,3),
-             lambda1 = rep(0.0004,3),
-             lambda2 = rep(0.0006,3),
-             lambda3 = rep(0.0005,3),
-             alpha1 = 0.3,
-             alpha2 = 0.4,
-             d2 = 0.3,
-             d3 = 0.4,
+             lambda1 = rep(0.00004,3),
+             lambda2 = rep(0.00006,3),
+             lambda3 = rep(0.00005,3),
+             alpha1 = rep(0.3,3),
+             alpha2 = rep(0.4,3),
+             d2 = rep(0.005,3),
+             d3 = rep(0.5,3),
+             Ad2 = rep(0.5,3),
+             Ad3 = rep(0.75,3),
+             Tr2 = rep(298,3),
+             Tr3 = rep(298,3),
              RCP = 8.5,
              time_start = 2005,
              time_end = 2100,
