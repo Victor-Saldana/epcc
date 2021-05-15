@@ -193,7 +193,8 @@ trend_periodic<- function(y_ini = c(N = 400, N = 400, N = 400),
 if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
 
-if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
+if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
+   temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
 
   u1<- temp_ini[1]-temp_cmin[1]
@@ -249,9 +250,9 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
 #########################################################
 
 
-    ##########################################################
+##########################################################
     # Model for each trend
-    ##########################################################
+##########################################################
 
     model1 <- function (times, y,parms1) {
       with(as.list(c(y)), {
@@ -261,7 +262,7 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
 
         list(dN,T,r1) })
     }
-    ###############################################################
+###############################################################
 
     model2 <- function (times, y,parms2) {
       with(as.list(c(y)), {
@@ -272,7 +273,7 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
         list(dN,T,r2)})
     }
 
-    ################################################################
+################################################################
     model3 <- function (times, y,parms3) {
       with(as.list(c(y)), {
         T <- P(times,temp_ini[3],A[3],B[3])
@@ -281,49 +282,39 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
 
         list(dN,T,r3)})
     }
-    ###############################################################
+###############################################################
 
 
 
-    ###############################################################
+###############################################################
     # Solution
-    ##############################################################
+##############################################################
 
     out1 <- ode(y=y_ini[1], times, model1, parms1,method = "ode45")
     out2 <- ode(y=y_ini[2], times, model2, parms2,method = "ode45")
     out3 <- ode(y=y_ini[3], times, model3, parms3,method = "ode45")
-    #############################################################
+#############################################################
 
 
-    ###############################################################
+###############################################################
     # Temperature trend
-    ##############################################################
-
+##############################################################
 
     da1<-data.frame('x'=times,'y'=out1[,3] )
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    # da1$group<-"Pop1"
-    # da2$group<-"Pop2"
-    # da3$group<-"Pop3"
-
-    ###############################################################
+###############################################################
     # Abundance
-    ##############################################################
+##############################################################
 
     data1<-data.frame('x'=times,'y'=out1[,2] )
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
 
-    # data1$group<-"Pop1"
-    # data2$group<-"Pop2"
-    # data3$group<-"Pop3"
-
-
-    ###############################################################
+###############################################################
     # Carrying capacity
-    ##############################################################
+##############################################################
 
     K1=out1[,4]/lambda[1]
     K2=out2[,4]/lambda[2]
@@ -333,59 +324,59 @@ parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda[3],A[3],B
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    # dat1$group<-"Pop1"
-    # dat2$group<-"Pop2"
-    # dat3$group<-"Pop3"
-
-
-    ###############################################################
+###############################################################
     # Data
-    ###############################################################
+###############################################################
 
-    Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    #View(Data)
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,
+                      out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+print(u)
 
-
-    ###############################################################
+###############################################################
     # Plots
-    ##############################################################
+###############################################################
 
   data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
 
-    q1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_ribbon(data=subset(dat1,times>times[1] & times<times[length(times)]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
-            geom_ribbon(data=subset(dat2,times>times[1] & times<times[length(times)]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
-            geom_ribbon(data=subset(dat3,times>times[1] & times<times[length(times)]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
-            geom_line(data =subset(data1,times>times[1] & times<times[length(times)]), color = "brown")+
-            geom_line(data =subset(data2,times>times[1] & times<times[length(times)]), color = "green4")+
-            geom_line(data =subset(data3,times>times[1] & times<times[length(times)]), color = "blue")+
-            labs(x = "Time",y="Abundance")+
-            theme(plot.title = element_text(size=40))+
-            theme(plot.title = element_text(hjust = 0.5))+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(a)")
+q1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_ribbon(data=subset(dat1,times>times[1] & times<times[length(times)]),aes(x=.data$x,
+                                            ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
+geom_ribbon(data=subset(dat2,times>times[1] & times<times[length(times)]),aes(x=.data$x,
+                                           ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
+geom_ribbon(data=subset(dat3,times>times[1] & times<times[length(times)]),aes(x=.data$x,
+                                            ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
+geom_line(data =subset(data1,times>times[1] & times<times[length(times)]), color = "brown")+
+geom_line(data =subset(data2,times>times[1] & times<times[length(times)]), color = "green4")+
+geom_line(data =subset(data3,times>times[1] & times<times[length(times)]), color = "blue")+
+labs(x = "Time",y="Abundance")+
+theme(plot.title = element_text(size=40))+
+theme(plot.title = element_text(hjust = 0.5))+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(a)")
 
 
-
-    q2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_line(data =subset(da1,times>times[1] & times<times[length(times)]), color = "brown")+
-            geom_line(data =subset(da2,times>times[1] & times<times[length(times)]), color = "green4")+
-            geom_line(data =subset(da3,times>times[1] & times<times[length(times)]), color = "blue")+
-            labs(x = "Time",y="Temperature")+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(b)")
+q2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_line(data =subset(da1,times>times[1] & times<times[length(times)]), color = "brown")+
+geom_line(data =subset(da2,times>times[1] & times<times[length(times)]), color = "green4")+
+geom_line(data =subset(da3,times>times[1] & times<times[length(times)]), color = "blue")+
+labs(x = "Time",y="Temperature")+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(b)")
 
 
-          plot_grid(q1, q2)
+plot_grid(q1, q2)
 
 
   }else{

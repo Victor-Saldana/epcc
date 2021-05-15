@@ -204,96 +204,83 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
   }
 
 
-  if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+
+if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
+   temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
 
-    if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
-
-
-
-      options(warn = - 1)
-      ##########################################################
+options(warn = - 1)
+##########################################################
       # Optimum growing temperature
-      ##########################################################
+##########################################################
 
-      temp_op1<- ( temp_cmax[1]+temp_cmin[1])/3+sqrt((( temp_cmax[1]+temp_cmin[1])/3)^2-( temp_cmax[1]*temp_cmin[1])/3)
+temp_op1<- ( temp_cmax[1]+temp_cmin[1])/3+sqrt((( temp_cmax[1]+
+             temp_cmin[1])/3)^2-( temp_cmax[1]*temp_cmin[1])/3)
 
-      temp_op2<- ( temp_cmax[2]+temp_cmin[2])/3+sqrt((( temp_cmax[2]+temp_cmin[2])/3)^2-( temp_cmax[2]*temp_cmin[2])/3)
+temp_op2<- ( temp_cmax[2]+temp_cmin[2])/3+sqrt((( temp_cmax[2]+
+             temp_cmin[2])/3)^2-( temp_cmax[2]*temp_cmin[2])/3)
 
-      temp_op3<- ( temp_cmax[3]+temp_cmin[3])/3+sqrt((( temp_cmax[3]+temp_cmin[3])/3)^2-( temp_cmax[3]*temp_cmin[3])/3)
+temp_op3<- ( temp_cmax[3]+temp_cmin[3])/3+sqrt((( temp_cmax[3]+
+             temp_cmin[3])/3)^2-( temp_cmax[3]*temp_cmin[3])/3)
 
 
-      ##########################################################
+##########################################################
       # Parameters
-      ##########################################################
-      parms1<-c(temp_cmin[1],temp_ini[1], temp_cmax[1],temp_op1,ro[1], lambda[1],m[1],A[1],B[1])
-      parms2<-c(temp_cmin[2],temp_ini[2], temp_cmax[2],temp_op2,ro[2], lambda[2],m[2],A[2],B[2])
-      parms3<-c(temp_cmin[3],temp_ini[3], temp_cmax[3],temp_op3,ro[3], lambda[3],m[3],A[3],B[3])
-      ##############################################
-
-
-      ##########################################################
+##########################################################
+parms1<-c(temp_cmin[1],temp_ini[1], temp_cmax[1],temp_op1,ro[1], lambda[1],m[1],A[1],B[1])
+parms2<-c(temp_cmin[2],temp_ini[2], temp_cmax[2],temp_op2,ro[2], lambda[2],m[2],A[2],B[2])
+parms3<-c(temp_cmin[3],temp_ini[3], temp_cmax[3],temp_op3,ro[3], lambda[3],m[3],A[3],B[3])
+##########################################################
+##########################################################
       # Model for each trend
-      ##########################################################
-
-      model1 <- function (times, y,parms1 ) {
+##########################################################
+model1 <- function (times, y,parms1 ) {
         with(as.list(c(y)), {
-
-          T <- PC(times,temp_ini[1],temp_cmin[1],temp_cmax[1],m[1],A[1],B[1])
-          r1<- rate_TPC(T,ro[1],temp_cmin[1], temp_cmax[1],temp_op1)
-          dN <-   r1 * N * (1 - lambda[1]*(N / r1))
-
-          list(dN,T,r1) })
+T <- PC(times,temp_ini[1],temp_cmin[1],temp_cmax[1],m[1],A[1],B[1])
+r1<- rate_TPC(T,ro[1],temp_cmin[1], temp_cmax[1],temp_op1)
+dN <-   r1 * N * (1 - lambda[1]*(N / r1))
+list(dN,T,r1) })
       }
-      ###############################################################
-
-      model2 <- function (times, y,parms2) {
+###############################################################
+model2 <- function (times, y,parms2) {
         with(as.list(c(y)), {
-
-          T <- PC(times,temp_ini[2],temp_cmin[2],temp_cmax[2],m[2],A[2],B[2])
-          r2<- rate_TPC(T,ro[2],temp_cmin[2], temp_cmax[2],temp_op2)
-          dN <-   r2 * N * (1 - lambda[2]*(N / r2))
-
-          list(dN,T,r2)})
+T <- PC(times,temp_ini[2],temp_cmin[2],temp_cmax[2],m[2],A[2],B[2])
+r2<- rate_TPC(T,ro[2],temp_cmin[2], temp_cmax[2],temp_op2)
+dN <-   r2 * N * (1 - lambda[2]*(N / r2))
+list(dN,T,r2)})
       }
-      ###############################################################
-
-      model3 <- function (times, y,parms3) {
+###############################################################
+model3 <- function (times, y,parms3) {
         with(as.list(c(y)), {
-
-          T <- PC(times,temp_ini[3],temp_cmin[3],temp_cmax[3],m[3],A[3],B[3])
-          r3<- rate_TPC(T,ro[3],temp_cmin[3], temp_cmax[3],temp_op3)
-          dN <-   r3 * N * (1 - lambda[3]*(N / r3))
-
-          list(dN,T,r3)})
+T <- PC(times,temp_ini[3],temp_cmin[3],temp_cmax[3],m[3],A[3],B[3])
+r3<- rate_TPC(T,ro[3],temp_cmin[3], temp_cmax[3],temp_op3)
+dN <-   r3 * N * (1 - lambda[3]*(N / r3))
+list(dN,T,r3)})
       }
-      ###############################################################
-
-
-      ###############################################################
+###############################################################
+###############################################################
       # Solution
-      ##############################################################
+##############################################################
 
-      out1 <- ode(y=y_ini[1], times, model1, parms1 ,method = "ode45")
-      out2 <- ode(y=y_ini[2], times, model2, parms2, method = "ode45")
-      out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
+out1 <- ode(y=y_ini[1], times, model1, parms1 ,method = "ode45")
+out2 <- ode(y=y_ini[2], times, model2, parms2, method = "ode45")
+out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
 
-      #############################################################
-
-      ###############################################################
+###############################################################
+###############################################################
       # Time limits
-      ##############################################################
+###############################################################
 
       times_new1<-vector(mode = "numeric", length = 0)
       times_new2<-vector(mode = "numeric", length = 0)
       times_new3<-vector(mode = "numeric", length = 0)
 
-      for (i in 2: length(times)){
-
-        if((out1[i-1,3]-temp_cmin[1])>=0 && (out1[i,3]-temp_cmin[1])<0){
+for (i in 2: length(times)){
+if((out1[i-1,3]-temp_cmin[1])>=0 && (out1[i,3]-temp_cmin[1])<0){
           times_new1[i-1]<- times[i-1]
 
-        }else if((out1[i-1,3]-temp_cmin[1])<=0 && (out1[i,3]-temp_cmin[1])>0){
+}else if((out1[i-1,3]-temp_cmin[1])<=0 && (out1[i,3]-temp_cmin[1])>0){
 
           times_new1[i-1]<- times[i-1]
         }else{
@@ -302,12 +289,12 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       }
 
 
-      for (i in 2: length(times)){
+for (i in 2: length(times)){
 
-        if((out2[i-1,3]-temp_cmin[2])>=0 && (out2[i,3]-temp_cmin[2])<0){
+if((out2[i-1,3]-temp_cmin[2])>=0 && (out2[i,3]-temp_cmin[2])<0){
           times_new2[i-1]<- times[i-1]
 
-        }else if((out2[i-1,3]-temp_cmin[2])<=0 && (out2[i,3]-temp_cmin[2])>0){
+}else if((out2[i-1,3]-temp_cmin[2])<=0 && (out2[i,3]-temp_cmin[2])>0){
 
           times_new2[i-1]<- times[i-1]
         }else{
@@ -316,12 +303,12 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       }
 
 
-      for (i in 2: length(times)){
+for (i in 2: length(times)){
 
-        if((out3[i-1,3]-temp_cmin[3])>=0 && (out3[i,3]-temp_cmin[3])<0){
+if((out3[i-1,3]-temp_cmin[3])>=0 && (out3[i,3]-temp_cmin[3])<0){
           times_new3[i-1]<- times[i-1]
 
-        }else if((out3[i-1,3]-temp_cmin[3])<=0 && (out3[i,3]-temp_cmin[3])>0){
+}else if((out3[i-1,3]-temp_cmin[3])<=0 && (out3[i,3]-temp_cmin[3])>0){
 
           times_new3[i-1]<- times[i-1]
         }else{
@@ -354,20 +341,19 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
         times_inf3<- times[index3]
       }
 
-
-      #############################################################
-      #############################################################
+#############################################################
+#############################################################
 
       times_new4<-vector(mode = "numeric", length = 0)
       times_new5<-vector(mode = "numeric", length = 0)
       times_new6<-vector(mode = "numeric", length = 0)
 
-      for (i in 2: length(times)){
+for (i in 2: length(times)){
 
-        if(( temp_cmax[1]-out1[i-1,3])>=0 && ( temp_cmax[1]-out1[i,3])<0){
+if(( temp_cmax[1]-out1[i-1,3])>=0 && ( temp_cmax[1]-out1[i,3])<0){
           times_new4[i-1]<- times[i-1]
 
-        }else if(( temp_cmax[1]-out1[i-1,3])<=0 && ( temp_cmax[1]-out1[i,3])>0){
+}else if(( temp_cmax[1]-out1[i-1,3])<=0 && ( temp_cmax[1]-out1[i,3])>0){
 
           times_new4[i-1]<- times[i-1]
         }else{
@@ -376,12 +362,12 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       }
 
 
-      for (i in 2: length(times)){
+for (i in 2: length(times)){
 
-        if(( temp_cmax[2]-out2[i-1,3])>=0 && ( temp_cmax[2]-out2[i,3])<0){
+if(( temp_cmax[2]-out2[i-1,3])>=0 && ( temp_cmax[2]-out2[i,3])<0){
           times_new5[i-1]<- times[i-1]
 
-        }else if(( temp_cmax[2]-out2[i-1,3])<=0 && ( temp_cmax[2]-out2[i,3])>0){
+}else if(( temp_cmax[2]-out2[i-1,3])<=0 && ( temp_cmax[2]-out2[i,3])>0){
 
           times_new5[i-1]<- times[i-1]
         }else{
@@ -390,12 +376,12 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       }
 
 
-      for (i in 2: length(times)){
+for (i in 2: length(times)){
 
-        if(( temp_cmax[3]-out3[i-1,3])>=0 && ( temp_cmax[3]-out3[i,3])<0){
+if(( temp_cmax[3]-out3[i-1,3])>=0 && ( temp_cmax[3]-out3[i,3])<0){
           times_new6[i-1]<- times[i-1]
 
-        }else if(( temp_cmax[3]-out3[i-1,3])<=0 && ( temp_cmax[3]-out3[i,3])>0){
+}else if(( temp_cmax[3]-out3[i-1,3])<=0 && ( temp_cmax[3]-out3[i,3])>0){
 
           times_new6[i-1]<- times[i-1]
         }else{
@@ -427,9 +413,8 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       }else{
         times_sup3<- times[index6]
       }
-
-      #############################################################
-      #############################################################
+#############################################################
+#############################################################
       if(times_inf1<= times_sup1){
         times_ext1<-times_inf1
       }else{
@@ -448,100 +433,90 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
         times_ext3<-times_sup3
       }
 
-
-      ###############################################################
+###############################################################
       # Temperature trend
-      ##############################################################
+##############################################################
 
       da1<-data.frame('x'=times,'y'=out1[,3] )
       da2<-data.frame('x'=times,'y'=out2[,3] )
       da3<-data.frame('x'=times,'y'=out3[,3] )
 
-      # da1$group<-"Pop1"
-      # da2$group<-"Pop2"
-      # da3$group<-"Pop3"
-
-      ###############################################################
+###############################################################
       # Abundance
-      ##############################################################
+##############################################################
 
       data1<-data.frame('x'=times,'y'=out1[,2] )
       data2<-data.frame('x'=times,'y'=out2[,2] )
       data3<-data.frame('x'=times,'y'=out3[,2] )
 
-      # data1$group<-"Pop1"
-      # data2$group<-"Pop2"
-      # data3$group<-"Pop3"
-
-      ###############################################################
+###############################################################
       # Carrying capacity
-      ##############################################################
+##############################################################
 
       K1=out1[,4]/lambda[1]
       K2=out2[,4]/lambda[2]
       K3=out3[,4]/lambda[3]
 
-
       dat1<-data.frame('x'=times,'y'=K1 )
       dat2<-data.frame('x'=times,'y'=K2 )
       dat3<-data.frame('x'=times,'y'=K3 )
-
-      # dat1$group<-"Pop1"
-      # dat2$group<-"Pop2"
-      # dat3$group<-"Pop3"
-
 
 ###############################################################
 # Data
 ###############################################################
 
-      Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-      names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-      #View(Data)
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],
+                  K2,out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+print(u)
 
-
-      ###############################################################
+###############################################################
       # Plots
-      ##############################################################
+##############################################################
 
-      data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
+data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
 
-      p1<- ggplot(data, aes(x=.data$x, y=.data$y)) +
-               theme_bw()+
-               theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-               geom_ribbon(data=subset(dat1,times>times[1] & times<times_ext1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
-               geom_ribbon(data=subset(dat2,times>times[1] & times<times_ext2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
-               geom_ribbon(data=subset(dat3,times>times[1] & times<times_ext3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
-               # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-               geom_vline(xintercept = times_ext1, size=.5, color="brown",linetype="dashed")+
-               geom_vline(xintercept = times_ext2, size=.5, color="green4",linetype="dashed")+
-               geom_vline(xintercept = times_ext3, size=.5, color="blue",linetype="dashed")+
-               geom_line(data =subset(data1,times>times[1] & times<times_ext1), color = "brown")+
-               geom_line(data =subset(data2,times>times[1] & times<times_ext2), color = "green4")+
-               geom_line(data =subset(data3,times>times[1] & times<times_ext3), color = "blue")+
-               labs(x = "Time",y="Abundance")+
-               theme(plot.title = element_text(size=40))+
-               theme(plot.title = element_text(hjust = 0.5))+
-               theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-               theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-               labs(tag = "(a)")
+p1<- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_ribbon(data=subset(dat1,times>times[1] & times<times_ext1),aes(x=.data$x,
+                                ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
+geom_ribbon(data=subset(dat2,times>times[1] & times<times_ext2),aes(x=.data$x,
+                               ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
+geom_ribbon(data=subset(dat3,times>times[1] & times<times_ext3),aes(x=.data$x,
+                                 ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
+geom_vline(xintercept = times_ext1, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_ext2, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_ext3, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(data1,times>times[1] & times<times_ext1), color = "brown")+
+geom_line(data =subset(data2,times>times[1] & times<times_ext2), color = "green4")+
+geom_line(data =subset(data3,times>times[1] & times<times_ext3), color = "blue")+
+labs(x = "Time",y="Abundance")+
+theme(plot.title = element_text(size=40))+
+theme(plot.title = element_text(hjust = 0.5))+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(a)")
 
 
-
-      p2<- ggplot(data, aes(x=.data$x, y=.data$y)) +
-               theme_bw()+
-               theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-               # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-               geom_vline(xintercept = times_ext1, size=.5, color="brown",linetype="dashed")+
-               geom_vline(xintercept = times_ext2, size=.5, color="green4",linetype="dashed")+
-               geom_vline(xintercept = times_ext3, size=.5, color="blue",linetype="dashed")+
-               geom_line(data =subset(da1,times>times[1] & times<times_ext1), color = "brown")+
-               geom_line(data =subset(da2,times>times[1] & times<times_ext2), color = "green4")+
-               geom_line(data =subset(da3,times>times[1] & times<times_ext3), color = "blue")+
-               labs(x = "Time",y="Temperature")+
-               theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-               theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-               labs(tag = "(b)")
+p2<- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_vline(xintercept = times_ext1, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_ext2, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_ext3, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(da1,times>times[1] & times<times_ext1), color = "brown")+
+geom_line(data =subset(da2,times>times[1] & times<times_ext2), color = "green4")+
+geom_line(data =subset(da3,times>times[1] & times<times_ext3), color = "blue")+
+labs(x = "Time",y="Temperature")+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(b)")
 
 
 
@@ -554,12 +529,12 @@ increasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
 
 
     }else{
-      stop("The initial study temperature must be within the thermal tolerance range")
+stop("The initial study temperature must be within the thermal tolerance range")
     }
 
   }else{
 
-    stop("The minimum critical temperature must be less than the maximum critical temperature")
+stop("The minimum critical temperature must be less than the maximum critical temperature")
   }
 
 

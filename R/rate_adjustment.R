@@ -80,7 +80,9 @@
 rate_adjustment<-function(data = data){
 
   options(warn = - 1)
-  rate <- function(T,temp_cmin,temp_cmax,ro){ro*T*(T-temp_cmin)*(temp_cmax-T)/(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)*(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)-temp_cmin)*(temp_cmax-((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)))}
+  rate <- function(T,temp_cmin,temp_cmax,ro){ro*T*(T-temp_cmin)*(temp_cmax-T)/(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-
+          3*temp_cmin*temp_cmax))/3)*(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)-temp_cmin)*
+          (temp_cmax-((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)))}
 
   m <- nls2(data$R~rate(data$TA,temp_cmin,temp_cmax,ro),data=data,start=list(temp_cmin=10,temp_cmax=30,ro=0.2))
 
@@ -91,14 +93,17 @@ rate_adjustment<-function(data = data){
 
   s<- seq(temp_cmin,temp_cmax)
 
-  r<- ro*s*(s-temp_cmin)*(temp_cmax-s)/(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)*(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)-temp_cmin)*(temp_cmax-((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)))
+  r<- ro*s*(s-temp_cmin)*(temp_cmax-s)/(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-
+      3*temp_cmin*temp_cmax))/3)*(((temp_cmin+temp_cmax+sqrt((temp_cmin+temp_cmax)^2-
+      3*temp_cmin*temp_cmax))/3)-temp_cmin)*(temp_cmax-((temp_cmin+temp_cmax+
+      sqrt((temp_cmin+temp_cmax)^2-3*temp_cmin*temp_cmax))/3)))
 
 
 
   plot(s,r,xlab="Temperature", ylab="r(T)",
-       main="Intrinsic growth rate", xlim = c(temp_cmin, temp_cmax),
-       ylim = c(0, ro), type="l",lty=c(1),cex.axis=1.5,
-       tcl=-0.7,las=0, cex.main=2,bty="n",cex=1.5,lwd=2,cex.lab=1.5,lwd.ticks=2)
+  main="Intrinsic growth rate", xlim = c(temp_cmin, temp_cmax),
+  ylim = c(0, ro), type="l",lty=c(1),cex.axis=1.5,
+  tcl=-0.7,las=0, cex.main=2,bty="n",cex=1.5,lwd=2,cex.lab=1.5,lwd.ticks=2)
   par(new=T)
   plot(data$TA,data$R,xlab = "",ylab = "", xlim = c(temp_cmin, temp_cmax), ylim = c(0, ro), axes=F,lwd=2)
   axis(side=1,at=c(-20,100),col="black",lwd=3)

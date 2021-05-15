@@ -183,14 +183,15 @@ cooling_pulse1<- function(y_ini = c(N = 400, N = 400, N = 400),
 
   times<- seq(time_start, time_end, leap)
 
-  if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
+if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
+   temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
-  if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
+if(temp_peak[1]<=temp_ini[1] && temp_peak[2]<=temp_ini[2] && temp_peak[3]<=temp_ini[3]){
 
-  if(temp_peak[1]<=temp_ini[1] && temp_peak[2]<=temp_ini[2] && temp_peak[3]<=temp_ini[3]){
-
-  if(time_start<=time_peak[1] && time_peak[1]<=time_end && time_start<=time_peak[2] && time_peak[2]<=time_end  && time_start<=time_peak[3] && time_peak[3]<=time_end){
+if(time_start<=time_peak[1] && time_peak[1]<=time_end && time_start<=time_peak[2] &&
+   time_peak[2]<=time_end  && time_start<=time_peak[3] && time_peak[3]<=time_end){
 
 P1E <- function (times,temp_a,temp_peak,time_peak,sd) {
   T <-  temp_a-(temp_a-temp_peak)*exp(-(times-time_peak)^{2}/(2*sd^{2}))
@@ -201,12 +202,14 @@ options(warn = - 1)
 ##########################################################
 # Optimum growing temperature
 ##########################################################
+temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+
+            temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
 
-  temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
+temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+
+            temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
 
-  temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
-
-  temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
+temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
+            temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
 
 
   ##########################################################
@@ -218,9 +221,7 @@ options(warn = - 1)
   time_op11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_op1)/(temp_a1-temp_peak[1])))
   time_op12=time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_a1-temp_op1)/(temp_a1-temp_peak[1])))
   time_cmin11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1])))
-  # time_cmax11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmax[1])/(temp_a1-temp_peak[1])))
   time_cmin12=time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1])))
-  # time_cmax12=tp1-sqrt(-2*(sd1)^2*log((temp_a1-temp_cmax1)/(temp_a1-temp_peak1)))
 suppressWarnings(sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1]))))
   ##########################################################
 
@@ -229,9 +230,7 @@ suppressWarnings(sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak
   time_op21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_op2)/(temp_a2-temp_peak[2])))
   time_op22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_op2)/(temp_a2-temp_peak[2])))
   time_cmin21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2])))
-  # time_cmax21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmax[2])/(temp_a2-temp_peak[2])))
   time_cmin22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2])))
-  # time_cmax22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmax[2])/(temp_a2-temp_peak[2])))
   suppressWarnings(sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2]))))
   #########################################################
 
@@ -240,10 +239,7 @@ suppressWarnings(sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak
   time_op31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_op3)/(temp_a3-temp_peak[3])))
   time_op32=time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_a3-temp_op3)/(temp_a3-temp_peak[3])))
   time_cmin31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3])))
-  # time_cmax31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmax[3])/(temp_a3-temp_peak[3])))
   time_cmin32=time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3])))
-  # time_cmax32=time_peak[3]-sqrt(-2*(sd3)^2*log((temp_a3-temp_cmax[3])/(temp_a3-temp_peak[3])))
-  #
 suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3]))))
   ###############################################################
   # Time limits
@@ -298,15 +294,13 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
   }
 
 
-
-  ##########################################################
+##########################################################
   # Parameters
-  ##########################################################
-
-    parms1<-c(temp_cmin[1],temp_ini[1],temp_a1,temp_cmax[1],temp_op1,ro[1],lambda[1])
-    parms2<-c(temp_cmin[2],temp_ini[2],temp_a2,temp_cmax[2],temp_op2,ro[2],lambda[2])
-    parms3<-c(temp_cmin[3],temp_ini[3],temp_a3,temp_cmax[3],temp_op3,ro[3],lambda[3])
-    ##############################################
+##########################################################
+parms1<-c(temp_cmin[1],temp_ini[1],temp_a1,temp_cmax[1],temp_op1,ro[1],lambda[1])
+parms2<-c(temp_cmin[2],temp_ini[2],temp_a2,temp_cmax[2],temp_op2,ro[2],lambda[2])
+parms3<-c(temp_cmin[3],temp_ini[3],temp_a3,temp_cmax[3],temp_op3,ro[3],lambda[3])
+############################################################
 
 
     ##########################################################
@@ -362,10 +356,6 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    da1$group<-"Pop1"
-    da2$group<-"Pop2"
-    da3$group<-"Pop3"
-
 
     ###############################################################
     # Abundance
@@ -374,10 +364,6 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
     data1<-data.frame('x'=times,'y'=out1[,2] )
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
-
-    data1$group<-"Pop1"
-    data2$group<-"Pop2"
-    data3$group<-"Pop3"
 
     ###############################################################
     # Carrying capacity
@@ -391,17 +377,19 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    dat1$group<-"Pop1"
-    dat2$group<-"Pop2"
-    dat3$group<-"Pop3"
 
     ###############################################################
     # Data
     ###############################################################
-
-    Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-   # View(Data)
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,
+                  out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+    u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+    print(u)
 
 
     ###############################################################
@@ -416,7 +404,6 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
             geom_ribbon(data=subset(dat1,times>times[1] & times<tm_new1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
             geom_ribbon(data=subset(dat2,times>times[1] & times<tm_new2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
             geom_ribbon(data=subset(dat3,times>times[1] & times<tm_new3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+
@@ -435,7 +422,6 @@ suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak
     p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+

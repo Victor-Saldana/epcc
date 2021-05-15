@@ -206,19 +206,16 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
 
   time_op1=  -1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_op1))+time_start
   time_cmin1=-1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_cmin[1]))+time_start
-# time_cmax1=-1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_cmax[1]))+time_start
 
 #########################################################
 
   time_op2=  -1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_op2))+time_start
   time_cmin2=-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_cmin[2]))+time_start
-# time_cmax2=-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_cmax[2]))+time_start
 
 ##########################################################
 
   time_op3=  -1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_op3))+time_start
   time_cmin3=-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_cmin[3]))+time_start
-# time_cmax3=-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_cmax[3]))+time_start
 #########################################################
 
 
@@ -299,10 +296,6 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    # da1$group<-"Pop1"
-    # da2$group<-"Pop2"
-    # da3$group<-"Pop3"
-
     ###############################################################
     # Abundance
     ##############################################################
@@ -310,10 +303,6 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
     data1<-data.frame('x'=times,'y'=out1[,2] )
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
-
-    # data1$group<-"Pop1"
-    # data2$group<-"Pop2"
-    # data3$group<-"Pop3"
 
     ###############################################################
     # Carrying capacity
@@ -327,17 +316,19 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    # dat1$group<-"Pop1"
-    # dat2$group<-"Pop2"
-    # dat3$group<-"Pop3"
-
     ###############################################################
     # Data
     ###############################################################
 
-    Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    #View(Data)
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],
+                  K2,out3[,3],out3[,2],K3)
+    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                    "Carrying capacity scenario 1","Temperature scenario 2",
+                    "Abundance scenario 2","Carrying capacity scenario 2",
+                    "Temperature scenario 3","Abundance scenario 3","Carrying
+                    capacity scenario 3")
+    u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+    print(u)
 
 
     ###############################################################
@@ -352,7 +343,6 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
             geom_ribbon(data=subset(dat1,times>times[1] & times<tm_new[1]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
             geom_ribbon(data=subset(dat2,times>times[1] & times<tm_new[2]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
             geom_ribbon(data=subset(dat3,times>times[1] & times<tm_new[3]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new[1], size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new[2], size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new[3], size=.5, color="blue",linetype="dashed")+
@@ -371,7 +361,6 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
     p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new[1], size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new[2], size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new[3], size=.5, color="blue",linetype="dashed")+

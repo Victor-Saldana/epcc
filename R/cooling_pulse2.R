@@ -177,15 +177,15 @@ cooling_pulse2<- function(y_ini = c(N = 400, N = 400, N = 400),
 
   times<- seq(time_start, time_end, leap)
 
+if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
-  if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
+   temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
+if(temp_peak[1]<=(temp_ini[1]-q[1]) && temp_peak[2]<=(temp_ini[2]-q[2]) && temp_peak[3]<=(temp_ini[3]-q[3])){
 
-    if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
-
-      if(temp_peak[1]<=(temp_ini[1]-q[1]) && temp_peak[2]<=(temp_ini[2]-q[2]) && temp_peak[3]<=(temp_ini[3]-q[3])){
-
-        if(time_start<=time_peak[1] && time_peak[1]<=time_end && time_start<=time_peak[2] && time_peak[2]<=time_end  && time_start<=time_peak[3] && time_peak[3]<=time_end){
+if(time_start<=time_peak[1] && time_peak[1]<=time_end && time_start<=time_peak[2] &&
+   time_peak[2]<=time_end  && time_start<=time_peak[3] && time_peak[3]<=time_end){
 
 
   P2E <- function (times,temp_ini,a,b,q) {
@@ -199,11 +199,14 @@ cooling_pulse2<- function(y_ini = c(N = 400, N = 400, N = 400),
   # Optimum growing temperature
   ##########################################################
 
-  temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
+  temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+
+              temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
 
-  temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
+  temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+
+              temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
 
-  temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
+  temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
+              temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
 
 
   ##########################################################
@@ -223,29 +226,35 @@ cooling_pulse2<- function(y_ini = c(N = 400, N = 400, N = 400),
   # Time
   ##########################################################
 
-  time_op11=(b1*(temp_ini[1]-temp_op1)+sqrt(b1^2*(temp_ini[1]-temp_op1)^2-4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start
-  time_op12=(b1*(temp_ini[1]-temp_op1)-sqrt(b1^2*(temp_ini[1]-temp_op1)^2-4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start
-  time_cmin11=(b1*(temp_ini[1]-temp_cmin[1])+sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start
-  time_cmin12=(b1*(temp_ini[1]-temp_cmin[1])-sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start
-# time_cmax11=(b1*(temp_ini[1]-temp_cmax[1])+sqrt(b1^2*(temp_ini[1]-temp_cmax[1])^2-4*a1*((temp_ini[1]-temp_cmax[1])-q[1])*(temp_ini[1]-temp_cmax[1])))/(2*((temp_ini1-temp_cmax[1])-q[1]))+time_start
-# time_cmax12=(b1*(temp_ini[1]-temp_cmax[1])-sqrt(b1^2*(temp_ini[1]-temp_cmax[1])^2-4*a1*((temp_ini[1]-temp_cmax[1])-q[1])*(temp_ini[1]-temp_cmax[1])))/(2*((temp_ini1-temp_cmax[1])-q[1]))+time_start
+time_op11=(b1*(temp_ini[1]-temp_op1)+sqrt(b1^2*(temp_ini[1]-temp_op1)^2-
+4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start
+time_op12=(b1*(temp_ini[1]-temp_op1)-sqrt(b1^2*(temp_ini[1]-temp_op1)^2-
+4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start
+time_cmin11=(b1*(temp_ini[1]-temp_cmin[1])+sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-
+4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start
+time_cmin12=(b1*(temp_ini[1]-temp_cmin[1])-sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-
+4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start
 suppressWarnings(sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))
   ##########################################################
 
-  time_op21=(b2*(temp_ini[2]-temp_op2)+sqrt(b2^2*(temp_ini[2]-temp_op2)^2-4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start
-  time_op22=(b2*(temp_ini[2]-temp_op2)-sqrt(b2^2*(temp_ini[2]-temp_op2)^2-4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start
-  time_cmin21=(b2*(temp_ini[2]-temp_cmin[2])+sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start
-  time_cmin22=(b2*(temp_ini[2]-temp_cmin[2])-sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start
-# time_cmax21=(b2*(temp_ini[2]-temp_cmax[2])+sqrt(b2^2*(temp_ini[2]-temp_cmax[2])^2-4*a2*((temp_ini[2]-temp_cmax[2])-q[2])*(temp_ini[2]-temp_cmax[2])))/(2*((temp_ini[2]-temp_cmax[2])-q[2]))+time_start
-# time_cmax22=(b2*(temp_ini[2]-temp_cmax[2])-sqrt(b2^2*(temp_ini[2]-temp_cmax[2])^2-4*a2*((temp_ini[2]-temp_cmax[2])-q[2])*(temp_ini[2]-temp_cmax[2])))/(2*((temp_ini[2]-temp_cmax[2])-q[2]))+time_start
+time_op21=(b2*(temp_ini[2]-temp_op2)+sqrt(b2^2*(temp_ini[2]-temp_op2)^2-
+4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start
+time_op22=(b2*(temp_ini[2]-temp_op2)-sqrt(b2^2*(temp_ini[2]-temp_op2)^2-
+4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start
+time_cmin21=(b2*(temp_ini[2]-temp_cmin[2])+sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-
+4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start
+time_cmin22=(b2*(temp_ini[2]-temp_cmin[2])-sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-
+4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start
 suppressWarnings(sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))
   ##########################################################
-  time_op31=(b3*(temp_ini[3]-temp_op3)+sqrt(b3^2*(temp_ini[3]-temp_op3)^2-4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start
-  time_op32=(b3*(temp_ini[3]-temp_op3)-sqrt(b3^2*(temp_ini[3]-temp_op3)^2-4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start
-  time_cmin31=(b3*(temp_ini[3]-temp_cmin[3])+sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start
-  time_cmin32=(b3*(temp_ini[3]-temp_cmin[3])-sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start
-# time_cmax31=(b3*(temp_ini[3]-temp_cmax[3])+sqrt(b3^2*(temp_ini[3]-temp_cmax[3])^2-4*a3*((temp_ini[3]-temp_cmax[3])-q[3])*(temp_ini[3]-temp_cmax[3])))/(2*((temp_ini[3]-temp_cmax[3])-q[3]))+time_start
-# time_cmax32=(b3*(temp_ini[3]-temp_cmax[3])-sqrt(b3^2*(temp_ini[3]-temp_cmax[3])^2-4*a3*((temp_ini[3]-temp_cmax[3])-q[3])*(temp_ini[3]-temp_cmax[3])))/(2*((temp_ini[3]-temp_cmax[3])-q[3]))+time_start
+time_op31=(b3*(temp_ini[3]-temp_op3)+sqrt(b3^2*(temp_ini[3]-temp_op3)^2-
+4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start
+time_op32=(b3*(temp_ini[3]-temp_op3)-sqrt(b3^2*(temp_ini[3]-temp_op3)^2-
+4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start
+time_cmin31=(b3*(temp_ini[3]-temp_cmin[3])+sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-
+4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start
+time_cmin32=(b3*(temp_ini[3]-temp_cmin[3])-sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-
+4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start
   suppressWarnings(sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))
   #########################################################
 
@@ -308,78 +317,58 @@ suppressWarnings(sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_
   ##########################################################
   # Parameters
   ##########################################################
-
-  parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1, ro[1], q[1], a1, b1, lambda[1])
-  parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2, ro[2], q[2], a2, b2, lambda[2])
-  parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3, ro[3], q[3], a3, b3, lambda[3])
-
+parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1, ro[1], q[1], a1, b1, lambda[1])
+parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2, ro[2], q[2], a2, b2, lambda[2])
+parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3, ro[3], q[3], a3, b3, lambda[3])
 
   ##########################################################
   # Model for each trend
   ##########################################################
-    model1 <- function (times, y,parms1) {
+model1 <- function (times, y,parms1) {
       with(as.list(c(y)), {
-        T <- P2E(times,temp_ini[1],a1,b1,q[1])
-        r1<- rate_TPC(T,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
-        dN <-   r1 * N * (1 - lambda[1]*(N / r1))
-
-        list(dN,T,r1) })
+  T <- P2E(times,temp_ini[1],a1,b1,q[1])
+  r1<- rate_TPC(T,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
+  dN <-   r1 * N * (1 - lambda[1]*(N / r1))
+  list(dN,T,r1) })
     }
 ###############################################################
-
-    model2 <- function (times, y,parms2) {
+model2 <- function (times, y,parms2) {
       with(as.list(c(y)), {
-        T <- P2E(times,temp_ini[2],a2,b2,q[2])
-        r2<- rate_TPC(T,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
-        dN <-   r2 * N * (1 - lambda[2]*(N / r2))
-
-        list(dN,T,r2) })
+ T <- P2E(times,temp_ini[2],a2,b2,q[2])
+ r2<- rate_TPC(T,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
+ dN <-   r2 * N * (1 - lambda[2]*(N / r2))
+ list(dN,T,r2) })
     }
 ###############################################################
-
-    model3 <- function (times, y,parms3) {
+model3 <- function (times, y,parms3) {
       with(as.list(c(y)), {
-        T <- P2E(times,temp_ini[3],a3,b3,q[3])
-        r3<- rate_TPC(T,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
-        dN <-   r3 * N * (1 - lambda[3]*(N / r3))
-
-        list(dN,T,r3)})
+  T <- P2E(times,temp_ini[3],a3,b3,q[3])
+  r3<- rate_TPC(T,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
+  dN <-   r3 * N * (1 - lambda[3]*(N / r3))
+  list(dN,T,r3)})
     }
-
 ###############################################################
   # Solution
 ##############################################################
-
-    out1 <- ode(y=y_ini[1], times, model1, parms1, method = "ode45")
-    out2 <- ode(y=y_ini[2], times, model2, parms2, method = "ode45")
-    out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
-
+out1 <- ode(y=y_ini[1], times, model1, parms1, method = "ode45")
+out2 <- ode(y=y_ini[2], times, model2, parms2, method = "ode45")
+out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
 #############################################################
-
-    ###############################################################
+###############################################################
     # Temperature trend
-    ##############################################################
+##############################################################
 
     da1<-data.frame('x'=times,'y'=out1[,3] )
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    # da1$group<-"Pop1"
-    # da2$group<-"Pop2"
-    # da3$group<-"Pop3"
-
-
-    ###############################################################
+###############################################################
     # Abundance
-    ##############################################################
+##############################################################
 
     data1<-data.frame('x'=times,'y'=out1[,2] )
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
-
-    # data1$group<-"Pop1"
-    # data2$group<-"Pop2"
-    # data3$group<-"Pop3"
 
 ###############################################################
     # Carrying capacity
@@ -392,17 +381,18 @@ suppressWarnings(sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    # dat1$group<-"Pop1"
-    # dat2$group<-"Pop2"
-    # dat3$group<-"Pop3"
-
 ###############################################################
 # Data
 ###############################################################
-
-    Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    #View(Data)
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,
+                  out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+    u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+    print(u)
 
 ###############################################################
     # Plots
@@ -415,7 +405,6 @@ suppressWarnings(sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_
             geom_ribbon(data=subset(dat1,times>times[1] & times<tm_new1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
             geom_ribbon(data=subset(dat2,times>times[1] & times<tm_new2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
             geom_ribbon(data=subset(dat3,times>times[1] & times<tm_new3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3,fill="blue") +
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+
@@ -433,7 +422,6 @@ suppressWarnings(sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_
     p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+

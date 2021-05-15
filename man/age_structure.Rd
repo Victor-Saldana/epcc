@@ -60,14 +60,14 @@ age_structure(
 \value{
 (1) A data.frame with columns having the simulated trends.
 
-(2) A four-panel figure where (a), (b), and (c) show the population abundance curves for each simulation.
-       The brown curve corresponds to the abundance of prey and the green curve to predators. Panel (d)
-       shows the temperature trend curves used for each simulation, green, blue, and black, respectively.
+(2) Figure of four panels in which (a), (b) and (c) show the population abundance curves for
+           each age stage. Panel (d) shows the temperature trend curves used for each simulation,
+           colored brown, green and blue, respectively.
 }
 \description{
-This function allows simulating the effect of the IPCC RCP2.6 or RCP8.5 scenarios
-            (2014) on the abundances of two species interacting through predation. The prey is an
-            ectotherm population, and the predator is not affected by temperature.
+This function allows to simulate the effect of IPCC (2014) RCP2.6
+            or RCP8.5 scenarios on the abundances of an ectotherm population
+            considering three stages as age structure.
 }
 \details{
 Three scenarios can be evaluated for a predation interaction where the prey is an ectotherm
@@ -166,67 +166,6 @@ age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
              time_end = time_end,
              leap = 1/50)
 
-#######################################################################
-  #Example 3: Different conversion efficiencies (scenario RCP2.6).
-#######################################################################
-
-e1 <- 0.2
-e2 <- 2*e1
-e3 <- 2*e2
-
-age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
-                       N2 = 600, N2 = 600, N2 = 600,
-                       N3 = 400, N3 = 400, N3 = 400),
-             temp_ini = rep(295,3),
-             temp_cmin = rep(293,3),
-             temp_cmax = rep(308,3),
-             ro = rep(0.9,3),
-             lambda1 = rep(0.00004,3),
-             lambda2 = rep(0.00006,3),
-             lambda3 = rep(0.00005,3),
-             alpha1 = rep(0.3,3),
-             alpha2 = rep(0.4,3),
-             d2 = rep(0.005,3),
-             d3 = rep(0.5,3),
-             Ad2 = rep(0.5,3),
-             Ad3 = rep(0.75,3),
-             Tr2 = rep(298,3),
-             Tr3 = rep(298,3),
-             RCP = 2.6,
-             time_start = 2005,
-             time_end = 2100,
-             leap = 1/50)
-
-#######################################################################
-  #Example 4: Different conversion efficiencies (scenario RCP8.5).
-#######################################################################
-
-e1 <- 0.2
-e2 <- 2*e1
-e3 <- 2*e2
-
-age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
-                       N2 = 600, N2 = 600, N2 = 600,
-                       N3 = 400, N3 = 400, N3 = 400),
-             temp_ini = rep(295,3),
-             temp_cmin = rep(293,3),
-             temp_cmax = rep(308,3),
-             ro = rep(0.9,3),
-             lambda1 = rep(0.00004,3),
-             lambda2 = rep(0.00006,3),
-             lambda3 = rep(0.00005,3),
-             alpha1 = rep(0.3,3),
-             alpha2 = rep(0.4,3),
-             d2 = rep(0.005,3),
-             d3 = rep(0.5,3),
-             Ad2 = rep(0.5,3),
-             Ad3 = rep(0.75,3),
-             Tr2 = rep(298,3),
-             Tr3 = rep(298,3),
-             RCP = 8.5,
-             time_start = 2005,
-             time_end = 2100,
-             leap = 1/50)
 }
 \references{
 IPCC. (2014): Cambio climático 2014: Informe de síntesis. Contribución de los Grupos de trabajo

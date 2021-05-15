@@ -458,9 +458,6 @@ decreasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       da2<-data.frame('x'=times,'y'=out2[,3] )
       da3<-data.frame('x'=times,'y'=out3[,3] )
 
-      # da1$group<-"Pop1"
-      # da2$group<-"Pop2"
-      # da3$group<-"Pop3"
 
       ###############################################################
       # Abundance
@@ -469,10 +466,6 @@ decreasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       data1<-data.frame('x'=times,'y'=out1[,2] )
       data2<-data.frame('x'=times,'y'=out2[,2] )
       data3<-data.frame('x'=times,'y'=out3[,2] )
-
-      # data1$group<-"Pop1"
-      # data2$group<-"Pop2"
-      # data3$group<-"Pop3"
 
       ###############################################################
       # Carrying capacity
@@ -487,17 +480,20 @@ decreasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       dat2<-data.frame('x'=times,'y'=K2 )
       dat3<-data.frame('x'=times,'y'=K3 )
 
-      # dat1$group<-"Pop1"
-      # dat2$group<-"Pop2"
-      # dat3$group<-"Pop3"
 
       ###############################################################
       # Data
       ###############################################################
 
-      Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-      names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-      #View(Data)
+      Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,
+                        out3[,3],out3[,2],K3)
+      names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                      "Carrying capacity scenario 1","Temperature scenario 2",
+                      "Abundance scenario 2","Carrying capacity scenario 2",
+                      "Temperature scenario 3","Abundance scenario 3","Carrying
+                      capacity scenario 3")
+      u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+      print(u)
 
       ###############################################################
       # Plots
@@ -511,7 +507,6 @@ decreasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
         geom_ribbon(data=subset(dat1,times>times[1] & times<times_ext1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
         geom_ribbon(data=subset(dat2,times>times[1] & times<times_ext2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
         geom_ribbon(data=subset(dat3,times>times[1] & times<times_ext3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
-        # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
         geom_vline(xintercept = times_ext1, size=.5, color="brown",linetype="dashed")+
         geom_vline(xintercept = times_ext2, size=.5, color="green4",linetype="dashed")+
         geom_vline(xintercept = times_ext3, size=.5, color="blue",linetype="dashed")+
@@ -530,7 +525,6 @@ decreasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
       p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
         theme_bw()+
         theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-        # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
         geom_vline(xintercept = times_ext1, size=.5, color="brown",linetype="dashed")+
         geom_vline(xintercept = times_ext2, size=.5, color="green4",linetype="dashed")+
         geom_vline(xintercept = times_ext3, size=.5, color="blue",linetype="dashed")+

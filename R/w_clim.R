@@ -292,274 +292,257 @@ w_clim<- function(y_ini = c(N = 400, N = 400, N = 400),
                        time_end = 2070,
                        leap = 1/12){
 
-  times<- seq(time_start, time_end, leap)
+times<- seq(time_start, time_end, leap)
 
-  if(time_end<=2100){
-    if(time_start<=time_end){
+if(time_end<=2100){
+if(time_start<=time_end){
 
-  if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
+options(warn = - 1)
 
-    options(warn = - 1)
+wclimCurr <- getData("worldclim", var="bio", res=res)
+wclimCurr <- wclimCurr[[s]]
+plot(wclimCurr,cex.axis=1.2, tcl=-0.7,las=1)
+axis(side=1,at=c(-200,200),col="black",lwd=3)
+axis(side=2,at=c(-200,200),col="black",lwd=3)
+axis(side=3,at=c(-200,200),col="black",lwd=3)
+axis(side=4,at=c(-200,200),col="black",lwd=3)
 
-    wclimCurr <- getData("worldclim", var="bio", res=res)
-    wclimCurr <- wclimCurr[[s]]
-    plot(wclimCurr,cex.axis=1.2, tcl=-0.7,las=1)
-    axis(side=1,at=c(-200,200),col="black",lwd=3)
-    axis(side=2,at=c(-200,200),col="black",lwd=3)
-    axis(side=3,at=c(-200,200),col="black",lwd=3)
-    axis(side=4,at=c(-200,200),col="black",lwd=3)
-
-    wclim50 <- getData("CMIP5", var="bio", rcp=85, res=res, model="AC", year="50")
-    wclim50 <- wclim50[[s]]
-    wclim70 <- getData("CMIP5", var="bio", rcp=85, res=res, model="AC", year="70")
-    wclim70 <- wclim70[[s]]
-
+wclim50 <- getData("CMIP5", var="bio", rcp=85, res=res, model="AC", year="50")
+wclim50 <- wclim50[[s]]
+wclim70 <- getData("CMIP5", var="bio", rcp=85, res=res, model="AC", year="70")
+wclim70 <- wclim70[[s]]
 
 
+coord1 <- data.frame(x=lon[1], y=lat[1])
+coord2 <- data.frame(x=lon[2], y=lat[2])
+coord3 <- data.frame(x=lon[3], y=lat[3])
 
-      coord1 <- data.frame(x=lon[1], y=lat[1])
-      coord2 <- data.frame(x=lon[2], y=lat[2])
-      coord3 <- data.frame(x=lon[3], y=lat[3])
+point1 <- SpatialPoints(coord1, proj4string=wclimCurr@crs)
+point2 <- SpatialPoints(coord2, proj4string=wclimCurr@crs)
+point3 <- SpatialPoints(coord3, proj4string=wclimCurr@crs)
+plot(point1, add=T,col="brown")
+plot(point2, add=T,col="red")
+plot(point3, add=T,col="black")
 
-      point1 <- SpatialPoints(coord1, proj4string=wclimCurr@crs)
-      point2 <- SpatialPoints(coord2, proj4string=wclimCurr@crs)
-      point3 <- SpatialPoints(coord3, proj4string=wclimCurr@crs)
-      plot(point1, add=T,col="brown")
-      plot(point2, add=T,col="red")
-      plot(point3, add=T,col="black")
+valueCurr1 <- extract(wclimCurr, point1)
+valueCurr2 <- extract(wclimCurr, point2)
+valueCurr3 <- extract(wclimCurr, point3)
 
-      valueCurr1 <- extract(wclimCurr, point1)
-      valueCurr2 <- extract(wclimCurr, point2)
-      valueCurr3 <- extract(wclimCurr, point3)
+value50_1 <- extract(wclim50, point1)
+value70_1 <- extract(wclim70, point1)
 
-      value50_1 <- extract(wclim50, point1)
-      value70_1 <- extract(wclim70, point1)
+value50_2 <- extract(wclim50, point2)
+value70_2 <- extract(wclim70, point2)
 
-      value50_2 <- extract(wclim50, point2)
-      value70_2 <- extract(wclim70, point2)
+value50_3 <- extract(wclim50, point3)
+value70_3 <- extract(wclim70, point3)
 
-      value50_3 <- extract(wclim50, point3)
-      value70_3 <- extract(wclim70, point3)
+values1 <- c(valueCurr1, value50_1, value70_1)
+values1 <- values1/10
 
-      values1 <- c(valueCurr1, value50_1, value70_1)
-      values1 <- values1/10
+if (is.na(values1[1])== FALSE){
 
-      if (is.na(values1[1])== FALSE){
+values2 <- c(valueCurr2, value50_2, value70_2)
+values2 <- values2/10
 
-      values2 <- c(valueCurr2, value50_2, value70_2)
-      values2 <- values2/10
+if (is.na(values2[1])== FALSE){
 
-      if (is.na(values2[1])== FALSE){
+values3 <- c(valueCurr3, value50_3, value70_3)
+values3 <- values3/10
 
-      values3 <- c(valueCurr3, value50_3, value70_3)
-      values3 <- values3/10
+if (is.na(values3[1])== FALSE){
 
-      if (is.na(values3[1])== FALSE){
+x<- c(2000,2050,2070)
+y1<- values1
+y2<- values2
+y3<- values3
+df1 <- data.frame(x, y1)
+df2 <- data.frame(x, y2)
+df3 <- data.frame(x, y3)
+f <- function(times,a,b) {a * exp(b * times)}
 
+m1<- nls(y1 ~ exp(loga + b * x), df1, start = list( loga = log(2),
+                        b = 0.005),control = list (maxiter = 500))
+y_est1<-predict(m1,df1$x)
 
+m2<- nls(y2 ~ exp(logw + z * x), df2, start = list(logw = log(2),
+                        z = 0.005), control = list (maxiter = 500))
+y_est2<-predict(m2,df2$x)
 
-      x<- c(2000,2050,2070)
-      y1<- values1
-      y2<- values2
-      y3<- values3
-      df1 <- data.frame(x, y1)
-      df2 <- data.frame(x, y2)
-      df3 <- data.frame(x, y3)
-      f <- function(times,a,b) {a * exp(b * times)}
+m3<- nls(y3 ~ exp(loge + g * x), df3, start = list(loge = log(2),
+                        g = 0.005),control = list (maxiter = 500))
+y_est3<-predict(m3,df3$x)
 
-      m1<- nls(y1 ~ exp(loga + b * x), df1, start = list( loga = log(2), b = 0.005),control = list (maxiter = 500))
-      y_est1<-predict(m1,df1$x)
+a1=exp(coef(m1)[1])
+b1=coef(m1)[2]
 
+a2=exp(coef(m2)[1])
+b2=coef(m2)[2]
 
-      m2<- nls(y2 ~ exp(logw + z * x), df2, start = list(logw = log(2), z = 0.005), control = list (maxiter = 500))
-      y_est2<-predict(m2,df2$x)
-
-
-      m3<- nls(y3 ~ exp(loge + g * x), df3, start = list(loge = log(2), g = 0.005),control = list (maxiter = 500))
-      y_est3<-predict(m3,df3$x)
-
-
-      a1=exp(coef(m1)[1])
-      b1=coef(m1)[2]
-
-      a2=exp(coef(m2)[1])
-      b2=coef(m2)[2]
-
-      a3=exp(coef(m3)[1])
-      b3=coef(m3)[2]
-      ##########################################################
-
-      ##########################################################
+a3=exp(coef(m3)[1])
+b3=coef(m3)[2]
+##########################################################
+##########################################################
       # Optimum growing temperature
-      ##########################################################
+##########################################################
 
-      temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
+temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+
+            temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
 
-      temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
+temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+
+            temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
 
-      temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
-
-
-
-      ##########################################################
-      # Time
-      ##########################################################
-
-      time_op1= 1/b1*log(temp_op1/a1)
-      # time_cmin1= 1/b1*log(temp_cmin[1]/a1)
-      time_cmax1= 1/b1*log(temp_cmax[1]/a1)
-
-      #########################################################
-      time_op2= 1/b2*log(temp_op2/a2)
-      # time_cmin2= 1/b2*log(temp_cmin[2]/a2)
-      time_cmax2= 1/b2*log(temp_cmax[2]/a2)
-
-      #########################################################
-      time_op3= 1/b3*log(temp_op3/a3)
-      # time_cmin3= 1/b3*log(temp_cmin[3]/a3)
-      time_cmax3= 1/b3*log(temp_cmax[3]/a3)
-
-      #########################################################
-      if(time_cmax1<=times[length(times)]){
-        time_ext1<- time_cmax1
-      }else{
-        time_ext1<- times[length(times)]
-      }
-
-      if(time_cmax2<=times[length(times)]){
-        time_ext2<- time_cmax2
-      }else{
-        time_ext2<- times[length(times)]
-      }
+temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
+            temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
 
 
-      if(time_cmax3<=times[length(times)]){
-        time_ext3<- time_cmax3
-      }else{
-        time_ext3<- times[length(times)]
-      }
-      ##########################################################
-      # Parameters
-      ##########################################################
+##########################################################
+  # Time
+##########################################################
+time_op1= 1/b1*log(temp_op1/a1)
+time_cmax1= 1/b1*log(temp_cmax[1]/a1)
 
-      parms1<-c(temp_cmin[1],temp_cmax[1],temp_op1,ro[1], lambda[1])
-      parms2<-c(temp_cmin[2],temp_cmax[2],temp_op2,ro[2], lambda[2])
-      parms3<-c(temp_cmin[3],temp_cmax[3],temp_op3,ro[3], lambda[3])
-      ##############################################
+#########################################################
+time_op2= 1/b2*log(temp_op2/a2)
+time_cmax2= 1/b2*log(temp_cmax[2]/a2)
 
+#########################################################
+time_op3= 1/b3*log(temp_op3/a3)
+time_cmax3= 1/b3*log(temp_cmax[3]/a3)
 
-      ##########################################################
+#########################################################
+if(time_cmax1<=times[length(times)]){
+  time_ext1<- time_cmax1
+  }else{
+  time_ext1<- times[length(times)]
+}
+
+if(time_cmax2<=times[length(times)]){
+  time_ext2<- time_cmax2
+}else{
+  time_ext2<- times[length(times)]
+}
+
+if(time_cmax3<=times[length(times)]){
+  time_ext3<- time_cmax3
+}else{
+  time_ext3<- times[length(times)]
+}
+
+##############################################################
+    # Parameters
+##############################################################
+
+parms1<-c(temp_cmin[1],temp_cmax[1],temp_op1,ro[1], lambda[1])
+parms2<-c(temp_cmin[2],temp_cmax[2],temp_op2,ro[2], lambda[2])
+parms3<-c(temp_cmin[3],temp_cmax[3],temp_op3,ro[3], lambda[3])
+
+###############################################################
+
+###############################################################
       # Model for each trend
-      ##########################################################
-      model1 <- function (times, y,parms1) {
-        with(as.list(c(y)), {
-          T1<-f(times,a=exp(coef(m1)[1]), b=coef(m1)[2])
-          r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
-          dN <-   r1 * N * (1 - lambda[1]*(N / r1))
+###############################################################
 
-          list(dN,T1,r1) })
-      }
-      ###############################################################
+model1 <- function (times, y,parms1) {
+  with(as.list(c(y)), {
+  T1<-f(times,a=exp(coef(m1)[1]), b=coef(m1)[2])
+  r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
+  dN <-   r1 * N * (1 - lambda[1]*(N / r1))
+  list(dN,T1,r1) })
+}
 
-      model2 <- function (times, y,parms2) {
-        with(as.list(c(y)), {
-          # T <- T2(times,temp_ini[2])
-          T2<-f(times,a=exp(coef(m2)[1]), b=coef(m2)[2])
-          r2<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
-          dN <-   r2 * N * (1 - lambda[2]*(N / r2))
+###############################################################
 
-          list(dN,T2,r2)})
-      }
-      ###############################################################
+model2 <- function (times, y,parms2) {
+  with(as.list(c(y)), {
+  T2<-f(times,a=exp(coef(m2)[1]), b=coef(m2)[2])
+  r2<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
+  dN <-   r2 * N * (1 - lambda[2]*(N / r2))
+  list(dN,T2,r2)})
+}
 
-      model3 <- function (times, y,parms3) {
-        with(as.list(c(y)), {
-          # T <- T2(times,temp_ini[3])
-          T3<-f(times,a=exp(coef(m3)[1]), b=coef(m3)[2])
-          r3<- rate_TPC(T3,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
-          dN <-   r3 * N * (1 - lambda[3]*(N / r3))
+###############################################################
 
-          list(dN,T3,r3)})
-      }
-      ###############################################################
+model3 <- function (times, y,parms3) {
+with(as.list(c(y)), {
+T3<-f(times,a=exp(coef(m3)[1]), b=coef(m3)[2])
+r3<- rate_TPC(T3,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
+dN <-   r3 * N * (1 - lambda[3]*(N / r3))
+list(dN,T3,r3)})
+}
 
+###############################################################
+###############################################################
+  # Solution
+##############################################################
 
-      ###############################################################
-      # Solution
-      ##############################################################
+out1 <- ode(y=y_ini[1], times, model1, parms1,method = "ode45")
+out2 <- ode(y=y_ini[2], times, model2, parms2,method = "ode45")
+out3 <- ode(y=y_ini[3], times, model3, parms3,method = "ode45")
 
-      out1 <- ode(y=y_ini[1], times, model1, parms1,method = "ode45")
-      out2 <- ode(y=y_ini[2], times, model2, parms2,method = "ode45")
-      out3 <- ode(y=y_ini[3], times, model3, parms3,method = "ode45")
-      #############################################################
-
-      ###############################################################
+##############################################################
+##############################################################
       # Temperature trend
-      ##############################################################
+##############################################################
 
-      da1<-data.frame('x'=times,'y'=out1[,3] )
-      da2<-data.frame('x'=times,'y'=out2[,3] )
-      da3<-data.frame('x'=times,'y'=out3[,3] )
+da1<-data.frame('x'=times,'y'=out1[,3] )
+da2<-data.frame('x'=times,'y'=out2[,3] )
+da3<-data.frame('x'=times,'y'=out3[,3] )
 
-      # da1$group<-"Pop1"
-      # da2$group<-"Pop2"
-      # da3$group<-"Pop3"
-
-      ###############################################################
+###############################################################
       # Abundance
-      ##############################################################
+###############################################################
 
-      data1<-data.frame('x'=times,'y'=out1[,2] )
-      data2<-data.frame('x'=times,'y'=out2[,2] )
-      data3<-data.frame('x'=times,'y'=out3[,2] )
+data1<-data.frame('x'=times,'y'=out1[,2] )
+data2<-data.frame('x'=times,'y'=out2[,2] )
+data3<-data.frame('x'=times,'y'=out3[,2] )
 
-      # data1$group<-"Pop1"
-      # data2$group<-"Pop2"
-      # data3$group<-"Pop3"
-
-      ###############################################################
+###############################################################
       # Carrying capacity
-      ##############################################################
+###############################################################
 
-      K1=out1[,4]/lambda[1]
-      K2=out2[,4]/lambda[2]
-      K3=out3[,4]/lambda[3]
+K1=out1[,4]/lambda[1]
+K2=out2[,4]/lambda[2]
+K3=out3[,4]/lambda[3]
 
-      dat1<-data.frame('x'=times,'y'=K1 )
-      dat2<-data.frame('x'=times,'y'=K2 )
-      dat3<-data.frame('x'=times,'y'=K3 )
+dat1<-data.frame('x'=times,'y'=K1 )
+dat2<-data.frame('x'=times,'y'=K2 )
+dat3<-data.frame('x'=times,'y'=K3 )
 
-      # dat1$group<-"Pop1"
-      # dat2$group<-"Pop2"
-      # dat3$group<-"Pop3"
+###############################################################
+  # Data
+###############################################################
 
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],
+                  K2,out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+print(u)
 
-      ###############################################################
-      # Data
-      ###############################################################
+###############################################################
+# Plots
+###############################################################
 
-      Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-      names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-      #View(Data)
+data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
 
-
-      ###############################################################
-      # Plots
-      ##############################################################
-
-  data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
-
-      p1<- ggplot(data, aes(x=.data$x, y=.data$y)) +
-               theme_bw()+
-               theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-               geom_ribbon(data=subset(dat1,times>times[1] & times<time_ext1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
-               geom_ribbon(data=subset(dat2,times>times[1] & times<time_ext2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
-               geom_ribbon(data=subset(dat3,times>times[1] & times<time_ext3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
+p1<- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_ribbon(data=subset(dat1,times>times[1] & times<time_ext1),aes(x=.data$x,
+                               ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
+geom_ribbon(data=subset(dat2,times>times[1] & times<time_ext2),aes(x=.data$x,
+                               ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
+geom_ribbon(data=subset(dat3,times>times[1] & times<time_ext3),aes(x=.data$x,
+                               ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
                geom_vline(xintercept = time_ext1, size=.5, color="brown",linetype="dashed")+
                geom_vline(xintercept = time_ext2, size=.5, color="green4",linetype="dashed")+
                geom_vline(xintercept = time_ext3, size=.5, color="blue",linetype="dashed")+
-               # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
                geom_line(data =subset(data1,times>times[1] & times<time_ext1), color = "brown")+
                geom_line(data =subset(data2,times>times[1] & times<time_ext2), color = "green4")+
                geom_line(data =subset(data3,times>times[1] & times<time_ext3), color = "blue")+
@@ -571,55 +554,51 @@ w_clim<- function(y_ini = c(N = 400, N = 400, N = 400),
                labs(tag = "(a)")
 
 
-      p2<-ggplot(data, aes(x=.data$x, y=.data$y)) +
-              theme_bw()+
-              theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-              # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-              geom_vline(xintercept = time_ext1, size=.5, color="brown",linetype="dashed")+
-              geom_vline(xintercept = time_ext2, size=.5, color="green4",linetype="dashed")+
-              geom_vline(xintercept = time_ext3, size=.5, color="blue",linetype="dashed")+
-              geom_line(data =subset(da1,times>times[1] & times<time_ext1), color = "brown")+
-              geom_line(data =subset(da2,times>times[1] & times<time_ext2), color = "green4")+
-              geom_line(data =subset(da3,times>times[1] & times<time_ext3), color = "blue")+
-              labs(x = "Time",y="Temperature")+
-              theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-              theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-              labs(tag = "(b)")
+p2<-ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_vline(xintercept = time_ext1, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = time_ext2, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = time_ext3, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(da1,times>times[1] & times<time_ext1), color = "brown")+
+geom_line(data =subset(da2,times>times[1] & times<time_ext2), color = "green4")+
+geom_line(data =subset(da3,times>times[1] & times<time_ext3), color = "blue")+
+labs(x = "Time",y="Temperature")+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(b)")
 
-      plot_grid(p1, p2)
+plot_grid(p1, p2)
 
 
-      }else{
+}else{
 
-        stop("No information is recorded for the entered coordinates (number 3), enter new coordinates.")
+stop("No information is recorded for the entered coordinates (number 3), enter new coordinates.")
+   }
+
+
+ }else{
+
+stop("No information is recorded for the entered coordinates (number 2), enter new coordinates.")
       }
 
+}else{
 
-      }else{
-
-        stop("No information is recorded for the entered coordinates (number 2), enter new coordinates.")
+stop("No information is recorded for the entered coordinates (number 1), enter new coordinates.")
       }
-
-
-      }else{
-
-        stop("No information is recorded for the entered coordinates (number 1), enter new coordinates.")
-      }
-
 
   }else{
-
-    stop("The minimum critical temperature must be less than the maximum critical temperature")
+stop("The minimum critical temperature must be less than the maximum critical temperature")
   }
 
  }else{
 
-  stop("time_start must be less than time_end ")
+stop("time_start must be less than time_end ")
  }
 
 }else{
 
-  stop("The maximum simulation time is the year 2100 ")
+stop("The maximum simulation time is the year 2100 ")
 }
 
 }

@@ -143,8 +143,7 @@ decreasing_linear <- function(y_ini = c(N = 400, N = 400, N = 400),
 
   times<- seq(time_start, time_end, leap)
 
-
-  if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
 
     if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
@@ -167,17 +166,17 @@ decreasing_linear <- function(y_ini = c(N = 400, N = 400, N = 400),
 # Time
 ##########################################################
 
-  time_op1= -(temp_op1-temp_ini[1])/m+time_start
-  time_cmin1=(temp_ini[1]-temp_cmin[1])/m+time_start
-  time_cmax1=(temp_ini[1]-temp_cmax[1])/m+time_start
+  time_op1= -(temp_op1-temp_ini[1])/m[1]+time_start
+  time_cmin1=(temp_ini[1]-temp_cmin[1])/m[1]+time_start
+  time_cmax1=(temp_ini[1]-temp_cmax[1])/m[1]+time_start
 
-  time_op2  = -(temp_op2-temp_ini[2])/m+time_start
-  time_cmin2=(temp_ini[2]-temp_cmin[2])/m+time_start
-  time_cmax2=(temp_ini[2]-temp_cmax[2])/m+time_start
+  time_op2  = -(temp_op2-temp_ini[2])/m[2]+time_start
+  time_cmin2=(temp_ini[2]-temp_cmin[2])/m[2]+time_start
+  time_cmax2=(temp_ini[2]-temp_cmax[2])/m[2]+time_start
 
-  time_op3= -(temp_op3-temp_ini[3])/m+time_start
-  time_cmin3=(temp_ini[3]-temp_cmin[3])/m+time_start
-  time_cmax3=(temp_ini[3]-temp_cmax[3])/m+time_start
+  time_op3= -(temp_op3-temp_ini[3])/m[3]+time_start
+  time_cmin3=(temp_ini[3]-temp_cmin[3])/m[3]+time_start
+  time_cmax3=(temp_ini[3]-temp_cmax[3])/m[3]+time_start
 
 
   if(times[length(times)]<time_cmin1){
@@ -247,9 +246,6 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    # da1$group<-"Pop1"
-    # da2$group<-"Pop2"
-    # da3$group<-"Pop3"
 ###############################################################
 
 ###############################################################
@@ -259,10 +255,6 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     data1<-data.frame('x'=times,'y'=out1[,2] )
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
-
-    # data1$group<-"Pop1"
-    # data2$group<-"Pop2"
-    # data3$group<-"Pop3"
 
 ###############################################################
 # Carrying capacity
@@ -276,17 +268,19 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
 
-    # dat1$group<-"Pop1"
-    # dat2$group<-"Pop2"
-    # dat3$group<-"Pop3"
-
 ###############################################################
 # Data
 ###############################################################
 
-    Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    #View(Data)
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,
+                  out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+    u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+    print(u)
 
 
 ###############################################################
@@ -299,7 +293,6 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     p1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_ribbon(data=subset(dat1,times>times[1] & times<tm_new1),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3,fill="brown") +
             geom_ribbon(data=subset(dat2,times>times[1] & times<tm_new2),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
             geom_ribbon(data=subset(dat3,times>times[1] & times<tm_new3),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
@@ -320,7 +313,6 @@ out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
     p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
             theme_bw()+
             theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
             geom_vline(xintercept = tm_new1, size=.5, color="brown",linetype="dashed")+
             geom_vline(xintercept = tm_new2, size=.5, color="green4",linetype="dashed")+
             geom_vline(xintercept = tm_new3, size=.5, color="blue",linetype="dashed")+

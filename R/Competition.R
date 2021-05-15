@@ -47,6 +47,7 @@
 #'@import readxl
 #'@import raster
 #'@import rlang
+#'@rawNamespace import(formattable, except = area)
 #'@importFrom graphics axis par
 #'@importFrom ggplot2 ggplot aes geom_ribbon geom_vline geom_line theme_bw theme element_text element_blank labs rel
 #'@importFrom utils View
@@ -275,11 +276,9 @@ times<- seq(time_start, time_end, leap)
 
 if(time_end<=2100){
   if(time_start<=time_end){
-
 if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
-
-
-if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
+if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
+   temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
   options(warn = - 1)
 
@@ -288,17 +287,19 @@ if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_
 # Optimum growing temperature
 ##########################################################
 
-temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
+temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+
+            temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
 
-temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
+temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+
+            temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
 
-temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
+temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
+            temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
 
 
 ##########################################################
 # Parameters
 ##########################################################
-
 parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1,ro[1], lambda1[1],K2[1])
 parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2,ro[2], lambda1[2],K2[2])
 parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3], lambda1[3],K2[3])
@@ -366,26 +367,11 @@ temp_max<- get_RCP2.6(time_end)
   data1<-data.frame('x'=times,'y'=out1[,2] )
   data2<-data.frame('x'=times,'y'=out1[,3] )
 
-
-  # data1$group<-"Pop1"
-  # data2$group<-"Pop2"
-
-
-
   dat1<-data.frame('x'=times,'y'=out2[,2] )
   dat2<-data.frame('x'=times,'y'=out2[,3] )
 
-
-  # dat1$group<-"Pop1"
-  # dat2$group<-"Pop2"
-
-
   da1<-data.frame('x'=times,'y'=out3[,2] )
   da2<-data.frame('x'=times,'y'=out3[,3] )
-
-
-  # da1$group<-"Pop1"
-  # da2$group<-"Pop2"
 
   T1 <- get_RCP2.6(times)+temp_ini[1]
   T2 <- get_RCP2.6(times)+temp_ini[2]
@@ -395,9 +381,6 @@ temp_max<- get_RCP2.6(time_end)
   d2<-data.frame('x'=times,'y'=T2)
   d3<-data.frame('x'=times,'y'=T3)
 
-  # d1$group<-"Pop1"
-  # d2$group<-"Pop2"
-  # d3$group<-"Pop3"
 
 
   r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
@@ -414,20 +397,22 @@ temp_max<- get_RCP2.6(time_end)
   cap2<-data.frame('x'=times,'y'=K2 )
   cap3<-data.frame('x'=times,'y'=K3 )
 
-  # cap1$group<-"Pop1"
-  # cap2$group<-"Pop2"
-  # cap3$group<-"Pop3"
 
 
 
   ###############################################################
   # Data
   ###############################################################
-
-  Data<- data.frame(times,out1[,2],out1[,3],K1,out2[,2],out2[,3],K2,out3[,2],out3[,3],K3)
-  names(Data)<- c("Time","Abundance species-1","Abundance species-2","Carrying capacity scenario 1","Abundance species-1","Abundance species-2","Carrying capacity scenario 2","Abundance species-3","Abundance species-2","Carrying capacity scenario 3")
-  #View(Data)
-
+Data<- data.frame(times,out1[,2],out1[,3],K1,out2[,2],out2[,3],K2,
+                  out3[,2],out3[,3],K3)
+names(Data)<- c("Time","Abundance species-1","Abundance species-2",
+                "Carrying capacity scenario 1","Abundance species-1",
+                "Abundance species-2","Carrying capacity scenario 2",
+                "Abundance species-3","Abundance species-2","Carrying
+                capacity scenario 3")
+  u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+  print(u)
+  ###############################################################
 
   times_new1<-vector(mode = "numeric", length = 0)
   times_new2<-vector(mode = "numeric", length = 0)
@@ -715,11 +700,23 @@ temp_max<- get_RCP2.6(time_end)
 
   } else if(RCP==8.5) {
 
-    temp_max<- get_RCP8.5(time_end)
+    RCP8.5 <- function(date,a,b) {a * exp(b * date)}
+    values <- c(0.61, 2, 3.7)
+    x<- c(2005,2065,2100)
+    y<- values
+    df <- data.frame(x, y)
+
+    m<- nls(y ~ exp(loga + b * x), df, start = list( loga = log(2), b = 0.005),control = list (maxiter = 500))
+    y_est<-predict(m,df$x)
+
+
+
+
+    temp_max<- RCP8.5(time_end,a=exp(coef(m)[1]), b=coef(m)[2])
 
   model1 <- function (times, y,parms1) {
     with(as.list(c(y)), {
-      T1<-  get_RCP8.5(times)+temp_ini[1]    #IPCC2
+      T1<-  RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[1]    #IPCC2
       r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
       dN1 <-   r1 * N1 * (1 - (lambda1[1]/ r1)*(N1+alpha[1]*N2))
       dN2<-    r2[1] * N2 * (1 - (N2+beta[1]*N1)/K2[1])
@@ -731,7 +728,7 @@ temp_max<- get_RCP2.6(time_end)
 
   model2 <- function (times, y,parms2) {
     with(as.list(c(y)), {
-      T2<-  get_RCP8.5(times)+temp_ini[2]    #IPCC2
+      T2<-  RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[2]    #IPCC2
       r<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
       dN1 <-   r * N1 * (1 - (lambda1[2]/ r)*(N1+alpha[2]*N2))
       dN2<-    r2[2] * N2 * (1 - (N2+beta[2]*N1)/K2[2])
@@ -743,7 +740,7 @@ temp_max<- get_RCP2.6(time_end)
 
   model3 <- function (times, y,parms3) {
     with(as.list(c(y)), {
-      T3<-  get_RCP8.5(times)+temp_ini[3]    #IPCC2
+      T3<-  RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[3]    #IPCC2
       r3<- rate_TPC(T3,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
       dN1 <-   r3 * N1 * (1 - (lambda1[3]/ r3)*(N1+alpha[3]*N2))
       dN2<-    r2[3] * N2 * (1 - (N2+beta[3]*N1)/K2[3])
@@ -765,9 +762,6 @@ temp_max<- get_RCP2.6(time_end)
   out2 <- ode(y=y_ini2, times, model2, parms2,method = "ode45")
   out3 <- ode(y=y_ini3, times, model3, parms3,method = "ode45")
   #############################################################
-
-
-
   ###############################################################
   # Abundance
   ##############################################################
@@ -776,38 +770,19 @@ temp_max<- get_RCP2.6(time_end)
   data2<-data.frame('x'=times,'y'=out1[,3] )
 
 
-  # data1$group<-"Pop1"
-  # data2$group<-"Pop2"
-
-
-
   dat1<-data.frame('x'=times,'y'=out2[,2] )
   dat2<-data.frame('x'=times,'y'=out2[,3] )
-
-
-  # dat1$group<-"Pop1"
-  # dat2$group<-"Pop2"
-
 
   da1<-data.frame('x'=times,'y'=out3[,2] )
   da2<-data.frame('x'=times,'y'=out3[,3] )
 
-
-  # da1$group<-"Pop1"
-  # da2$group<-"Pop2"
-
-  T1<-  get_RCP8.5(times)+temp_ini[1]
-  T2<-  get_RCP8.5(times)+temp_ini[2]
-  T3<-  get_RCP8.5(times)+temp_ini[3]
+  T1<-  RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[1]
+  T2<-  RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[2]
+  T3<-  RCP8.5(times,a=exp(coef(m)[1]), b=coef(m)[2])+temp_ini[3]
 
   d1<-data.frame('x'=times,'y'=T1)
   d2<-data.frame('x'=times,'y'=T2)
   d3<-data.frame('x'=times,'y'=T3)
-
-  # d1$group<-"Pop1"
-  # d2$group<-"Pop2"
-  # d3$group<-"Pop3"
-
 
   r1<- rate_TPC(T1,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
   r2<- rate_TPC(T2,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
@@ -822,18 +797,20 @@ temp_max<- get_RCP2.6(time_end)
   cap2<-data.frame('x'=times,'y'=K2 )
   cap3<-data.frame('x'=times,'y'=K3 )
 
-  # cap1$group<-"Pop1"
-  # cap2$group<-"Pop2"
-  # cap3$group<-"Pop3"
-
-
   ###############################################################
   # Data
   ###############################################################
+Data<- data.frame(times,out1[,2],out1[,3],K1,out2[,2],out2[,3],K2,
+                  out3[,2],out3[,3],K3)
+names(Data)<- c("Time","Abundance species-1","Abundance species-2",
+                "Carrying capacity scenario 1","Abundance species-1",
+                "Abundance species-2","Carrying capacity scenario 2",
+                "Abundance species-1","Abundance species-2","Carrying
+                capacity scenario 3")
+  u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+  print(u)
 
-  Data<- data.frame(times,out1[,2],out1[,3],K1,out2[,2],out2[,3],K2,out3[,2],out3[,3],K3)
-  names(Data)<- c("Time","Abundance species-1","Abundance species-2","Carrying capacity scenario 1","Abundance species-1","Abundance species-2","Carrying capacity scenario 2","Abundance species-1","Abundance species-2","Carrying capacity scenario 3")
-  #View(Data)
+  ###############################################################
 
   times_new1<-vector(mode = "numeric", length = 0)
   times_new2<-vector(mode = "numeric", length = 0)

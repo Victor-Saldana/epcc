@@ -169,10 +169,10 @@ increasing_stabilization<- function(y_ini = c(N = 400, N = 400, N = 400),
 
   times<- seq(time_start, time_end, leap)
 
-  if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
+if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
-
-    if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
+if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
+   temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
 
 CE <- function (times,temp_ini,temp_stabilization,q) {
@@ -184,11 +184,14 @@ options(warn = - 1)
 # Optimum growing temperature
 ##########################################################
 
-temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
+temp_op1<- (temp_cmax[1]+temp_cmin[1])/3+sqrt(((temp_cmax[1]+
+            temp_cmin[1])/3)^2-(temp_cmax[1]*temp_cmin[1])/3)
 
-temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
+temp_op2<- (temp_cmax[2]+temp_cmin[2])/3+sqrt(((temp_cmax[2]+
+            temp_cmin[2])/3)^2-(temp_cmax[2]*temp_cmin[2])/3)
 
-temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
+temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
+            temp_cmin[3])/3)^2-(temp_cmax[3]*temp_cmin[3])/3)
 
 
 ##########################################################
@@ -196,26 +199,21 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
 ##########################################################
 
   time_op1=  -1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_op1))+time_start
-# time_cmin1=-1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_cmin[1]))+time_start
   time_cmax1=-1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_cmax[1]))+time_start
 
-  #########################################################
+#########################################################
 
   time_op2=  -1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_op2))+time_start
-# time_cmin2=-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_cmin[2]))+time_start
   time_cmax2=-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_cmax[2]))+time_start
 
-  ##########################################################
+##########################################################
 
   time_op3=  -1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_op3))+time_start
-# time_cmin3=-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_cmin[3]))+time_start
   time_cmax3=-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_cmax[3]))+time_start
-  #########################################################
-
-
-  ##########################################################
+#########################################################
+##########################################################
   # Time limits
-  ##########################################################
+##########################################################
 
   time_max<-c(time_cmax1[1],time_cmax2[1],time_cmax3[1])
   time_new <- time_max
@@ -231,63 +229,52 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
   if(times[length(times)]<time_new[3]){
     time_new[3]=times[length(times)]
   }
-  #########################################################
-
-
-  ##########################################################
+##########################################################
+##########################################################
   # Parameters
-  ##########################################################
+##########################################################
 
-    parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1,ro[1],lambda[1])
-    parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2,ro[2],lambda[2])
-    parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3],lambda[3])
-    ##############################################
+parms1<-c(temp_cmin[1],temp_ini[1],temp_cmax[1],temp_op1,ro[1],lambda[1])
+parms2<-c(temp_cmin[2],temp_ini[2],temp_cmax[2],temp_op2,ro[2],lambda[2])
+parms3<-c(temp_cmin[3],temp_ini[3],temp_cmax[3],temp_op3,ro[3],lambda[3])
 
-
+#########################################################
 ##########################################################
     # Model for each trend
 ##########################################################
-
-    model1 <- function (times, y,parms1) {
+model1 <- function (times, y,parms1) {
       with(as.list(c(y)), {
-        T <- CE(times,temp_ini[1],temp_stabilization[1],q[1])
-        r1<- rate_TPC(T,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
-        dN <-   r1 * N * (1 - lambda[1]*(N / r1))
-
-        list(dN,T,r1) })
+  T <- CE(times,temp_ini[1],temp_stabilization[1],q[1])
+  r1<- rate_TPC(T,ro[1],temp_cmin[1],temp_cmax[1],temp_op1)
+  dN <-   r1 * N * (1 - lambda[1]*(N / r1))
+  list(dN,T,r1) })
     }
-
-    ################################################################
-    model2 <- function (times, y,parms2) {
+#########################################################
+model2 <- function (times, y,parms2) {
       with(as.list(c(y)), {
-        T <- CE(times,temp_ini[2],temp_stabilization[2],q[2])
-        r2<- rate_TPC(T,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
-        dN <-   r2 * N * (1 - lambda[2]*(N / r2))
-
-        list(dN,T,r2) })
+  T <- CE(times,temp_ini[2],temp_stabilization[2],q[2])
+  r2<- rate_TPC(T,ro[2],temp_cmin[2],temp_cmax[2],temp_op2)
+  dN <-   r2 * N * (1 - lambda[2]*(N / r2))
+  list(dN,T,r2) })
     }
-
-    ################################################################
-    model3 <- function (times, y,parms3) {
+################################################################
+model3 <- function (times, y,parms3) {
       with(as.list(c(y)), {
-        T <- CE(times,temp_ini[3],temp_stabilization[3],q[3])
-        r3<- rate_TPC(T,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
-        dN <-   r3 * N * (1 - lambda[3]*(N / r3))
-
-        list(dN,T,r3)})
+  T <- CE(times,temp_ini[3],temp_stabilization[3],q[3])
+  r3<- rate_TPC(T,ro[3],temp_cmin[3],temp_cmax[3],temp_op3)
+  dN <-   r3 * N * (1 - lambda[3]*(N / r3))
+  list(dN,T,r3)})
     }
-    ###############################################################
-
-    ###############################################################
+###############################################################
+###############################################################
     # Solution
-    ##############################################################
+###############################################################
 
-    out1 <- ode(y=y_ini[1], times, model1, parms1, method = "ode45")
-    out2 <- ode(y=y_ini[2], times, model2, parms2, method = "ode45")
-    out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
-    #############################################################
+out1 <- ode(y=y_ini[1], times, model1, parms1, method = "ode45")
+out2 <- ode(y=y_ini[2], times, model2, parms2, method = "ode45")
+out3 <- ode(y=y_ini[3], times, model3, parms3, method = "ode45")
 
-
+###############################################################
 ###############################################################
     # Temperature trend
 ##############################################################
@@ -296,21 +283,13 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
     da2<-data.frame('x'=times,'y'=out2[,3] )
     da3<-data.frame('x'=times,'y'=out3[,3] )
 
-    # da1$group<-"Pop1"
-    # da2$group<-"Pop2"
-    # da3$group<-"Pop3"
-
-    ###############################################################
+###############################################################
     # Abundance
-    ##############################################################
+##############################################################
 
     data1<-data.frame('x'=times,'y'=out1[,2] )
     data2<-data.frame('x'=times,'y'=out2[,2] )
     data3<-data.frame('x'=times,'y'=out3[,2] )
-
-    # data1$group<-"Pop1"
-    # data2$group<-"Pop2"
-    # data3$group<-"Pop3"
 
 ###############################################################
     # Carrying capacity
@@ -320,23 +299,23 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
     K2=out2[,4]/lambda[2]
     K3=out3[,4]/lambda[3]
 
-
     dat1<-data.frame('x'=times,'y'=K1 )
     dat2<-data.frame('x'=times,'y'=K2 )
     dat3<-data.frame('x'=times,'y'=K3 )
-
-    # dat1$group<-"Pop1"
-    # dat2$group<-"Pop2"
-    # dat3$group<-"Pop3"
 
 ###############################################################
 # Data
 ###############################################################
 
-    Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],K2,out3[,3],out3[,2],K3)
-    names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1","Carrying capacity scenario 1","Temperature scenario 2","Abundance scenario 2","Carrying capacity scenario 2","Temperature scenario 3","Abundance scenario 3","Carrying capacity scenario 3")
-    #View(Data)
-
+Data<- data.frame(times,out1[,3],out1[,2],K1,out2[,3],out2[,2],
+                  K2,out3[,3],out3[,2],K3)
+names(Data)<- c("Time","Temperature Scenario 1","Abundance scenario 1",
+                "Carrying capacity scenario 1","Temperature scenario 2",
+                "Abundance scenario 2","Carrying capacity scenario 2",
+                "Temperature scenario 3","Abundance scenario 3","Carrying
+                capacity scenario 3")
+u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
+print(u)
 
 ###############################################################
     # Plots
@@ -344,42 +323,42 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
 
 data<-rbind(data1,data2,data3,dat1,dat2,dat3,da1,da2,da3)
 
-    p1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            geom_ribbon(data=subset(dat1,times>times[1] & times<time_new[1]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
-            geom_ribbon(data=subset(dat2,times>times[1] & times<time_new[2]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
-            geom_ribbon(data=subset(dat3,times>times[1] & times<time_new[3]),aes(x=.data$x,ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_vline(xintercept = time_new[1], size=.5, color="brown",linetype="dashed")+
-            geom_vline(xintercept = time_new[2], size=.5, color="green4",linetype="dashed")+
-            geom_vline(xintercept = time_new[3], size=.5, color="blue",linetype="dashed")+
-            geom_line(data =subset(data1,times>times[1] & times<time_new[1]), color = "brown")+
-            geom_line(data =subset(data2,times>times[1] & times<time_new[2]), color = "green4")+
-            geom_line(data =subset(data3,times>times[1] & times<time_new[3]), color = "blue")+
-            labs(x = "Time",y="Abundance")+
-            theme(plot.title = element_text(size=40))+
-            theme(plot.title = element_text(hjust = 0.5))+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(a)")
+p1 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_ribbon(data=subset(dat1,times>times[1] & times<time_new[1]),aes(x=.data$x,
+                                  ymax=.data$y),ymin=0,alpha=0.3, fill="brown") +
+geom_ribbon(data=subset(dat2,times>times[1] & times<time_new[2]),aes(x=.data$x,
+                                 ymax=.data$y),ymin=0,alpha=0.3, fill="green4") +
+geom_ribbon(data=subset(dat3,times>times[1] & times<time_new[3]),aes(x=.data$x,
+                                   ymax=.data$y),ymin=0,alpha=0.3, fill="blue") +
+geom_vline(xintercept = time_new[1], size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = time_new[2], size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = time_new[3], size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(data1,times>times[1] & times<time_new[1]), color = "brown")+
+geom_line(data =subset(data2,times>times[1] & times<time_new[2]), color = "green4")+
+geom_line(data =subset(data3,times>times[1] & times<time_new[3]), color = "blue")+
+labs(x = "Time",y="Abundance")+
+theme(plot.title = element_text(size=40))+
+theme(plot.title = element_text(hjust = 0.5))+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(a)")
 
 
-
-    p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
-            theme_bw()+
-            theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-            # scale_fill_manual(name='', values=c("Pop1" = "brown", "Pop2" = "green4", "Pop3"="blue"))+
-            geom_vline(xintercept = time_new[1], size=.5, color="brown",linetype="dashed")+
-            geom_vline(xintercept = time_new[2], size=.5, color="green4",linetype="dashed")+
-            geom_vline(xintercept = time_new[3], size=.5, color="blue",linetype="dashed")+
-            geom_line(data =subset(da1,times>times[1] & times<time_new[1]), color = "brown")+
-            geom_line(data =subset(da2,times>times[1] & times<time_new[2]), color = "green4")+
-            geom_line(data =subset(da3,times>times[1] & times<time_new[3]), color = "blue")+
-            labs(x = "Time",y="Temperature")+
-            theme(axis.title.y = element_text(size = rel(1), angle = 90))+
-            theme(axis.title.x = element_text(size = rel(1), angle = 00))+
-            labs(tag = "(b)")
+p2 <- ggplot(data, aes(x=.data$x, y=.data$y)) +
+theme_bw()+
+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+geom_vline(xintercept = time_new[1], size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = time_new[2], size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = time_new[3], size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(da1,times>times[1] & times<time_new[1]), color = "brown")+
+geom_line(data =subset(da2,times>times[1] & times<time_new[2]), color = "green4")+
+geom_line(data =subset(da3,times>times[1] & times<time_new[3]), color = "blue")+
+labs(x = "Time",y="Temperature")+
+theme(axis.title.y = element_text(size = rel(1), angle = 90))+
+theme(axis.title.x = element_text(size = rel(1), angle = 00))+
+labs(tag = "(b)")
 
     plot_grid(p1, p2)
 
