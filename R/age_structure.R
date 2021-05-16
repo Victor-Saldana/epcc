@@ -67,13 +67,13 @@
 #'              temp_cmin = rep(temp_cmin,3),
 #'              temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
 #'              ro = rep(0.7,3),
-#'              lambda1 = rep(0.00004,3),
-#'              lambda2 = rep(0.00006,3),
-#'              lambda3 = rep(0.00005,3),
+#'              lambda1 = c(0.00002,0,0),
+#'              lambda2 = c(0,0.00004,0.00003),
+#'              lambda3 = c(0,0.00003,0.00004),
 #'              alpha1 = rep(0.3,3),
 #'              alpha2 = rep(0.4,3),
-#'              d2 = rep(0.005,3),
-#'              d3 = rep(0.5,3),
+#'              d2 = rep(0.004,3),
+#'              d3 = rep(0.005,3),
 #'              Ad2 = rep(0.5,3),
 #'              Ad3 = rep(0.75,3),
 #'              Tr2 = rep(298,3),
@@ -112,15 +112,15 @@
 #'              temp_cmin = rep(temp_cmin,3),
 #'              temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
 #'              ro = rep(0.7,3),
-#'              lambda1 = rep(0.00004,3),
-#'              lambda2 = rep(0.00006,3),
-#'              lambda3 = rep(0.00005,3),
+#'              lambda1 = c(0.00002,0,0),
+#'              lambda2 = c(0,0.00004,0.00003),
+#'              lambda3 = c(0,0.00003,0.00004),
 #'              alpha1 = rep(0.3,3),
 #'              alpha2 = rep(0.4,3),
-#'              d2 = rep(0.005,3),
-#'              d3 = rep(0.5,3),
+#'              d2 = rep(0.004,3),
+#'              d3 = rep(0.003,3),
 #'              Ad2 = rep(0.5,3),
-#'              Ad3 = rep(0.75,3),
+#'              Ad3 = rep(0.6,3),
 #'              Tr2 = rep(298,3),
 #'              Tr3 = rep(298,3),
 #'              RCP = 8.5,
@@ -292,153 +292,275 @@ names(Data)<- c("Time","Abundance Stage-1,Scenario-1","Abundance Stage-2,Scenari
         u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
 print(u)
 
+times_new11<-vector(mode = "numeric", length = 0)
+times_new12<-vector(mode = "numeric", length = 0)
+times_new13<-vector(mode = "numeric", length = 0)
+times_new21<-vector(mode = "numeric", length = 0)
+times_new22<-vector(mode = "numeric", length = 0)
+times_new23<-vector(mode = "numeric", length = 0)
+times_new31<-vector(mode = "numeric", length = 0)
+times_new32<-vector(mode = "numeric", length = 0)
+times_new33<-vector(mode = "numeric", length = 0)
 
-    times_new1<-vector(mode = "numeric", length = 0)
-    times_new2<-vector(mode = "numeric", length = 0)
-    times_new3<-vector(mode = "numeric", length = 0)
+for (i in 2: length(times)){
 
-            for (i in 2: length(times)){
-
-              if(out1[i-1,2]>=0 && ( out1[i,2])<0){
-                times_new1[i-1]<- times[i-1]
-              }else{
-                times_new1[i-1]<- 0
-              }
-            }
-
-
-            for (i in 2: length(times)){
-
-              if(out2[i-1,2]>=0 && ( out2[i,2])<0){
-                times_new2[i-1]<- times[i-1]
-              }else{
-                times_new2[i-1]<- 0
-              }
-            }
+  if(is.na(out1[i,2])) {times_new11[i-1]<- 0
+  } else {
+    if(out1[i-1,2]>=0 && ( out1[i,2]<0 || is.na(out1[i,2]))){
+      times_new11[i-1]<- times[i-1]
+    }else{
+      times_new11[i-1]<- 0
+    }
+  }
+}
 
 
-            for (i in 2: length(times)){
+for (i in 2: length(times)){
+  if(is.na(out1[i,3])) {times_new12[i-1]<- 0
+  } else {
+    if(out1[i-1,3]>=0 && ( out1[i,3]<0 || is.na(out1[i,3]))){
+      times_new12[i-1]<- times[i-1]
+    }else{
+      times_new12[i-1]<- 0
+    }
+  }
+}
 
-              if(out3[i-1,2]>=0 && ( out3[i,2])<0){
-                times_new3[i-1]<- times[i-1]
-              }else{
-                times_new3[i-1]<- 0
-              }
-            }
 
-            index1<- which(times_new1!=0)[1]
-            index2<- which(times_new2!=0)[1]
-            index3<- which(times_new3!=0)[1]
+for (i in 2: length(times)){
+  if(is.na(out1[i,4])) {times_new13[i-1]<- 0
+  } else {
+    if(out1[i-1,4]>=0 && ( out1[i,4]<0 || is.na(out1[i,4]))){
+      times_new13[i-1]<- times[i-1]
+    }else{
+      times_new13[i-1]<- 0
+    }
+  }
 
-            index1<- as.integer(index1)
-            index2<- as.integer(index2)
-            index3<- as.integer(index3)
+}
+index11<- which(times_new11!=0)[1]
+index12<- which(times_new12!=0)[1]
+index13<- which(times_new13!=0)[1]
 
-            if(!is.na(as.integer(index1))== FALSE){
-              times_sup11<- times[length(times)]
-            }else{
-              times_sup11<- times[index1]
-            }
-            if(!is.na(as.integer(index2))== FALSE){
-              times_sup21<- times[length(times)]
-            }else{
-              times_sup21<- times[index2]
-            }
+index11<- as.integer(index11)
+index11<- as.integer(index12)
+index13<- as.integer(index13)
 
-            if(!is.na(as.integer(index3))== FALSE){
-              times_sup31<- times[length(times)]
-            }else{
-              times_sup31<- times[index3]
-            }
+if(!is.na(as.integer(index11))== FALSE){
+  times_super11<- times[length(times)]
+}else{
+  times_super11<- times[index11]
+}
+if(!is.na(as.integer(index12))== FALSE){
+  times_super12<- times[length(times)]
+}else{
+  times_super12<- times[index12]
+}
 
-            times_new7<-vector(mode = "numeric", length = 0)
-            times_new8<-vector(mode = "numeric", length = 0)
-            times_new9<-vector(mode = "numeric", length = 0)
+if(!is.na(as.integer(index13))== FALSE){
+  times_super13<- times[length(times)]
+}else{
+  times_super13<- times[index13]
+}
+###################################################################
 
-  for (i in 2: length(times)){
+for (i in 2: length(times)){
+
+  if(is.na(out2[i,2])) {times_new21[i-1]<- 0
+  } else {
+    if(out2[i-1,2]>=0 && ( out2[i,2]<0 || is.na(out2[i,2]))){
+      times_new21[i-1]<- times[i-1]
+    }else{
+      times_new21[i-1]<- 0
+    }
+  }
+}
+
+
+for (i in 2: length(times)){
+  if(is.na(out2[i,3])) {times_new22[i-1]<- 0
+  } else {
+    if(out2[i-1,3]>=0 && ( out2[i,3]<0 || is.na(out2[i,3]))){
+      times_new22[i-1]<- times[i-1]
+    }else{
+      times_new22[i-1]<- 0
+    }
+  }
+}
+
+
+for (i in 2: length(times)){
+  if(is.na(out2[i,4])) {times_new23[i-1]<- 0
+  } else {
+    if(out2[i-1,4]>=0 && ( out2[i,4]<0 || is.na(out2[i,4]))){
+      times_new23[i-1]<- times[i-1]
+    }else{
+      times_new23[i-1]<- 0
+    }
+  }
+
+}
+index21<- which(times_new21!=0)[1]
+index22<- which(times_new22!=0)[1]
+index23<- which(times_new23!=0)[1]
+
+index21<- as.integer(index21)
+index22<- as.integer(index22)
+index23<- as.integer(index23)
+
+if(!is.na(as.integer(index21))== FALSE){
+  times_super21<- times[length(times)]
+}else{
+  times_super21<- times[index21]
+}
+if(!is.na(as.integer(index22))== FALSE){
+  times_super22<- times[length(times)]
+}else{
+  times_super22<- times[index22]
+}
+
+if(!is.na(as.integer(index23))== FALSE){
+  times_super23<- times[length(times)]
+}else{
+  times_super23<- times[index23]
+}
+##################################################################
+
+
+for (i in 2: length(times)){
+
+  if(is.na(out3[i,2])) {times_new31[i-1]<- 0
+  } else {
+    if(out3[i-1,2]>=0 && ( out3[i,2]<0 || is.na(out3[i,2]))){
+      times_new31[i-1]<- times[i-1]
+    }else{
+      times_new31[i-1]<- 0
+    }
+  }
+}
+
+
+for (i in 2: length(times)){
+  if(is.na(out3[i,3])) {times_new32[i-1]<- 0
+  } else {
+    if(out3[i-1,3]>=0 && ( out3[i,3]<0 || is.na(out3[i,3]))){
+      times_new32[i-1]<- times[i-1]
+    }else{
+      times_new32[i-1]<- 0
+    }
+  }
+}
+
+
+for (i in 2: length(times)){
+  if(is.na(out3[i,4])) {times_new33[i-1]<- 0
+  } else {
+    if(out3[i-1,4]>=0 && ( out3[i,4]<0 || is.na(out3[i,4]))){
+      times_new33[i-1]<- times[i-1]
+    }else{
+      times_new33[i-1]<- 0
+    }
+  }
+
+}
+
+index31<- which(times_new31!=0)[1]
+index32<- which(times_new32!=0)[1]
+index33<- which(times_new33!=0)[1]
+
+index31<- as.integer(index31)
+index32<- as.integer(index32)
+index33<- as.integer(index33)
+
+if(!is.na(as.integer(index31))== FALSE){
+  times_super31<- times[length(times)]
+}else{
+  times_super31<- times[index31]
+}
+if(!is.na(as.integer(index32))== FALSE){
+  times_super32<- times[length(times)]
+}else{
+  times_super32<- times[index32]
+}
+
+if(!is.na(as.integer(index33))== FALSE){
+  times_super33<- times[length(times)]
+}else{
+  times_super33<- times[index33]
+}
+##################################################################
+
+times_new7<-vector(mode = "numeric", length = 0)
+times_new8<-vector(mode = "numeric", length = 0)
+times_new9<-vector(mode = "numeric", length = 0)
+
+for (i in 2: length(times)){
 
   if(( temp_cmax[1]-T1[i-1])>=0 && ( temp_cmax[1]-T1[i])<0){
-                times_new7[i-1]<- times[i-1]
+    times_new7[i-1]<- times[i-1]
 
- }else if(( temp_cmax[1]-T1[i-1])<=0 && ( temp_cmax[1]-T1[i])>0){
+  }else if(( temp_cmax[1]-T1[i-1])<=0 && ( temp_cmax[1]-T1[i])>0){
 
-                times_new7[i-1]<- times[i-1]
-   }else{
-                times_new7[i-1]<- 0
-         }
-    }
+    times_new7[i-1]<- times[i-1]
+  }else{
+    times_new7[i-1]<- 0
+  }
+}
 
 
-  for (i in 2: length(times)){
+for (i in 2: length(times)){
 
   if(( temp_cmax[2]-T2[i-1])>=0 && ( temp_cmax[2]-T2[i])<0){
-                times_new8[i-1]<- times[i-1]
+    times_new8[i-1]<- times[i-1]
 
-}else if(( temp_cmax[2]-T2[i-1])<=0 && ( temp_cmax[2]-T2[i])>0){
+  }else if(( temp_cmax[2]-T2[i-1])<=0 && ( temp_cmax[2]-T2[i])>0){
 
-                times_new8[i-1]<- times[i-1]
-              }else{
-                times_new8[i-1]<- 0
-              }
-            }
+    times_new8[i-1]<- times[i-1]
+  }else{
+    times_new8[i-1]<- 0
+  }
+}
 
 
-  for (i in 2: length(times)){
+for (i in 2: length(times)){
 
   if(( temp_cmax[3]-T3[i-1])>=0 && ( temp_cmax[3]-T3[i])<0){
-                times_new9[i-1]<- times[i-1]
+    times_new9[i-1]<- times[i-1]
 
-}else if(( temp_cmax[3]-T3[i-1])<=0 && ( temp_cmax[3]-T3[i])>0){
+  }else if(( temp_cmax[3]-T3[i-1])<=0 && ( temp_cmax[3]-T3[i])>0){
 
-                times_new9[i-1]<- times[i-1]
-              }else{
-                times_new9[i-1]<- 0
-              }
-            }
+    times_new9[i-1]<- times[i-1]
+  }else{
+    times_new9[i-1]<- 0
+  }
+}
 
-            index7<- which(times_new7!=0)[1]
-            index8<- which(times_new8!=0)[1]
-            index9<- which(times_new9!=0)[1]
+index7<- which(times_new7!=0)[1]
+index8<- which(times_new8!=0)[1]
+index9<- which(times_new9!=0)[1]
 
-            index7<- as.integer(index7)
-            index8<- as.integer(index8)
-            index9<- as.integer(index9)
+index7<- as.integer(index7)
+index8<- as.integer(index8)
+index9<- as.integer(index9)
 
-            if(!is.na(as.integer(index7))== FALSE){
-              times_sup12<- times[length(times)]
-            }else{
-              times_sup12<- times[index7]
-            }
-            if(!is.na(as.integer(index8))== FALSE){
-              times_sup22<- times[length(times)]
-            }else{
-              times_sup22<- times[index8]
-            }
+if(!is.na(as.integer(index7))== FALSE){
+  times_sup1<- times[length(times)]
+}else{
+  times_sup2<- times[index7]
+}
+if(!is.na(as.integer(index8))== FALSE){
+  times_sup2<- times[length(times)]
+}else{
+  times_sup2<- times[index8]
+}
 
-            if(!is.na(as.integer(index9))== FALSE){
-              times_sup32<- times[length(times)]
-            }else{
-              times_sup32<- times[index9]
-            }
+if(!is.na(as.integer(index9))== FALSE){
+  times_sup3<- times[length(times)]
+}else{
+  times_sup3<- times[index9]
+}
 
 
-            if(times_sup11<= times_sup12){
-              times_sup1<-times_sup11
-            }else{
-              times_sup1<-times_sup12
-            }
-
-            if(times_sup21<= times_sup22){
-              times_sup2<-times_sup21
-            }else{
-              times_sup2<-times_sup22
-            }
-
-            if(times_sup31<= times_sup32){
-              times_sup3<-times_sup31
-            }else{
-              times_sup3<-times_sup32
-            }
 
 
 ###############################################################
@@ -450,10 +572,12 @@ data<-rbind(data1, data2, data3)
 p1<- ggplot(data, aes(x=.data$x, y=.data$y)) +
 theme_bw()+
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
-geom_line(data =subset(data1,times>times[1] & times<times_sup1), color = "brown")+
-geom_line(data =subset(data2,times>times[1] & times<times_sup1), color = "green4")+
-geom_line(data =subset(data3,times>times[1] & times<times_sup1), color = "blue")+
+geom_vline(xintercept = times_super11, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_super12, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_super13, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(data1,times>times[1] & times<times_super11), color = "brown")+
+geom_line(data =subset(data2,times>times[1] & times<times_super12), color = "green4")+
+geom_line(data =subset(data3,times>times[1] & times<times_super13), color = "blue")+
 labs(x = "Time",y="Abundance")+
 theme(plot.title = element_text(size=40))+
 theme(plot.title = element_text(hjust = 0.5))+
@@ -467,10 +591,12 @@ dat<-rbind(dat1, dat2, dat3)
 p2<- ggplot(dat, aes(x=.data$x, y=.data$y)) +
 theme_bw()+
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
-geom_line(data =subset(dat1,times>times[1] & times<times_sup2), color = "brown")+
-geom_line(data =subset(dat2,times>times[1] & times<times_sup2), color = "green4")+
-geom_line(data =subset(dat3,times>times[1] & times<times_sup2), color = "blue")+
+geom_vline(xintercept = times_super21, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_super22, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_super23, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(dat1,times>times[1] & times<times_super21), color = "brown")+
+geom_line(data =subset(dat2,times>times[1] & times<times_super22), color = "green4")+
+geom_line(data =subset(dat3,times>times[1] & times<times_super23), color = "blue")+
 labs(x = "Time",y="Abundance")+
 theme(plot.title = element_text(size=40))+
 theme(plot.title = element_text(hjust = 0.5))+
@@ -484,10 +610,12 @@ da<-rbind(da1, da2, da3)
 p3<- ggplot(da, aes(x=.data$x, y=.data$y)) +
 theme_bw()+
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
-geom_line(data =subset(da1,times>times[1] & times<times_sup3), color = "brown")+
-geom_line(data =subset(da2,times>times[1] & times<times_sup3), color = "green4")+
-geom_line(data =subset(da3,times>times[1] & times<times_sup3), color = "blue")+
+geom_vline(xintercept = times_super31, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_super32, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_super33, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(da1,times>times[1] & times<times_super31), color = "brown")+
+geom_line(data =subset(da2,times>times[1] & times<times_super32), color = "green4")+
+geom_line(data =subset(da3,times>times[1] & times<times_super33), color = "blue")+
 labs(x = "Time",y="Abundance")+
 theme(plot.title = element_text(size=40))+
 theme(plot.title = element_text(hjust = 0.5))+
@@ -635,64 +763,203 @@ names(Data)<- c("Time","Abundance Stage-1,Scenario-1","Abundance Stage-2,Scenari
     u<- formattable(Data, align = c("l", rep("r", NCOL(Data))))
 print(u)
 ###############################################################
-            times_new1<-vector(mode = "numeric", length = 0)
-            times_new2<-vector(mode = "numeric", length = 0)
-            times_new3<-vector(mode = "numeric", length = 0)
+            times_new11<-vector(mode = "numeric", length = 0)
+            times_new12<-vector(mode = "numeric", length = 0)
+            times_new13<-vector(mode = "numeric", length = 0)
+            times_new21<-vector(mode = "numeric", length = 0)
+            times_new22<-vector(mode = "numeric", length = 0)
+            times_new23<-vector(mode = "numeric", length = 0)
+            times_new31<-vector(mode = "numeric", length = 0)
+            times_new32<-vector(mode = "numeric", length = 0)
+            times_new33<-vector(mode = "numeric", length = 0)
 
             for (i in 2: length(times)){
 
-              if(out1[i-1,2]>=0 && ( out1[i,2])<0){
-                times_new1[i-1]<- times[i-1]
-              }else{
-                times_new1[i-1]<- 0
+              if(is.na(out1[i,2])) {times_new11[i-1]<- 0
+              } else {
+                if(out1[i-1,2]>=0 && ( out1[i,2]<0 || is.na(out1[i,2]))){
+                  times_new11[i-1]<- times[i-1]
+                }else{
+                  times_new11[i-1]<- 0
+                }
               }
             }
 
 
             for (i in 2: length(times)){
-
-              if(out2[i-1,2]>=0 && ( out2[i,2])<0){
-                times_new2[i-1]<- times[i-1]
-              }else{
-                times_new2[i-1]<- 0
+              if(is.na(out1[i,3])) {times_new12[i-1]<- 0
+              } else {
+                if(out1[i-1,3]>=0 && ( out1[i,3]<0 || is.na(out1[i,3]))){
+                  times_new12[i-1]<- times[i-1]
+                }else{
+                  times_new12[i-1]<- 0
+                }
               }
             }
 
 
             for (i in 2: length(times)){
+              if(is.na(out1[i,4])) {times_new13[i-1]<- 0
+              } else {
+                if(out1[i-1,4]>=0 && ( out1[i,4]<0 || is.na(out1[i,4]))){
+                  times_new13[i-1]<- times[i-1]
+                }else{
+                  times_new13[i-1]<- 0
+                }
+              }
 
-              if(out3[i-1,2]>=0 && ( out3[i,2])<0){
-                times_new3[i-1]<- times[i-1]
-              }else{
-                times_new3[i-1]<- 0
+            }
+            index11<- which(times_new11!=0)[1]
+            index12<- which(times_new12!=0)[1]
+            index13<- which(times_new13!=0)[1]
+
+            index11<- as.integer(index11)
+            index11<- as.integer(index12)
+            index13<- as.integer(index13)
+
+            if(!is.na(as.integer(index11))== FALSE){
+              times_super11<- times[length(times)]
+            }else{
+              times_super11<- times[index11]
+            }
+            if(!is.na(as.integer(index12))== FALSE){
+              times_super12<- times[length(times)]
+            }else{
+              times_super12<- times[index12]
+            }
+
+            if(!is.na(as.integer(index13))== FALSE){
+              times_super13<- times[length(times)]
+            }else{
+              times_super13<- times[index13]
+            }
+###################################################################
+
+            for (i in 2: length(times)){
+
+              if(is.na(out2[i,2])) {times_new21[i-1]<- 0
+              } else {
+                if(out2[i-1,2]>=0 && ( out2[i,2]<0 || is.na(out2[i,2]))){
+                  times_new21[i-1]<- times[i-1]
+                }else{
+                  times_new21[i-1]<- 0
+                }
               }
             }
 
-            index1<- which(times_new1!=0)[1]
-            index2<- which(times_new2!=0)[1]
-            index3<- which(times_new3!=0)[1]
 
-            index1<- as.integer(index1)
-            index2<- as.integer(index2)
-            index3<- as.integer(index3)
-
-            if(!is.na(as.integer(index1))== FALSE){
-              times_sup11<- times[length(times)]
-            }else{
-              times_sup11<- times[index1]
-            }
-            if(!is.na(as.integer(index2))== FALSE){
-              times_sup21<- times[length(times)]
-            }else{
-              times_sup21<- times[index2]
+            for (i in 2: length(times)){
+              if(is.na(out2[i,3])) {times_new22[i-1]<- 0
+              } else {
+                if(out2[i-1,3]>=0 && ( out2[i,3]<0 || is.na(out2[i,3]))){
+                  times_new22[i-1]<- times[i-1]
+                }else{
+                  times_new22[i-1]<- 0
+                }
+              }
             }
 
-            if(!is.na(as.integer(index3))== FALSE){
-              times_sup31<- times[length(times)]
+
+            for (i in 2: length(times)){
+              if(is.na(out2[i,4])) {times_new23[i-1]<- 0
+              } else {
+                if(out2[i-1,4]>=0 && ( out2[i,4]<0 || is.na(out2[i,4]))){
+                  times_new23[i-1]<- times[i-1]
+                }else{
+                  times_new23[i-1]<- 0
+                }
+              }
+
+            }
+            index21<- which(times_new21!=0)[1]
+            index22<- which(times_new22!=0)[1]
+            index23<- which(times_new23!=0)[1]
+
+            index21<- as.integer(index21)
+            index22<- as.integer(index22)
+            index23<- as.integer(index23)
+
+            if(!is.na(as.integer(index21))== FALSE){
+              times_super21<- times[length(times)]
             }else{
-              times_sup31<- times[index3]
+              times_super21<- times[index21]
+            }
+            if(!is.na(as.integer(index22))== FALSE){
+              times_super22<- times[length(times)]
+            }else{
+              times_super22<- times[index22]
             }
 
+            if(!is.na(as.integer(index23))== FALSE){
+              times_super23<- times[length(times)]
+            }else{
+              times_super23<- times[index23]
+            }
+##################################################################
+
+
+            for (i in 2: length(times)){
+
+              if(is.na(out3[i,2])) {times_new31[i-1]<- 0
+              } else {
+                if(out3[i-1,2]>=0 && ( out3[i,2]<0 || is.na(out3[i,2]))){
+                  times_new31[i-1]<- times[i-1]
+                }else{
+                  times_new31[i-1]<- 0
+                }
+              }
+            }
+
+
+            for (i in 2: length(times)){
+              if(is.na(out3[i,3])) {times_new32[i-1]<- 0
+              } else {
+                if(out3[i-1,3]>=0 && ( out3[i,3]<0 || is.na(out3[i,3]))){
+                  times_new32[i-1]<- times[i-1]
+                }else{
+                  times_new32[i-1]<- 0
+                }
+              }
+            }
+
+
+            for (i in 2: length(times)){
+              if(is.na(out3[i,4])) {times_new33[i-1]<- 0
+              } else {
+                if(out3[i-1,4]>=0 && ( out3[i,4]<0 || is.na(out3[i,4]))){
+                  times_new33[i-1]<- times[i-1]
+                }else{
+                  times_new33[i-1]<- 0
+                }
+              }
+
+            }
+
+            index31<- which(times_new31!=0)[1]
+            index32<- which(times_new32!=0)[1]
+            index33<- which(times_new33!=0)[1]
+
+            index31<- as.integer(index31)
+            index32<- as.integer(index32)
+            index33<- as.integer(index33)
+
+            if(!is.na(as.integer(index31))== FALSE){
+              times_super31<- times[length(times)]
+            }else{
+              times_super31<- times[index31]
+            }
+            if(!is.na(as.integer(index32))== FALSE){
+            times_super32<- times[length(times)]
+            }else{
+              times_super32<- times[index32]
+            }
+
+            if(!is.na(as.integer(index33))== FALSE){
+              times_super33<- times[length(times)]
+            }else{
+              times_super33<- times[index33]
+            }
+##################################################################
 
             times_new7<-vector(mode = "numeric", length = 0)
             times_new8<-vector(mode = "numeric", length = 0)
@@ -748,40 +1015,23 @@ if(( temp_cmax[3]-T3[i-1])>=0 && ( temp_cmax[3]-T3[i])<0){
             index9<- as.integer(index9)
 
             if(!is.na(as.integer(index7))== FALSE){
-              times_sup12<- times[length(times)]
+              times_sup1<- times[length(times)]
             }else{
-              times_sup12<- times[index7]
+              times_sup2<- times[index7]
             }
             if(!is.na(as.integer(index8))== FALSE){
-              times_sup22<- times[length(times)]
+              times_sup2<- times[length(times)]
             }else{
-              times_sup22<- times[index8]
+              times_sup2<- times[index8]
             }
 
             if(!is.na(as.integer(index9))== FALSE){
-              times_sup32<- times[length(times)]
+              times_sup3<- times[length(times)]
             }else{
-              times_sup32<- times[index9]
+              times_sup3<- times[index9]
             }
 
 
-            if(times_sup11<= times_sup12){
-              times_sup1<-times_sup11
-            }else{
-              times_sup1<-times_sup12
-            }
-
-            if(times_sup21<= times_sup22){
-              times_sup2<-times_sup21
-            }else{
-              times_sup2<-times_sup22
-            }
-
-            if(times_sup31<= times_sup32){
-              times_sup3<-times_sup31
-            }else{
-              times_sup3<-times_sup32
-            }
 
 ###############################################################
             # Plots
@@ -792,10 +1042,12 @@ data<-rbind(data1, data2, data3)
 p1<- ggplot(data, aes(x=.data$x, y=.data$y)) +
 theme_bw()+
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-geom_vline(xintercept = times_sup1, size=.5, color="brown",linetype="dashed")+
-geom_line(data =subset(data1,times>times[1] & times<times_sup1), color = "brown")+
-geom_line(data =subset(data2,times>times[1] & times<times_sup1), color = "green4")+
-geom_line(data =subset(data3,times>times[1] & times<times_sup1), color = "blue")+
+geom_vline(xintercept = times_super11, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_super12, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_super13, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(data1,times>times[1] & times<times_super11), color = "brown")+
+geom_line(data =subset(data2,times>times[1] & times<times_super12), color = "green4")+
+geom_line(data =subset(data3,times>times[1] & times<times_super13), color = "blue")+
 labs(x = "Time",y="Abundance")+
 theme(plot.title = element_text(size=40))+
 theme(plot.title = element_text(hjust = 0.5))+
@@ -810,10 +1062,12 @@ dat<-rbind(dat1, dat2, dat3)
 p2<- ggplot(dat, aes(x=.data$x, y=.data$y)) +
 theme_bw()+
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-geom_vline(xintercept = times_sup2, size=.5, color="brown",linetype="dashed")+
-geom_line(data =subset(dat1,times>times[1] & times<times_sup2), color = "brown")+
-geom_line(data =subset(dat2,times>times[1] & times<times_sup2), color = "green4")+
-geom_line(data =subset(dat3,times>times[1] & times<times_sup2), color = "blue")+
+geom_vline(xintercept = times_super21, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_super22, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_super23, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(dat1,times>times[1] & times<times_super21), color = "brown")+
+geom_line(data =subset(dat2,times>times[1] & times<times_super22), color = "green4")+
+geom_line(data =subset(dat3,times>times[1] & times<times_super23), color = "blue")+
 labs(x = "Time",y="Abundance")+
 theme(plot.title = element_text(size=40))+
 theme(plot.title = element_text(hjust = 0.5))+
@@ -826,10 +1080,12 @@ da<-rbind(da1, da2, da3)
 p3<- ggplot(da, aes(x=.data$x, y=.data$y)) +
 theme_bw()+
 theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
-geom_vline(xintercept = times_sup3, size=.5, color="brown",linetype="dashed")+
-geom_line(data =subset(da1,times>times[1] & times<times_sup3), color = "brown")+
-geom_line(data =subset(da2,times>times[1] & times<times_sup3), color = "green4")+
-geom_line(data =subset(da3,times>times[1] & times<times_sup3), color = "blue")+
+geom_vline(xintercept = times_super31, size=.5, color="brown",linetype="dashed")+
+geom_vline(xintercept = times_super32, size=.5, color="green4",linetype="dashed")+
+geom_vline(xintercept = times_super33, size=.5, color="blue",linetype="dashed")+
+geom_line(data =subset(da1,times>times[1] & times<times_super31), color = "brown")+
+geom_line(data =subset(da2,times>times[1] & times<times_super32), color = "green4")+
+geom_line(data =subset(da3,times>times[1] & times<times_super33), color = "blue")+
 labs(x = "Time",y="Abundance")+
 theme(plot.title = element_text(size=40))+
 theme(plot.title = element_text(hjust = 0.5))+
