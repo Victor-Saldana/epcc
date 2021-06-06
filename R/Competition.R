@@ -47,6 +47,7 @@
 #'@import readxl
 #'@import raster
 #'@import rlang
+#'@import rgdal
 #'@rawNamespace import(formattable, except = area)
 #'@importFrom graphics axis par
 #'@importFrom ggplot2 ggplot aes geom_ribbon geom_vline geom_line theme_bw theme element_text element_blank labs rel
