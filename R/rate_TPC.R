@@ -47,7 +47,7 @@
 #'
 #'ro <- 0.8
 #'
-#'# Temperature that occurs in the minimum time ofthe simulation.
+#'# Temperature that occurs in the minimum time of the simulation.
 #'temp_i <- 20
 #'
 #'temp <- get_RCP8.5(times)+temp_i

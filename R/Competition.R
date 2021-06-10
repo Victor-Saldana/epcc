@@ -33,10 +33,10 @@
 #'            trend curves, as they may differ for each simulation, these will be displayed by the colors
 #'            green, blue, and black respectively.
 #'
-#'@references IPCC. (2014): Cambio climático 2014: Informe de síntesis. Contribución de los Grupos de trabajo
-#'            I, II y III al Quinto Informe de Evaluación del Grupo Intergubernamental de Expertos sobre el
-#'            Cambio Climático [Equipo principal de redacción, R.K. Pachauri y L.A. Meyer (eds.)]. IPCC, Ginebra,
-#'            Suiza, 157 págs.
+#'@references IPCC. (2014): Climate Change 2014: Synthesis Report. Contribution of Working Groups I,
+#'            II and III to the Fifth Assessment Report of the Intergovernmental Panel on Climate
+#'            Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, Geneva,
+#'            Switzerland, 151 pp.
 #'
 #'@import deSolve
 #'@import httr
@@ -92,7 +92,7 @@
 #'
 #'time_end <- 2100
 #'
-#'# Temperature that occurs in the maximum time ofthe simulation.
+#'# Temperature that occurs in the maximum time of the simulation.
 #'temp_max <- get_RCP2.6(time_end)+temp_i
 #'
 #'# Simulation thermal range.
@@ -104,7 +104,7 @@
 #'temp_ini <- (temp_cmin+temp_cmax3)/2
 #'
 #'competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
-#'                       N2 = 300, N2 = 300, N2 = 300),
+#'                      N2 = 300, N2 = 300, N2 = 300),
 #'            temp_ini = rep(temp_ini,3),
 #'            temp_cmin = rep(temp_cmin,3),
 #'            temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
@@ -130,7 +130,7 @@
 #'
 #'time_end <- 2100
 #'
-#'# Temperature that occurs in the maximum time ofthe simulation.
+#'# Temperature that occurs in the maximum time of the simulation.
 #'temp_max <- get_RCP8.5(time_end)+temp_i
 #'
 #'# Simulation thermal range.
@@ -142,7 +142,7 @@
 #'temp_ini <- (temp_cmin+temp_cmax3)/2
 #'
 #'competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
-#'                       N2 = 300, N2 = 300, N2 = 300),
+#'                      N2 = 300, N2 = 300, N2 = 300),
 #'            temp_ini = rep(temp_ini,3),
 #'            temp_cmin = rep(temp_cmin ,3),
 #'            temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
@@ -168,7 +168,7 @@
 #' lambda1 <- 1/2*lambda2
 #'
 #'competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
-#'                       N2 = 200, N2 = 200, N2 = 200),
+#'                      N2 = 200, N2 = 200, N2 = 200),
 #'            temp_ini = rep(25,3),
 #'            temp_cmin = rep(20,3),
 #'            temp_cmax = rep(30,3),
@@ -194,7 +194,7 @@
 #' lambda1 <- 1/2*lambda2
 #'
 #'competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
-#'                       N2 = 200, N2 = 200, N2 = 200),
+#'                      N2 = 200, N2 = 200, N2 = 200),
 #'            temp_ini = rep(25,3),
 #'            temp_cmin = rep(20,3),
 #'            temp_cmax = rep(30,3),
@@ -218,7 +218,7 @@
 #'alpha3 <- 2*alpha2
 #'
 #'competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
-#'                       N2 = 200, N2 = 200, N2 = 200),
+#'                      N2 = 200, N2 = 200, N2 = 200),
 #'            temp_ini = rep(25,3),
 #'            temp_cmin = rep(20,3),
 #'            temp_cmax = rep(30,3),
@@ -242,7 +242,7 @@
 #'alpha3 <- 2*alpha2
 #'
 #'competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
-#'                       N2 = 200, N2 = 200, N2 = 200),
+#'                      N2 = 200, N2 = 200, N2 = 200),
 #'            temp_ini = rep(25,3),
 #'            temp_cmin = rep(20,3),
 #'            temp_cmax = rep(30,3),

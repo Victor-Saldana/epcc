@@ -31,10 +31,10 @@
 #'            each age stage. Panel (d) shows the temperature trend curves used for each simulation,
 #'            colored brown, green and blue, respectively.
 #'
-#'@references IPCC. (2014): Cambio climático 2014: Informe de síntesis. Contribución de los Grupos de trabajo
-#'            I, II y III al Quinto Informe de Evaluación del Grupo Intergubernamental de Expertos sobre el
-#'            Cambio Climático [Equipo principal de redacción, R.K. Pachauri y L.A. Meyer (eds.)]. IPCC, Ginebra,
-#'            Suiza, 157 págs.
+#'@references IPCC. (2014): Climate Change 2014: Synthesis Report. Contribution of Working Groups I,
+#'            II and III to the Fifth Assessment Report of the Intergovernmental Panel on Climate
+#'            Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, Geneva,
+#'            Switzerland, 151 pp.
 #'@export
 #'@examples
 #'
@@ -49,7 +49,7 @@
 #'
 #'time_end <- 2100
 #'
-#'# Temperature that occurs in the maximum time ofthe simulation.
+#'# Temperature that occurs in the maximum time of the simulation.
 #'temp_max <- get_RCP2.6(time_end)+temp_i
 #'
 #'# Simulation thermal range.
@@ -94,7 +94,7 @@
 #'
 #'time_end <- 2100
 #'
-#'# Temperature that occurs in the maximum time ofthe simulation.
+#'# Temperature that occurs in the maximum time of the simulation.
 #'temp_max <- get_RCP8.5(time_end)+temp_i
 #'
 #'# Simulation thermal range.

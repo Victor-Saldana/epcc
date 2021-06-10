@@ -31,10 +31,10 @@
 #'            temperature trend is shown. The three simultaneous simulations are depicted by different
 #'            colors, i.e. 1st brown, 2nd green and 3rd blue.
 #'
-#'@references IPCC. (2014): Cambio climático 2014: Informe de síntesis. Contribución de los Grupos de trabajo
-#'            I, II y III al Quinto Informe de Evaluación del Grupo Intergubernamental de Expertos sobre el
-#'            Cambio Climático [Equipo principal de redacción, R.K. Pachauri y L.A. Meyer (eds.)]. IPCC, Ginebra,
-#'            Suiza, 157 págs.
+#'@references IPCC. (2014): Climate Change 2014: Synthesis Report. Contribution of Working Groups I,
+#'            II and III to the Fifth Assessment Report of the Intergovernmental Panel on Climate
+#'            Change [Core Writing Team, R.K. Pachauri and L.A. Meyer (eds.)]. IPCC, Geneva,
+#'            Switzerland, 151 pp.
 #'
 #'@references Soetaert, K., Petzoldt, T., & Setzer, R. (2010). Solving Differential Equations in R: Package
 #'            deSolve. Journal of Statistical Software, 33(9), 1 - 25.
