@@ -1,7 +1,7 @@
 Package: epcc
 Type: Package
 Title: An R Package to Assess and Simulate the Vulnerability of Ectotherm Populations when Facing Global Warming
-Version: 1.4.4
+Version: 1.4.3
 Author: Víctor Saldaña-Núñez, Fernando Córdova-Lepe, Felipe N. Moreno-Gómez.
 Maintainer: Víctor Saldaña Núñez <saldananunezvictor@gmail.com>
 Description: Provides several functions that allow model and simulate 

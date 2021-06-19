@@ -64,7 +64,8 @@ Three populations and/or scenarios can be simulated simultaneously.
         the three simulations must be specified (finite numbers for the initial
         population abundance). The simulations are obtained by a model that incorporates
         the effects of temperature over time, which leads to a non-autonomous ODE approach.
-        This is function uses the ODE solver implemented in the package deSolve (Soetaert et al., 2010).
+        This is function uses the ODE solver implemented in the package deSolve
+        (Soetaert et al., 2010).
 }
 \examples{
 

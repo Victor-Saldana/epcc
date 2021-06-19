@@ -167,7 +167,7 @@ cooling_pulse2(y_ini = c(N = 100, N = 100, N = 100),
 
 #######################################################################
   #Example 5: Different marginal losses by a non-thermodependent
-  #          component of intraspecific competition.
+  #           component of intraspecific competition.
 #######################################################################
 
 lambda3 <- 0.01
