@@ -4,12 +4,12 @@
 \name{epcc-package}
 \alias{epcc}
 \alias{epcc-package}
-\title{epcc: An R Package to Assess and Simulate the Vulnerability of Ectotherm Populations when Facing Global Warming}
+\title{epcc: An R Package to Assess and Simulate the Vulnerability of Ectotherms Populations when Facing Global Warming}
 \description{
 Provides several functions that allow model and simulate 
              the effects of thermal sensitivity and the exposition to 
              different trends in environmental temperature on the 
-             abundance dynamics of ectotherm populations. It allows 
+             abundance dynamics of ectotherms populations. It allows 
              an easy implementation of the possible consequences of 
              warming at global and local scales, constituting a useful 
              tool for understanding the extinction risk of populations.
