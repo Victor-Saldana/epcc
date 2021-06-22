@@ -11,7 +11,7 @@ Description: Provides several functions that allow model and simulate
              an easy implementation of the possible consequences of 
              warming at global and local scales, constituting a useful 
              tool for understanding the extinction risk of populations.
-License: GPL-3 + file LICENSE
+License: GPL-3
 Imports: 
     deSolve (>= 1.28),
     ggplot2 (>= 3.3.3),

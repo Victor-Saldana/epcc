@@ -68,7 +68,7 @@ Three populations and/or scenarios can be simulated simultaneously. The temperat
         considered for Macrolophus pygmaeus as reported in Sánchez et al. (2012).
 }
 \examples{
-
+\dontrun{
 #######################################################################
   #Application example I: Bioclimatic variable
   #                       (Annual Mean Temperature).
@@ -289,7 +289,7 @@ w_clim(y_ini = c(N = 100, N = 100, N = 100),
        time_start = 2000,
        time_end = 2070,
        leap = 1/12)
-
+}
 }
 \references{
 Hijmans, R.J. (2020). Package `raster' (Version 3.3-13). pp. 1-249.

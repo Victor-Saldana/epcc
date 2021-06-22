@@ -54,7 +54,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Application example I: Bioclimatic variable
 #'   #                       (Annual Mean Temperature).
@@ -275,7 +275,7 @@
 #'        time_start = 2000,
 #'        time_end = 2070,
 #'        leap = 1/12)
-#'
+#'}
 ###################################################
 
 
