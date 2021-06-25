@@ -299,7 +299,7 @@ if(time_start<=time_end){
 
 if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_cmax[3] ){
 
-options(warn = - 1)
+
 
 wclimCurr <- getData("worldclim", var="bio", res=res)
 wclimCurr <- wclimCurr[[s]]
@@ -322,9 +322,9 @@ coord3 <- data.frame(x=lon[3], y=lat[3])
 point1 <- SpatialPoints(coord1, proj4string=wclimCurr@crs)
 point2 <- SpatialPoints(coord2, proj4string=wclimCurr@crs)
 point3 <- SpatialPoints(coord3, proj4string=wclimCurr@crs)
-plot(point1, add=T,col="brown")
-plot(point2, add=T,col="red")
-plot(point3, add=T,col="black")
+plot(point1, add=TRUE,col="brown")
+plot(point2, add=TRUE,col="red")
+plot(point3, add=TRUE,col="black")
 
 valueCurr1 <- extract(wclimCurr, point1)
 valueCurr2 <- extract(wclimCurr, point2)
@@ -401,16 +401,16 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
 ##########################################################
   # Time
 ##########################################################
-time_op1= 1/b1*log(temp_op1/a1)
-time_cmax1= 1/b1*log(temp_cmax[1]/a1)
+time_op1= suppressWarnings(1/b1*log(temp_op1/a1))
+time_cmax1= suppressWarnings(1/b1*log(temp_cmax[1]/a1))
 
 #########################################################
-time_op2= 1/b2*log(temp_op2/a2)
-time_cmax2= 1/b2*log(temp_cmax[2]/a2)
+time_op2= suppressWarnings(1/b2*log(temp_op2/a2))
+time_cmax2= suppressWarnings(1/b2*log(temp_cmax[2]/a2))
 
 #########################################################
-time_op3= 1/b3*log(temp_op3/a3)
-time_cmax3= 1/b3*log(temp_cmax[3]/a3)
+time_op3= suppressWarnings(1/b3*log(temp_op3/a3))
+time_cmax3= suppressWarnings(1/b3*log(temp_cmax[3]/a3))
 
 #########################################################
 if(time_cmax1<=times[length(times)]){

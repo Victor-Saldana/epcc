@@ -39,7 +39,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -124,7 +124,7 @@
 #'                  time_start = 2005,
 #'                  time_end = 2100,
 #'                  leap = 1/12)
-#'
+#'}
 
 
 ###################################################
@@ -154,7 +154,7 @@ if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_c
          }
 
 
-      options(warn = - 1)
+
 ##########################################################
 # Optimum growing temperature
 ##########################################################
@@ -166,17 +166,17 @@ if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_c
 # Time
 ##########################################################
 
-  time_op1= -(temp_op1-temp_ini[1])/m[1]+time_start
-  time_cmin1=(temp_ini[1]-temp_cmin[1])/m[1]+time_start
-  time_cmax1=(temp_ini[1]-temp_cmax[1])/m[1]+time_start
+time_op1= suppressWarnings(-(temp_op1-temp_ini[1])/m[1]+time_start)
+time_cmin1=suppressWarnings((temp_ini[1]-temp_cmin[1])/m[1]+time_start)
+time_cmax1=suppressWarnings((temp_ini[1]-temp_cmax[1])/m[1]+time_start)
 
-  time_op2  = -(temp_op2-temp_ini[2])/m[2]+time_start
-  time_cmin2=(temp_ini[2]-temp_cmin[2])/m[2]+time_start
-  time_cmax2=(temp_ini[2]-temp_cmax[2])/m[2]+time_start
+time_op2  = suppressWarnings(-(temp_op2-temp_ini[2])/m[2]+time_start)
+time_cmin2=suppressWarnings((temp_ini[2]-temp_cmin[2])/m[2]+time_start)
+time_cmax2=suppressWarnings((temp_ini[2]-temp_cmax[2])/m[2]+time_start)
 
-  time_op3= -(temp_op3-temp_ini[3])/m[3]+time_start
-  time_cmin3=(temp_ini[3]-temp_cmin[3])/m[3]+time_start
-  time_cmax3=(temp_ini[3]-temp_cmax[3])/m[3]+time_start
+time_op3= suppressWarnings(-(temp_op3-temp_ini[3])/m[3]+time_start)
+time_cmin3=suppressWarnings((temp_ini[3]-temp_cmin[3])/m[3]+time_start)
+time_cmax3=suppressWarnings((temp_ini[3]-temp_cmax[3])/m[3]+time_start)
 
 
   if(times[length(times)]<time_cmin1){

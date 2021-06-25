@@ -4,7 +4,7 @@
 \name{epcc-package}
 \alias{epcc}
 \alias{epcc-package}
-\title{epcc: An R Package to Assess and Simulate the Vulnerability of Ectotherms Populations when Facing Global Warming}
+\title{epcc: Simulating Populations of Ectotherms under Global Warming}
 \description{
 Provides several functions that allow model and simulate 
              the effects of thermal sensitivity and the exposition to 
@@ -13,5 +13,15 @@ Provides several functions that allow model and simulate
              an easy implementation of the possible consequences of 
              warming at global and local scales, constituting a useful 
              tool for understanding the extinction risk of populations.
+}
+\author{
+\strong{Maintainer}: Víctor Saldaña-Núñez \email{saldananunezvictor@gmail.com}
+
+Authors:
+\itemize{
+  \item Fernando Córdova-Lepe
+  \item Felipe N. Moreno-Gómez
+}
+
 }
 \keyword{internal}

@@ -41,7 +41,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -178,7 +178,7 @@
 #'                       time_start = 2005,
 #'                       time_end = 2100,
 #'                       leap = 1/12)
-#'
+#'}
 ###################################################
 
 
@@ -211,7 +211,6 @@ decreasing_periodicity<- function(y_ini = c(N = 400, N = 400, N = 400),
     if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] && temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
 
-      options(warn = - 1)
 
       ##########################################################
       # Optimum growing temperature

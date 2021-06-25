@@ -80,7 +80,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #'#######################################################################
@@ -256,7 +256,7 @@
 #'            time_start = 2005,
 #'            time_end = 2100,
 #'            leap = 1/50)
-#'
+#'}
 competition <- function(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
                                   N2 = 200, N2 = 200, N2 = 200),
                         temp_ini = rep(25,3),
@@ -281,7 +281,6 @@ if(temp_cmin[1]<temp_cmax[1] && temp_cmin[2]<temp_cmax[2] && temp_cmin[3]<temp_c
 if(temp_cmin[1]<=temp_ini[1] && temp_ini[1]<=temp_cmax[1] && temp_cmin[2]<=temp_ini[2] &&
    temp_ini[2]<=temp_cmax[2] && temp_cmin[3]<=temp_ini[3] && temp_ini[3]<=temp_cmax[3]){
 
-  options(warn = - 1)
 
 
 ##########################################################

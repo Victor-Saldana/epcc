@@ -75,7 +75,7 @@ Three scenarios can be evaluated for a predation interaction where the prey is a
         scenarios. In each input vector, the parameters for the three simulations must be specified.
 }
 \examples{
-
+\dontrun{
 #######################################################################
   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #######################################################################
@@ -165,7 +165,7 @@ age_structure(y_ini = c(N1 = 800, N1 = 800, N1 = 800,
              time_start = 2005,
              time_end = time_end,
              leap = 1/50)
-
+}
 }
 \references{
 IPCC. (2014): Climate Change 2014: Synthesis Report. Contribution of Working Groups I,

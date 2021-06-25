@@ -71,7 +71,7 @@ The function allows simulating simultaneously three potential outcomes for the i
         be specified corresponds to IPCC projections under the RCP2.6 or RCP8.5 scenarios.
 }
 \examples{
-
+\dontrun{
 #######################################################################
   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #######################################################################
@@ -247,7 +247,7 @@ competition(y_ini = c(N1 = 400, N1 = 400, N1 = 400,
            time_start = 2005,
            time_end = 2100,
            leap = 1/50)
-
+}
 }
 \references{
 IPCC. (2014): Climate Change 2014: Synthesis Report. Contribution of Working Groups I,

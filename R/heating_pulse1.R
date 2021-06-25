@@ -43,7 +43,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -158,7 +158,7 @@
 #'               time_start = 2005,
 #'               time_end = 2100,
 #'               leap = 1/12)
-#'
+#'}
 ###################################################
 
 
@@ -192,7 +192,7 @@ P1C <- function (times,temp_a,temp_peak,time_peak,sd) {
 
 }
 
-options(warn = - 1)
+
 
 ##########################################################
 # Optimum growing temperature
@@ -215,28 +215,28 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
 
 temp_a1=(temp_ini[1]-temp_peak[1]*exp(-time_peak[1]^{2}/(2*sd[1]^{2})))/(1-exp(-time_peak[1]^{2}/(2*sd[1]^{2})))
 
-time_op11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_op1-temp_a1)/(temp_peak[1]-temp_a1)))
-time_op12=time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_op1-temp_a1)/(temp_peak[1]-temp_a1)))
-time_cmax11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_cmax[1]-temp_a1)/(temp_peak[1]-temp_a1)))
-time_cmax12=time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_cmax[1]-temp_a1)/(temp_peak[1]-temp_a1)))
+time_op11=suppressWarnings(time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_op1-temp_a1)/(temp_peak[1]-temp_a1))))
+time_op12=suppressWarnings(time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_op1-temp_a1)/(temp_peak[1]-temp_a1))))
+time_cmax11=suppressWarnings(time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_cmax[1]-temp_a1)/(temp_peak[1]-temp_a1))))
+time_cmax12=suppressWarnings(time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_cmax[1]-temp_a1)/(temp_peak[1]-temp_a1))))
 
 ##########################################################
 
 temp_a2=(temp_ini[2]-temp_peak[2]*exp(-time_peak[2]^{2}/(2*sd[2]^{2})))/(1-exp(-time_peak[2]^{2}/(2*sd[2]^{2})))
 
-time_op21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_op2-temp_a2)/(temp_peak[2]-temp_a2)))
-time_op22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_op2-temp_a2)/(temp_peak[2]-temp_a2)))
-time_cmax21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_cmax[2]-temp_a2)/(temp_peak[2]-temp_a2)))
-time_cmax22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_cmax[2]-temp_a2)/(temp_peak[2]-temp_a2)))
+time_op21=suppressWarnings(time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_op2-temp_a2)/(temp_peak[2]-temp_a2))))
+time_op22=suppressWarnings(time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_op2-temp_a2)/(temp_peak[2]-temp_a2))))
+time_cmax21=suppressWarnings(time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_cmax[2]-temp_a2)/(temp_peak[2]-temp_a2))))
+time_cmax22=suppressWarnings(time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_cmax[2]-temp_a2)/(temp_peak[2]-temp_a2))))
 
 ##########################################################
 
 temp_a3=(temp_ini[3]-temp_peak[3]*exp(-time_peak[3]^{2}/(2*sd[3]^{2})))/(1-exp(-time_peak[3]^{2}/(2*sd[3]^{2})))
 
-time_op31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_op3-temp_a3)/(temp_peak[3]-temp_a3)))
-time_op32=time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_op3-temp_a3)/(temp_peak[3]-temp_a3)))
-time_cmax31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_cmax[3]-temp_a3)/(temp_peak[3]-temp_a3)))
-time_cmax32=time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_cmax[3]-temp_a3)/(temp_peak[3]-temp_a3)))
+time_op31=suppressWarnings(time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_op3-temp_a3)/(temp_peak[3]-temp_a3))))
+time_op32=suppressWarnings(time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_op3-temp_a3)/(temp_peak[3]-temp_a3))))
+time_cmax31=suppressWarnings(time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_cmax[3]-temp_a3)/(temp_peak[3]-temp_a3))))
+time_cmax32=suppressWarnings(time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_cmax[3]-temp_a3)/(temp_peak[3]-temp_a3))))
 
 #########################################################
 ###############################################################

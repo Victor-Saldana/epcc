@@ -43,7 +43,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -164,6 +164,7 @@
 #'               time_start = 2005,
 #'               time_end = 2100,
 #'               leap = 1/12)
+#'}
 
 ####################################################################
 
@@ -198,7 +199,7 @@ P1E <- function (times,temp_a,temp_peak,time_peak,sd) {
 
 }
 
-options(warn = - 1)
+
 ##########################################################
 # Optimum growing temperature
 ##########################################################
@@ -218,28 +219,28 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+
 
   temp_a1=(temp_ini[1]-temp_peak[1]*exp(-time_peak[1]^{2}/(2*sd[1]^{2})))/(1-exp(-time_peak[1]^{2}/(2*sd[1]^{2})))
 
-  time_op11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_op1)/(temp_a1-temp_peak[1])))
-  time_op12=time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_a1-temp_op1)/(temp_a1-temp_peak[1])))
-  time_cmin11=time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1])))
-  time_cmin12=time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1])))
+time_op11=suppressWarnings(time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_op1)/(temp_a1-temp_peak[1]))))
+time_op12=suppressWarnings(time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_a1-temp_op1)/(temp_a1-temp_peak[1]))))
+time_cmin11=suppressWarnings(time_peak[1]+sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1]))))
+time_cmin12=suppressWarnings(time_peak[1]-sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1]))))
 suppressWarnings(sqrt(-2*(sd[1])^2*log((temp_a1-temp_cmin[1])/(temp_a1-temp_peak[1]))))
   ##########################################################
 
   temp_a2=(temp_ini[2]-temp_peak[2]*exp(-time_peak[2]^{2}/(2*sd[2]^{2})))/(1-exp(-time_peak[2]^{2}/(2*sd[2]^{2})))
 
-  time_op21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_op2)/(temp_a2-temp_peak[2])))
-  time_op22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_op2)/(temp_a2-temp_peak[2])))
-  time_cmin21=time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2])))
-  time_cmin22=time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2])))
+time_op21=suppressWarnings(time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_op2)/(temp_a2-temp_peak[2]))))
+time_op22=suppressWarnings(time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_op2)/(temp_a2-temp_peak[2]))))
+time_cmin21=suppressWarnings(time_peak[2]+sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2]))))
+time_cmin22=suppressWarnings(time_peak[2]-sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2]))))
   suppressWarnings(sqrt(-2*(sd[2])^2*log((temp_a2-temp_cmin[2])/(temp_a2-temp_peak[2]))))
   #########################################################
 
   temp_a3=(temp_ini[3]-temp_peak[3]*exp(-time_peak[3]^{2}/(2*sd[3]^{2})))/(1-exp(-time_peak[3]^{2}/(2*sd[3]^{2})))
 
-  time_op31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_op3)/(temp_a3-temp_peak[3])))
-  time_op32=time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_a3-temp_op3)/(temp_a3-temp_peak[3])))
-  time_cmin31=time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3])))
-  time_cmin32=time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3])))
+time_op31=suppressWarnings(time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_op3)/(temp_a3-temp_peak[3]))))
+time_op32=suppressWarnings(time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_a3-temp_op3)/(temp_a3-temp_peak[3]))))
+time_cmin31=suppressWarnings(time_peak[3]+sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3]))))
+time_cmin32=suppressWarnings(time_peak[3]-sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3]))))
 suppressWarnings(sqrt(-2*(sd[3])^2*log((temp_a3-temp_cmin[3])/(temp_a3-temp_peak[3]))))
   ###############################################################
   # Time limits

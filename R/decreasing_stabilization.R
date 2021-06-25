@@ -42,7 +42,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -154,7 +154,7 @@
 #'                         time_start = 2005,
 #'                         time_end = 2100,
 #'                         leap = 1/12)
-#'
+#'}
 ###################################################
 
 
@@ -186,7 +186,6 @@ DE <- function (times,temp_ini,temp_stabilization,q) {
 }
 
 
-options(warn = - 1)
 
 
 ##########################################################
@@ -204,18 +203,18 @@ temp_op3<- (temp_cmax[3]+temp_cmin[3])/3+sqrt(((temp_cmax[3]+temp_cmin[3])/3)^2-
 # Time
 ##########################################################
 
-  time_op1=  -1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_op1))+time_start
-  time_cmin1=-1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_cmin[1]))+time_start
+time_op1= suppressWarnings( -1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_op1))+time_start)
+time_cmin1=suppressWarnings(-1/q[1]*log((temp_ini[1]/(temp_ini[1]-temp_stabilization[1]))*(1-temp_stabilization[1]/temp_cmin[1]))+time_start)
 
 #########################################################
 
-  time_op2=  -1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_op2))+time_start
-  time_cmin2=-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_cmin[2]))+time_start
+time_op2=  suppressWarnings(-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_op2))+time_start)
+time_cmin2=suppressWarnings(-1/q[2]*log((temp_ini[2]/(temp_ini[2]-temp_stabilization[2]))*(1-temp_stabilization[2]/temp_cmin[2]))+time_start)
 
 ##########################################################
 
-  time_op3=  -1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_op3))+time_start
-  time_cmin3=-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_cmin[3]))+time_start
+time_op3=  suppressWarnings(-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_op3))+time_start)
+time_cmin3=suppressWarnings(-1/q[3]*log((temp_ini[3]/(temp_ini[3]-temp_stabilization[3]))*(1-temp_stabilization[3]/temp_cmin[3]))+time_start)
 #########################################################
 
 

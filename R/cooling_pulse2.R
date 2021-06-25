@@ -43,7 +43,7 @@
 #'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -158,8 +158,7 @@
 #'               time_start = 2005,
 #'               time_end = 2100,
 #'               leap = 1/12)
-#'
-#'
+#'}
 ###################################################
 
 cooling_pulse2<- function(y_ini = c(N = 400, N = 400, N = 400),
@@ -194,7 +193,7 @@ if(time_start<=time_peak[1] && time_peak[1]<=time_end && time_start<=time_peak[2
   }
 
 
-  options(warn = - 1)
+
   ##########################################################
   # Optimum growing temperature
   ##########################################################
@@ -226,35 +225,35 @@ if(time_start<=time_peak[1] && time_peak[1]<=time_end && time_start<=time_peak[2
   # Time
   ##########################################################
 
-time_op11=(b1*(temp_ini[1]-temp_op1)+sqrt(b1^2*(temp_ini[1]-temp_op1)^2-
-4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start
-time_op12=(b1*(temp_ini[1]-temp_op1)-sqrt(b1^2*(temp_ini[1]-temp_op1)^2-
-4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start
-time_cmin11=(b1*(temp_ini[1]-temp_cmin[1])+sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-
-4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start
-time_cmin12=(b1*(temp_ini[1]-temp_cmin[1])-sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-
-4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start
+time_op11=suppressWarnings((b1*(temp_ini[1]-temp_op1)+sqrt(b1^2*(temp_ini[1]-temp_op1)^2-
+4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start)
+time_op12=suppressWarnings((b1*(temp_ini[1]-temp_op1)-sqrt(b1^2*(temp_ini[1]-temp_op1)^2-
+4*a1*((temp_ini[1]-temp_op1)-q[1])*(temp_ini[1]-temp_op1)))/(2*((temp_ini[1]-temp_op1)-q[1]))+time_start)
+time_cmin11=suppressWarnings((b1*(temp_ini[1]-temp_cmin[1])+sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-
+4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start)
+time_cmin12=suppressWarnings((b1*(temp_ini[1]-temp_cmin[1])-sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-
+4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))/(2*((temp_ini[1]-temp_cmin[1])-q[1]))+time_start)
 suppressWarnings(sqrt(b1^2*(temp_ini[1]-temp_cmin[1])^2-4*a1*((temp_ini[1]-temp_cmin[1])-q[1])*(temp_ini[1]-temp_cmin[1])))
   ##########################################################
 
-time_op21=(b2*(temp_ini[2]-temp_op2)+sqrt(b2^2*(temp_ini[2]-temp_op2)^2-
-4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start
-time_op22=(b2*(temp_ini[2]-temp_op2)-sqrt(b2^2*(temp_ini[2]-temp_op2)^2-
-4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start
-time_cmin21=(b2*(temp_ini[2]-temp_cmin[2])+sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-
-4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start
-time_cmin22=(b2*(temp_ini[2]-temp_cmin[2])-sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-
-4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start
+time_op21=suppressWarnings((b2*(temp_ini[2]-temp_op2)+sqrt(b2^2*(temp_ini[2]-temp_op2)^2-
+4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start)
+time_op22=suppressWarnings((b2*(temp_ini[2]-temp_op2)-sqrt(b2^2*(temp_ini[2]-temp_op2)^2-
+4*a2*((temp_ini[2]-temp_op2)-q[2])*(temp_ini[2]-temp_op2)))/(2*((temp_ini[2]-temp_op2)-q[2]))+time_start)
+time_cmin21=suppressWarnings((b2*(temp_ini[2]-temp_cmin[2])+sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-
+4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start)
+time_cmin22=suppressWarnings((b2*(temp_ini[2]-temp_cmin[2])-sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-
+4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))/(2*((temp_ini[2]-temp_cmin[2])-q[2]))+time_start)
 suppressWarnings(sqrt(b2^2*(temp_ini[2]-temp_cmin[2])^2-4*a2*((temp_ini[2]-temp_cmin[2])-q[2])*(temp_ini[2]-temp_cmin[2])))
   ##########################################################
-time_op31=(b3*(temp_ini[3]-temp_op3)+sqrt(b3^2*(temp_ini[3]-temp_op3)^2-
-4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start
-time_op32=(b3*(temp_ini[3]-temp_op3)-sqrt(b3^2*(temp_ini[3]-temp_op3)^2-
-4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start
-time_cmin31=(b3*(temp_ini[3]-temp_cmin[3])+sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-
-4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start
-time_cmin32=(b3*(temp_ini[3]-temp_cmin[3])-sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-
-4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start
+time_op31=suppressWarnings((b3*(temp_ini[3]-temp_op3)+sqrt(b3^2*(temp_ini[3]-temp_op3)^2-
+4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start)
+time_op32=suppressWarnings((b3*(temp_ini[3]-temp_op3)-sqrt(b3^2*(temp_ini[3]-temp_op3)^2-
+4*a3*((temp_ini[3]-temp_op3)-q[3])*(temp_ini[3]-temp_op3)))/(2*((temp_ini[3]-temp_op3)-q[3]))+time_start)
+time_cmin31=suppressWarnings((b3*(temp_ini[3]-temp_cmin[3])+sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-
+4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start)
+time_cmin32=suppressWarnings((b3*(temp_ini[3]-temp_cmin[3])-sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-
+4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))/(2*((temp_ini[3]-temp_cmin[3])-q[3]))+time_start)
   suppressWarnings(sqrt(b3^2*(temp_ini[3]-temp_cmin[3])^2-4*a3*((temp_ini[3]-temp_cmin[3])-q[3])*(temp_ini[3]-temp_cmin[3])))
   #########################################################
 

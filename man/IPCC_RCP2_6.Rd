@@ -57,7 +57,7 @@ Three populations can be simulated simultaneously. The temperature trend is dete
         (Soetaert et al., 2010).
 }
 \examples{
-
+\dontrun{
 #######################################################################
   #Example 1: Different initial population abundances.
 #######################################################################
@@ -138,7 +138,7 @@ IPCC_RCP2_6(y_ini = c(N = 100, N = 100, N = 100),
             time_start = 2005,
             time_end = 2100,
             leap = 1/12)
-
+}
 }
 \references{
 IPCC. (2014): Climate Change 2014: Synthesis Report. Contribution of Working Groups I,
