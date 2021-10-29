@@ -9,6 +9,9 @@ get_RCP8.5(date)
 \arguments{
 \item{date}{A specific year or a vector of years.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 This function allows obtaining the projected increment in environmental
             temperature according to the IPCC RCP8.5 scenario.

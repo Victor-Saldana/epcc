@@ -22,6 +22,8 @@
 #'         The function implements a cubic expression that follows the characteristic shape
 #'         of TPCs as described in Saldaña et al. (2019).
 #'
+#'@return No return value, called for side effects.
+#'
 #'@references Angilletta, M. J. (2006). Estimating and comparing thermal performance curves.
 #'            Journal of Thermal Biology, 31(7), 541-545. doi:10.1016/j.jtherbio.2006.06.002
 #'

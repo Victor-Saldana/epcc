@@ -1,7 +1,7 @@
 Package: epcc
 Type: Package
 Title: Simulating Populations of Ectotherms under Global Warming
-Version: 1.4.6
+Version: 1.4.7
 Authors@R: c(
     person("Víctor", "Saldaña-Núñez", email = "saldananunezvictor@gmail.com", role = c("aut", "cre")),
     person("Fernando", "Córdova-Lepe", role = "aut"),
@@ -13,7 +13,11 @@ Description: Provides several functions that allow model and simulate
              an easy implementation of the possible consequences of 
              warming at global and local scales, constituting a useful 
              tool for understanding the extinction risk of populations.
+             (Víctor Saldaña-Núñez, Fernando Córdova-Lepe, & Felipe N. 
+             Moreno-Gómez, 2021) <doi:10.5281/zenodo.5034087>.
 License: GPL-3
+URL: https://github.com/Victor-Saldana/epcc
+BugReports: https://github.com/Victor-Saldana/epcc/issues
 Imports: 
     deSolve (>= 1.28),
     ggplot2 (>= 3.3.3),

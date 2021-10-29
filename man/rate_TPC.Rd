@@ -17,6 +17,9 @@ rate_TPC(T, ro, temp_cmin, temp_cmax, temp_op)
 
 \item{temp_op}{Optimum performance temperature.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 This function allows to obtain the intrinsic growth rate following a
              thermal performance curve (TPC). A cubic polynomial is used considering

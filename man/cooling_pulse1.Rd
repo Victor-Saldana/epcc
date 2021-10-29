@@ -72,7 +72,7 @@ Three populations and/or scenarios can be simulated simultaneously.
         (Soetaert et al., 2010).
 }
 \examples{
-\dontrun{
+
 #######################################################################
   #Example 1: Different initial population abundances.
 #######################################################################
@@ -117,7 +117,7 @@ cooling_pulse1(y_ini = c(N = 100, N = 100, N = 100),
               time_end = 2100,
               leap = 1/12)
 
-
+\donttest{
 #######################################################################
   #Example 3: Different relationships between initial environmental
   #           temperature and optimum temperature.

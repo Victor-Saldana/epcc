@@ -58,7 +58,7 @@ Three populations can be simulated simultaneously. The temperature trend is dete
         deSolve (Soetaert et al., 2010).
 }
 \examples{
-\dontrun{
+
 #######################################################################
   #Example 1: Different initial population abundances.
 #######################################################################
@@ -94,7 +94,7 @@ IPCC_RCP8_5(y_ini = c(N = 100, N = 100, N = 100),
            time_start = 2005,
            time_end = 2100,
            leap = 1/12)
-
+\donttest{
 #######################################################################
   #Example 3: Different relationships between initial environmental
   #           temperature and optimum temperature.

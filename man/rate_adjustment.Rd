@@ -11,6 +11,11 @@ rate_adjustment(data = data)
 temperature (TA) and the second column contains the
 intrinsic growth rate (R) associated with them.}
 }
+\value{
+A figure showing the fitting curve corresponding to the intrinsic growth rate of an ectothermic
+       population, the empirically obtained temperature and growth rate data points, in addition,
+       called for side effects.
+}
 \description{
 This function allows you to adjust the intrinsic growth rate of an ectothermic
             population using temperature and growth rate data obtained empirically, using a

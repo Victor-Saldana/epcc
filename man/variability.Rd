@@ -65,7 +65,7 @@ Three populations and/or scenarios can be simulated simultaneously.
         (Soetaert et al., 2010).
 }
 \examples{
-\dontrun{
+
 #######################################################################
   #Example 1: Different initial population abundances.
 #######################################################################
@@ -81,7 +81,7 @@ variability(y_ini = c(N = 100, N = 200, N = 400),
            time_start = 2005,
            time_end = 2100,
            leap = 1/12)
-
+\donttest{
 #######################################################################
   #Example 2: Different thermal tolerance ranges.
 #######################################################################

@@ -75,7 +75,7 @@ Three scenarios can be evaluated for a predation interaction where the prey is a
         scenarios. In each input vector, the parameters for the three simulations must be specified.
 }
 \examples{
-\dontrun{
+\donttest{
 #######################################################################
   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #######################################################################

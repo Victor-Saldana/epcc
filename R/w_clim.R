@@ -56,6 +56,94 @@
 #'@examples
 #'\dontrun{
 #'#######################################################################
+#'   #Example 1: Different initial population abundances.
+#'#######################################################################
+#'
+#'w_clim(y_ini = c(N = 100, N = 200, N = 400),
+#'       temp_cmin = rep(18,3),
+#'       temp_cmax = rep(30,3),
+#'       ro = rep(0.7,3),
+#'       lambda = rep(0.00005,3),
+#'       lat = rep(-33,3),
+#'       lon = rep(-71,3),
+#'       s = 5,
+#'       res = 5,
+#'       time_start = 2000,
+#'       time_end = 2070,
+#'       leap = 1/12)
+#'
+#'
+#'#######################################################################
+#'   #Example 2: Different thermal tolerance ranges.
+#'#######################################################################
+#'
+#'temp_cmin3 <- 18
+#'temp_cmin2 <- 10/9*temp_cmin3
+#'temp_cmin1 <- 10/9*temp_cmin2
+#'
+#'temp_cmax1 <- 32.4
+#'temp_cmax2 <- 10/9*temp_cmax1
+#'temp_cmax3 <- 10/9*temp_cmax2
+#'
+#'w_clim(y_ini = c(N = 100, N = 100, N = 100),
+#'       temp_cmin = c(temp_cmin1,temp_cmin2,temp_cmin3),
+#'       temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
+#'       ro = rep(0.7,3),
+#'       lambda = rep(0.00005,3),
+#'       lat = rep(-33,3),
+#'       lon = rep(-71,3),
+#'       s = 5,
+#'       res = 5,
+#'       time_start = 2000,
+#'       time_end = 2070,
+#'       leap = 1/12)
+#'
+#'#######################################################################
+#'   #Example 3: Different latitudes.
+#'#######################################################################
+#'
+#'lat1 <- -10
+#'lat2 <- -33
+#'lat3 <- -42
+#'
+#'w_clim(y_ini = c(N = 100, N = 100, N = 100),
+#'       temp_cmin = rep(18,3),
+#'       temp_cmax = rep(40,3),
+#'       ro = rep(0.7,3),
+#'       lambda = rep(0.00005,3),
+#'       lat = c(lat1,lat2,lat3),
+#'       lon = rep(-71,3),
+#'       s = 5,
+#'       res = 5,
+#'       time_start = 2000,
+#'       time_end = 2070,
+#'       leap = 1/12)
+#'
+#'#######################################################################
+#'   #Example 4: Different marginal losses by a non-thermodependent
+#'   #           component of intraspecific competition.
+#'#######################################################################
+#'
+#'lambda3 <- 0.01
+#'lambda2 <- 1/2*lambda3
+#'lambda1 <- 1/2*lambda2
+#'
+#' w_clim(y_ini = c(N = 100, N = 100, N = 100),
+#'        temp_cmin = rep(18,3),
+#'        temp_cmax = rep(30,3),
+#'        ro = rep(0.7,3),
+#'        lambda = c(lambda1,lambda2,lambda3),
+#'        lat = rep(-33,3),
+#'        lon = rep(-71,3),
+#'        s = 5,
+#'        res = 5,
+#'        time_start = 2000,
+#'        time_end = 2070,
+#'        leap = 1/12)
+#'
+#########################################################################
+#'
+#'#######################################################################
 #'   #Application example I: Bioclimatic variable
 #'   #                       (Annual Mean Temperature).
 #'#######################################################################
@@ -189,94 +277,7 @@
 #'        time_start = 2000,
 #'        time_end = 2070,
 #'        leap = 1/12)
-#'
-#'
-#'#######################################################################
-#'   #Example 1: Different initial population abundances.
-#'#######################################################################
-#'
-#'w_clim(y_ini = c(N = 100, N = 200, N = 400),
-#'       temp_cmin = rep(18,3),
-#'       temp_cmax = rep(30,3),
-#'       ro = rep(0.7,3),
-#'       lambda = rep(0.00005,3),
-#'       lat = rep(-33,3),
-#'       lon = rep(-71,3),
-#'       s = 5,
-#'       res = 5,
-#'       time_start = 2000,
-#'       time_end = 2070,
-#'       leap = 1/12)
-#'
-#'#######################################################################
-#'   #Example 2: Different thermal tolerance ranges.
-#'#######################################################################
-#'
-#'temp_cmin3 <- 18
-#'temp_cmin2 <- 10/9*temp_cmin3
-#'temp_cmin1 <- 10/9*temp_cmin2
-#'
-#'temp_cmax1 <- 32.4
-#'temp_cmax2 <- 10/9*temp_cmax1
-#'temp_cmax3 <- 10/9*temp_cmax2
-#'
-#'w_clim(y_ini = c(N = 100, N = 100, N = 100),
-#'       temp_cmin = c(temp_cmin1,temp_cmin2,temp_cmin3),
-#'       temp_cmax = c(temp_cmax1,temp_cmax2,temp_cmax3),
-#'       ro = rep(0.7,3),
-#'       lambda = rep(0.00005,3),
-#'       lat = rep(-33,3),
-#'       lon = rep(-71,3),
-#'       s = 5,
-#'       res = 5,
-#'       time_start = 2000,
-#'       time_end = 2070,
-#'       leap = 1/12)
-#'
-#'#######################################################################
-#'   #Example 3: Different latitudes.
-#'#######################################################################
-#'
-#'lat1 <- -10
-#'lat2 <- -33
-#'lat3 <- -42
-#'
-#'w_clim(y_ini = c(N = 100, N = 100, N = 100),
-#'       temp_cmin = rep(18,3),
-#'       temp_cmax = rep(40,3),
-#'       ro = rep(0.7,3),
-#'       lambda = rep(0.00005,3),
-#'       lat = c(lat1,lat2,lat3),
-#'       lon = rep(-71,3),
-#'       s = 5,
-#'       res = 5,
-#'       time_start = 2000,
-#'       time_end = 2070,
-#'       leap = 1/12)
-#'
-#'#######################################################################
-#'   #Example 4: Different marginal losses by a non-thermodependent
-#'   #           component of intraspecific competition.
-#'#######################################################################
-#'
-#'lambda3 <- 0.01
-#'lambda2 <- 1/2*lambda3
-#'lambda1 <- 1/2*lambda2
-#'
-#' w_clim(y_ini = c(N = 100, N = 100, N = 100),
-#'        temp_cmin = rep(18,3),
-#'        temp_cmax = rep(30,3),
-#'        ro = rep(0.7,3),
-#'        lambda = c(lambda1,lambda2,lambda3),
-#'        lat = rep(-33,3),
-#'        lon = rep(-71,3),
-#'        s = 5,
-#'        res = 5,
-#'        time_start = 2000,
-#'        time_end = 2070,
-#'        leap = 1/12)
 #'}
-###################################################
 
 
 w_clim<- function(y_ini = c(N = 400, N = 400, N = 400),
@@ -329,9 +330,7 @@ plot(point3, add=TRUE,col="black")
 valueCurr1 <- extract(wclimCurr, point1)
 valueCurr2 <- extract(wclimCurr, point2)
 valueCurr3 <- extract(wclimCurr, point3)
-
-value50_1 <- extract(wclim50, point1)
-value70_1 <- extract(wclim70, point1)
+,,,,,,
 
 value50_2 <- extract(wclim50, point2)
 value70_2 <- extract(wclim70, point2)

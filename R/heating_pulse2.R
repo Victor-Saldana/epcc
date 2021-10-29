@@ -46,7 +46,7 @@
 #'
 #'@export
 #'@examples
-#'\dontrun{
+#'
 #'#######################################################################
 #'   #Example 1: Different initial population abundances.
 #'#######################################################################
@@ -89,7 +89,7 @@
 #'               time_start = 2005,
 #'               time_end = 2100,
 #'               leap = 1/12)
-#'
+#'\donttest{
 #'#######################################################################
 #'   #Example 3: Different relationships between initial environmental
 #'   #           temperature and optimum temperature.

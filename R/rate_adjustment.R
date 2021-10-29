@@ -15,6 +15,10 @@
 #'         temp_cmax, temp_cmax and ro, which are necessary to adjust the curve through a cubic polynomial
 #'         which fulfills the essential conditions of a TPC.
 #'
+#'@return A figure showing the fitting curve corresponding to the intrinsic growth rate of an ectothermic
+#'        population, the empirically obtained temperature and growth rate data points, in addition,
+#'        called for side effects.
+#'
 #'@export
 #'@examples
 #'

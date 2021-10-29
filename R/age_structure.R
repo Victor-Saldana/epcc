@@ -37,7 +37,7 @@
 #'            Switzerland, 151 pp.
 #'@export
 #'@examples
-#'\dontrun{
+#'\donttest{
 #'#######################################################################
 #'   #Example 1: Different thermal tolerance ranges (scenario RCP2.6).
 #'#######################################################################

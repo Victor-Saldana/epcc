@@ -13,6 +13,16 @@ Provides several functions that allow model and simulate
              an easy implementation of the possible consequences of 
              warming at global and local scales, constituting a useful 
              tool for understanding the extinction risk of populations.
+             (Víctor Saldaña-Núñez, Fernando Córdova-Lepe, & Felipe N. 
+             Moreno-Gómez, 2021) <doi:10.5281/zenodo.5034087>.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Victor-Saldana/epcc}
+  \item Report bugs at \url{https://github.com/Victor-Saldana/epcc/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Víctor Saldaña-Núñez \email{saldananunezvictor@gmail.com}
