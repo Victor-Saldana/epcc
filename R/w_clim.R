@@ -330,7 +330,6 @@ plot(point3, add=TRUE,col="black")
 valueCurr1 <- extract(wclimCurr, point1)
 valueCurr2 <- extract(wclimCurr, point2)
 valueCurr3 <- extract(wclimCurr, point3)
-,,,,,,
 
 value50_2 <- extract(wclim50, point2)
 value70_2 <- extract(wclim70, point2)

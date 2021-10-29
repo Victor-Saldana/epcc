@@ -2,6 +2,7 @@
 
 export(IPCC_RCP2_6)
 export(IPCC_RCP8_5)
+export(adjustment_trend)
 export(age_structure)
 export(competition)
 export(cooling_pulse1)

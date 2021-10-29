@@ -34,45 +34,60 @@
 #'              temperature, using an increasing linear temperature trend.
 #'#######################################################################
 #'
-#'adjustment_trend <- function(y_ini = c(N = 15),
-#'                             temp_cmin = 4,
-#'                             temp_cmax = 33.1,
-#'                             roi = 0.3,
-#'                             lambdai = 0.05,
-#'                             trend = 1)
+#'adjustment_trend(y_ini = c(N = 15),
+#'                 temp_cmin = 4,
+#'                 temp_cmax = 33.1,
+#'                 roi = 0.3,
+#'                 lambdai = 0.05,
+#'                 trend = 1)
 #'
 #'######################################################################
 #'   #Example 2:Fitting the observed time series of abundance and ambient
 #'              temperature, using an periodic increasing temperature trend.
 #'#######################################################################
 #'
-#'adjustment_trend <- function(y_ini = c(N = 15),
-#'                             temp_cmin = 4,
-#'                             temp_cmax = 33.1,
-#'                             roi = 0.3,
-#'                             lambdai = 0.05,
-#'                             trend = 3)
+#'adjustment_trend(y_ini = c(N = 15),
+#'                 temp_cmin = 4,
+#'                 temp_cmax = 33.1,
+#'                 roi = 0.3,
+#'                 lambdai = 0.05,
+#'                 rend = 3)
 #'
 #'######################################################################
 #'   #Example 3:Fitting the observed time series of abundance and ambient
 #'              temperature, using a constant temperature trend.
 #'#######################################################################
 #'
-#'adjustment_trend <- function(y_ini = c(N = 15),
-#'                             temp_cmin = 4,
-#'                             temp_cmax = 33.1,
-#'                             roi = 0.3,
-#'                             lambdai = 0.05,
-#'                             trend = 5)
+#'adjustment_trend(y_ini = c(N = 15),
+#'                 temp_cmin = 4,
+#'                 temp_cmax = 33.1,
+#'                 roi = 0.3,
+#'                 lambdai = 0.05,
+#'                 trend = 5)
 #'
 #'
-#'@references Rezende, E. L., & Bozinovic, F. (2019). Thermal performance across levels of biological
-#'            organization. Philosophical Transactions of the Royal Society B: Biological Sciences,
-#'            374(1778), 20180549.doi:10.1098/rstb.2018.0549
+#'@references Dornelas M, Antão LH, Moyes F, Bates, AE, Magurran, AE, et al.(2018). BioTIME: A database of
+#'            biodiversity time series for the Anthropocene. Global Ecol Biogeogr; 27:760 - 786.
+#'            https://doi.org/10.1111/geb.12729.
 #'
-#'@references Saldaña-Núñez, V.N., Córdova-Lepe, F.D. & Moreno-Gómez, F.N. (2019). Population dynamics in the face of
-#'            climate change: Analysis of a cubic thermal performance curve in ectotherms. J. Phys.: Conf.
-#'            Ser. 1329 012007.   doi:10.1088/1742-6596/1329/1/012007
+#'@references Grothendieck, G. (2013). nls2: Non-Linear Regression with Brute Force. R package version 0.2,
+#'            URL http://CRAN.R-project.org/package=nls2.
+#'
+#'@references Layne, J. R., & Claussen, D. L. (1987). Time courses of thermal acclimation for critical
+#'            thermal minima in the salamanders Desmognathus quadramaculatus, Desmognathus monticola,
+#'            Desmognathus ochrophaeus, and Plethodon jordani. Comparative Biochemistry and Physiology
+#'            Part A: Physiology, 87(4), 895–898. doi:10.1016/0300-9629(87)90011-9
+#'
+#'@references Markle, T. M., & Kozak, K. H. (2018). Low acclimation capacity of narrow-ranging thermal
+#'            specialists exposes susceptibility to global climate change. Ecology and Evolution, 8(9),
+#'            4644–4656.doi:10.1002/ece3.4006.
+#'
+#'@references NOAA National Centers for Environmental Information, State of the Climate: Global Climate
+#'            Report for Annual 2020, published online January 2021, retrieved on September 4, 2021 from
+#'            https://www.ncdc.noaa.gov/sotc/global/202013.
+#'
+#'@references Wiley, R. H. (2016). “Population estimates of Appalachian salamanders”. Coweeta LTER. Available
+#'            at: http://coweeta.uga.edu/eml/1044.xml.
 #'
 
 adjustment_trend <- function(y_ini = c(N = 15),
