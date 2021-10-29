@@ -13,11 +13,18 @@
 #'@param trend Acronym corresponding to the type of temperature trend used.
 #'
 #'
-#'@details This function allows you to adjust the intrinsic growth rate of an ectotherm
-#'         population by providing as input the values of environmental or body temperature
-#'         together with the growth rate, using the nls2 function you can find the parameters
-#'         temp_cmax, temp_cmax and ro, which are necessary to adjust the curve through a cubic polynomial
-#'         which fulfills the essential conditions of a TPC.
+#'@details This function allows to fit the abundance trends reported for the salamander Desmognathus
+#'         ochrophaeus in the BioTIME database (Wiley, 2016; Dornelas et al., 2018), the temperature
+#'         data obtained from the NOAA platform (www.ncdc.noaa.gov), the descriptors of TPCs reported
+#'         by Layne & Claussen (1987) and by Markle & Kozak (2018), using the nls2 function we can
+#'         find the parameters ro and lambda, which are necessary to fit the abundance curve to the
+#'         proposed model.
+#'         Caution has to be taken to the sensitivity to the initial parameters to make adjustments,
+#'         therefore the following temperature trends are presented in an initial proposal, the
+#'         enumeration of which represents the option to be given in the "trend" argument of the function:
+#'         1: Projection of increasing linear temperatura, 2: Projection of decreasing linear temperatura
+#'         3: Periodic increasing temperature trend, 4: Periodic decreasing temperature trend,
+#'         5: Constant temperature projection.
 #'
 #'@export
 #'@examples
@@ -328,7 +335,9 @@ adjustment_trend <- function(y_ini = c(N = 15),
       coord_cartesian(xlim = c(xa[1],xa[length(xa)]))+
       theme(axis.title.y = element_text(size = rel(1.2), angle = 90))+
       theme(axis.title.x = element_text(size = rel(1.2), angle = 00))
+
     plot_grid(p1, p2)
+
   } else if(trend== 4) {
 
     #Temperatura promedio, decreciente con periocidad
