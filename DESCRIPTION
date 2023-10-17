@@ -1,7 +1,7 @@
 Package: epcc
 Type: Package
 Title: Simulating Populations of Ectotherms under Global Warming
-Version: 1.4.8
+Version: 1.4.9
 Authors@R: c(
     person("Víctor", "Saldaña-Núñez", email = "saldananunezvictor@gmail.com", role = c("aut", "cre")),
     person("Fernando", "Córdova-Lepe", role = "aut"),
