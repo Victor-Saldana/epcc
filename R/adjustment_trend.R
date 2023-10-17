@@ -26,12 +26,13 @@
 #'         3: Periodic increasing temperature trend, 4: Periodic decreasing temperature trend,
 #'         5: Constant temperature projection.
 #'
+#'
 #'@export
 #'@examples
-#'
+#'\dontrun{
 #'######################################################################
 #'   #Example 1:Fitting observed time series of abundance and ambient
-#'              temperature, using an increasing linear temperature trend.
+#'  #           temperature, using an increasing linear temperature trend.
 #'#######################################################################
 #'
 #'adjustment_trend(y_ini = c(N = 15),
@@ -43,7 +44,7 @@
 #'
 #'######################################################################
 #'   #Example 2:Fitting the observed time series of abundance and ambient
-#'              temperature, using an periodic increasing temperature trend.
+#'          #   temperature, using an periodic increasing temperature trend.
 #'#######################################################################
 #'
 #'adjustment_trend(y_ini = c(N = 15),
@@ -55,7 +56,7 @@
 #'
 #'######################################################################
 #'   #Example 3:Fitting the observed time series of abundance and ambient
-#'              temperature, using a constant temperature trend.
+#'            # temperature, using a constant temperature trend.
 #'#######################################################################
 #'
 #'adjustment_trend(y_ini = c(N = 15),
@@ -64,7 +65,7 @@
 #'                 roi = 0.3,
 #'                 lambdai = 0.05,
 #'                 trend = 5)
-#'
+#'}
 #'
 #'@references Dornelas M, Antão LH, Moyes F, Bates, AE, Magurran, AE, et al.(2018). BioTIME: A database of
 #'            biodiversity time series for the Anthropocene. Global Ecol Biogeogr; 27:760 - 786.
